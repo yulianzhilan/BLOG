@@ -25,7 +25,25 @@
             </list>
         </property>
     </bean>
-    <!-- 内容协商 -->
+    <!-- 内容协商管理 -->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <!-- 默认text/html -->
+        <property name="defaultContentType" value="text/html"/>
+        <!-- 通过请求路径的扩展名匹配media type。 foo.json -->
+        <property name="favorPathExtension" value="true"/>
+        <!-- 通过请求参数匹配media type。 foo?format=json -->
+        <property name="favorParameter" value="false"/>
+        <!-- 是否忽略accept头 -->
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="useJaf" value="false"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/xml"/>
+                <entry key="html" value="text/html"/>
+            </map>
+        </property>
+    </bean>
     <!-- 内容协商解析器 -->
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 
