@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90">
+    <session-descriptor>
+        <cookie-path>/blog</cookie-path>
+    </session-descriptor>
+    <container-descriptor>
+        <prefer-web-inf-classes>true</prefer-web-inf-classes>
+    </container-descriptor>
+    <context-root>/blog</context-root>
+    <!--<library-ref>-->
+        <!--<library-name>Library</library-name>-->
+    <!--</library-ref>-->
+</weblogic-web-app>

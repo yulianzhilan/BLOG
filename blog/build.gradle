@@ -38,4 +38,10 @@ dependencies {
     compile "org.slf4j:slf4j-log4j12:$slf4jVersion"
     compile 'org.jboss.logging:jboss-logging:3.3.0.Final'
 
+    // Tiles
+    providedCompile "org.apache.tiles:tiles-core:3.0.7"
+    providedCompile "org.apache.tiles:tiles-api:3.0.7"
+    providedCompile "org.apache.tiles:tiles-jsp:3.0.7"
+    providedCompile "org.apache.tiles:tiles-servlet:3.0.7"
+    providedCompile "org.apache.tiles:tiles-template:3.0.7"
 }
