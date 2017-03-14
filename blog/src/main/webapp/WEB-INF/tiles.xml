@@ -4,7 +4,53 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition>
-
+    <!-- template -->
+    <definition name="default.definition" template="/WEB-INF/tiles/definitions/default.jsp">
+        <put-attribute name="title" value="" type="string"/>
+        <put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/tiles/layout/sidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp"/>
     </definition>
+
+    <!-- 404 -->
+    <definition name="404" extends="default.definition">
+        <put-attribute name="title" value="404 Page Not Found"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/404.jsp"/>
+    </definition>
+
+    <!-- 500 -->
+    <definition name="500" extends="default.definition">
+        <put-attribute name="title" value="500 Internal Server Error"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/500.jsp"/>
+    </definition>
+
+    <!-- login -->
+    <definition name="login" template="/WEB-INF/tiles/views/login.jsp">
+        <put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp"/>
+    </definition>
+
+    <!-- home -->
+    <definition name="home" extends="default.definition">
+        <put-attribute name="title" value="Home"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/home.jsp"/>
+    </definition>
+
+    <!-- =================================================== -->
+    <!-- 1、相册相关模块 -->
+    <!-- 1.1、 查看 -->
+    <definition name="photo/check" extends="default.definition">
+        <put-attribute name="title" value="check"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/photo/check.jsp"/>
+    </definition>
+    <!-- 1.2、 管理-->
+    <definition name="photo/manage" extends="default.definition">
+        <put-attribute name="title" value="manage"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/photo/manage.jsp"/>
+    </definition>
+    <!-- 1.3、 上传/下载 -->
+    <definition name="photo/up_down_load" extends="default.definition">
+        <put-attribute name="title" value="up_down_load"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/photo/up_down_load.jsp"/>
+    </definition>
+
 </tiles-definitions>

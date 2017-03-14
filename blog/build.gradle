@@ -15,6 +15,9 @@ ext{
     slf4jVersion = "1.7.21"
     log4jVersion = "1.2.17"
     jacksonVersion="2.7.4"
+    servletVersion= '2.4'
+    jspVersion= '2.0'
+    jstlVersion= '1.2'
 }
 
 dependencies {
@@ -39,9 +42,20 @@ dependencies {
     compile 'org.jboss.logging:jboss-logging:3.3.0.Final'
 
     // Tiles
-    providedCompile "org.apache.tiles:tiles-core:3.0.7"
-    providedCompile "org.apache.tiles:tiles-api:3.0.7"
-    providedCompile "org.apache.tiles:tiles-jsp:3.0.7"
-    providedCompile "org.apache.tiles:tiles-servlet:3.0.7"
-    providedCompile "org.apache.tiles:tiles-template:3.0.7"
+    compile "org.apache.tiles:tiles-core:3.0.7"
+    compile "org.apache.tiles:tiles-api:3.0.7"
+    compile "org.apache.tiles:tiles-jsp:3.0.7"
+    compile "org.apache.tiles:tiles-servlet:3.0.7"
+    compile "org.apache.tiles:tiles-template:3.0.7"
+
+    // JSP & Servlet
+    compile "javax.servlet:servlet-api:$servletVersion"
+    compile "javax.servlet:jsp-api:$jspVersion"
+    // jstl
+    compile "jstl:jstl:$jstlVersion"
+
+    // jackson
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 }

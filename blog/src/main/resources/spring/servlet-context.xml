@@ -46,6 +46,17 @@
     </bean>
     <!-- 内容协商解析器 -->
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="defaultViews">
+            <list>
+                <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+            </list>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <ref bean="tilesViewResolver"/>
+                <ref bean="jspViewResolver"/>
+            </list>
+        </property>
     </bean>
 </beans>
