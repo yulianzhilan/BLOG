@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by scott on 2017/3/13.
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/application")
 public class Application {
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
