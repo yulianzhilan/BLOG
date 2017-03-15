@@ -2,22 +2,19 @@ package service.impl;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.web.servlet.DispatcherServlet;
 import service.ConfigService;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
  * Created by scott on 2017/3/15.
  */
 public class ConfigServiceImpl implements ConfigService {
-    public static String _TOKEN_KEY;
+    private static String _TOKEN_KEY;
+
     static {
-        Properties prop = new Properties();
+        Properties prop;
 
         try {
             ClassPathResource resource = new ClassPathResource("env.properties");
