@@ -4,11 +4,12 @@
 
 <!DOCTYPE html>
 <head>
-    <%@include file="/WEB-INF/jspi/minimal.jspi"%>
-    <%@include file="/WEB-INF/jspi/AdminLTE.jspi"%>
+    <%--<%@include file="/WEB-INF/jspi/minimal.jspi"%>--%>
+    <%--<%@include file="/WEB-INF/jspi/AdminLTE.jspi"%>--%>
+        <%@include file="/WEB-INF/jspi/test.jspi"%>
     <title><tiles:getAsString name="title" ignore="true"/></title>
 </head>
-<body>
+<body class="fixed skin-blue sidebar-mini">
     <div class="wrapper">
         <tiles:insertAttribute name="header"/>
 

@@ -6,7 +6,20 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
     <!-- 组建扫描 -->
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 静态资源访问处理 -->
+    <mvc:resources mapping="/css/**" location="/static/css/"/>
+    <mvc:resources mapping="/js/**" location="/static/js/"/>
+    <mvc:resources mapping="/images/**" location="/static/images/"/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/font-awesome/**" location="/static/font-awesome/"/>
+    <mvc:resources mapping="/adminLTE/**" location="/static/adminLTE/"/>
+    <mvc:resources mapping="/ionicons/**" location="/static/ionicons/"/>
+
+    <mvc:default-servlet-handler/>
+
     <!-- JSP试图解析器 -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -25,6 +38,17 @@
             </list>
         </property>
     </bean>
+
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" conversion-service="conversionService"/>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set></set>
+        </property>
+    </bean>
+
+    <bean id="servletHandlerAdapter" class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter"/>
+
     <!-- 内容协商管理 -->
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <!-- 默认text/html -->

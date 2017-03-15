@@ -21,7 +21,7 @@ public class PhotoController {
         return prepared();
     }
 
-    @RequestMapping(name = "query", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/query", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView query(){
         return prepared();
     }
