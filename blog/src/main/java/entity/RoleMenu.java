@@ -4,23 +4,23 @@ package entity;
  * Created by scott on 2017/3/15.
  */
 public class RoleMenu {
-    private Long roleId;
+    private Integer roleId;
 
-    private Long menuId;
+    private Integer menuId;
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public Long getMenuId() {
+    public Integer getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Long menuId) {
+    public void setMenuId(Integer menuId) {
         this.menuId = menuId;
     }
 }

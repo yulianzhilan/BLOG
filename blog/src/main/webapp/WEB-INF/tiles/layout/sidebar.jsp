@@ -34,21 +34,21 @@
                 </a>
             </li>
 
-            <c:forEach items="${sessionScope.categories}" var="category">
+            <c:forEach items="${sessionScope.modules}" var="module">
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa ${category.categoryIcon}"></i>
-                        <span>${category.categoryName}</span>
+                        <i class="glyphicon ${module.icon}"></i>
+                        <span>${module.name}</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <c:forEach items="${category.menus}" var="menu">
+                        <c:forEach items="${module.menus}" var="menu">
                             <li>
-                                <a href="${menu.menuUrl}">
+                                <a href="${menu.url}">
                                     <i class="fa fa-circle-o"></i>
-                                    ${menu.menuName}
+                                    ${menu.name}
                                 </a>
                             </li>
                         </c:forEach>
@@ -56,24 +56,6 @@
                 </li>
             </c:forEach>
 
-            <%--<li class="treeview">--%>
-                <%--<a href="#">--%>
-                    <%--<i class="fa fa-th"></i>--%>
-                    <%--<span>Photo Album</span>--%>
-                    <%--<span class="pull-right-container">--%>
-                            <%--&lt;%&ndash;<span class="label label-primary pull-right">4</span>&ndash;%&gt;--%>
-                            <%--<i class="fa fa-angle-left pull-right"></i>--%>
-                    <%--</span>--%>
-                <%--</a>--%>
-                <%--<ul class="treeview-menu">--%>
-                    <%--<li>--%>
-                        <%--<a href="/photo/check">--%>
-                            <%--<i class="fa fa-circle-o"></i>--%>
-                            <%--check--%>
-                        <%--</a>--%>
-                    <%--</li>--%>
-                <%--</ul>--%>
-            <%--</li>--%>
         </ul>
     </section>
     <!-- /.sidebar -->

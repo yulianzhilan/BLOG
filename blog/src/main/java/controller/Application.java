@@ -14,6 +14,6 @@ public class Application {
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView execute(){
-        return new ModelAndView("index");
+        return new ModelAndView("login");
     }
 }

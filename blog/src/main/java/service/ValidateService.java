@@ -1,11 +1,18 @@
 package service;
 
-import org.springframework.stereotype.Service;
+import dto.CallBackDTO;
+import dto.system.SidebarDTO;
+import dto.system.UserSummaryDTO;
+import entity.User;
+
+import java.util.List;
 
 /**
  * Created by scott on 2017/3/15.
  */
-@Service
 public interface ValidateService {
-    boolean isLogin(String _user, String _token);
+    UserSummaryDTO getUserSummaryDTO(String _user, String _token);
+    User getUser(String _user, String _token);
+    CallBackDTO validate(String _user, String _token);
+    List<SidebarDTO> getSideBar(User user);
 }

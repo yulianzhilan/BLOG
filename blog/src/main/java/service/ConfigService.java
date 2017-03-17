@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 //@Service
 public interface ConfigService {
     String getConfig(String key);
+    String encode(String message);
+    String decode(String message);
 }

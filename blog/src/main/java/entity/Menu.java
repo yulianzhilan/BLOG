@@ -4,21 +4,21 @@ package entity;
  * Created by scott on 2017/3/15.
  */
 public class Menu {
-    private Long id;
+    private Integer id;
 
     private String name;
 
     private String url;
 
-    private Long moduleId;
+    private Integer moduleId;
 
     private int seq;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,11 +38,11 @@ public class Menu {
         this.url = url;
     }
 
-    public Long getModuleId() {
+    public Integer getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(Long moduleId) {
+    public void setModuleId(Integer moduleId) {
         this.moduleId = moduleId;
     }
 

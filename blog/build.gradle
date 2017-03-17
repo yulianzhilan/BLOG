@@ -21,6 +21,7 @@ ext{
     mybatisVersion = '3.3.0'
     mybatisSpringVersion = '1.3.0'
     ibatisVersion = '2.3.4.726'
+    c3p0Version = '0.9.1.2'
 }
 
 dependencies {
@@ -52,8 +53,9 @@ dependencies {
     compile "org.apache.tiles:tiles-template:3.0.7"
 
     // JSP & Servlet
+    // fixme 与tomcat冲突
     compile "javax.servlet:servlet-api:$servletVersion"
-    compile "javax.servlet:jsp-api:$jspVersion"
+//    compile "javax.servlet:jsp-api:$jspVersion"
     // jstl
     compile "jstl:jstl:$jstlVersion"
 
@@ -65,4 +67,7 @@ dependencies {
     // Mybatis & IBatis APIs
     compile "org.mybatis:mybatis:$mybatisVersion"
     compile "org.mybatis:mybatis-spring:$mybatisSpringVersion"
+
+    // c3p0
+    compile "c3p0:c3p0:$c3p0Version"
 }
