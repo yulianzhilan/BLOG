@@ -5,8 +5,9 @@ apply plugin: 'java'
 apply plugin: 'war'
 
 repositories {
+
     mavenLocal()
-    mavenCentral()
+    maven{url 'http://maven.aliyun.com/nexus/content/repositories/central/'}
 }
 
 ext{
