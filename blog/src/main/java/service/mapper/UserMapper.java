@@ -1,6 +1,6 @@
 package service.mapper;
 
-import entity.User;
+import entity.system.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 

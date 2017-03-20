@@ -46,10 +46,7 @@
                     <ul class="treeview-menu">
                         <c:forEach items="${module.menus}" var="menu">
                             <li>
-                                <a href="${menu.url}">
-                                    <i class="fa fa-circle-o"></i>
-                                    ${menu.name}
-                                </a>
+                                <a href="${ctx}${menu.url}"><i class="fa fa-circle-o"></i> ${menu.name}</a>
                             </li>
                         </c:forEach>
                     </ul>

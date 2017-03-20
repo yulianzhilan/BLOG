@@ -1,8 +1,8 @@
 package controller;
 
-import entity.User;
+import dto.system.UserQueryDTO;
+import entity.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import service.ConfigService;
 import service.ValidateService;
@@ -28,6 +28,11 @@ public class BaseController {
 //        return validateService.getUser(account, password);
     }
 
+    /**
+     * 验证是否已登录，登录：true；未登录：false
+     * @param request
+     * @return
+     */
     protected boolean isLogin(HttpServletRequest request){
         return getCurrentUser(request) != null;
     }
@@ -38,4 +43,15 @@ public class BaseController {
         return mav;
     }
 
+    protected ModelAndView goLogin(){
+        return new ModelAndView("login").addObject("loginDTO", new UserQueryDTO());
+    }
+
+    protected int getCurrentUserId(HttpServletRequest request){
+        User user = getCurrentUser(request);
+        if(user != null){
+            return user.getId();
+        }
+        return 0;
+    }
 }

@@ -10,7 +10,7 @@
     <!--</resultMap>-->
 
     <!-- 用户 -->
-    <select id="getUser" resultType="entity.User">
+    <select id="getUser" resultType="entity.system.User">
         SELECT
         USER.ID as id,
         USER.NICK_NAME as nickName,

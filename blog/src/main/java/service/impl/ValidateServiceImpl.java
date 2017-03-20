@@ -3,7 +3,7 @@ package service.impl;
 import dto.CallBackDTO;
 import dto.system.SidebarDTO;
 import dto.system.UserSummaryDTO;
-import entity.User;
+import entity.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

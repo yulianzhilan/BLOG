@@ -8,6 +8,26 @@
     <%--<%@include file="/WEB-INF/jspi/AdminLTE.jspi"%>--%>
         <%@include file="/WEB-INF/jspi/test.jspi"%>
     <title><tiles:getAsString name="title" ignore="true"/></title>
+
+        <script>
+            $(document).ready(function () {
+                var pgurl = window.location.href;
+                // active：ul.sidebar-menu -> li -> a
+                $("ul.sidebar-menu>li>a").each(function () {
+                    if ($(this).attr("href") != "#" && pgurl.indexOf($(this).attr("href").split("?")[0]) >= 0) {
+                        $(this).parent().addClass("active");
+                    }
+                });
+                // active：ul.treeview-menu -> li -> a
+                $("ul.treeview-menu>li>a").each(function () {
+                    if ($(this).attr("href") != "#" && pgurl.indexOf($(this).attr("href").split("?")[0]) >= 0) {
+                        $(this).parent().addClass("active");
+                        $(this).parent().parent().parent().addClass("active");
+                    }
+                });
+            });
+        </script>
+
 </head>
 <body class="fixed skin-blue sidebar-mini">
     <div class="wrapper">

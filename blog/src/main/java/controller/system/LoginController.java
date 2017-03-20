@@ -3,8 +3,6 @@ package controller.system;
 import controller.BaseController;
 import dto.CallBackDTO;
 import dto.system.UserQueryDTO;
-import dto.system.UserSummaryDTO;
-import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -45,7 +43,7 @@ public class LoginController extends BaseController{
         return prepared().addObject("loginDTO", new UserQueryDTO());
     }
 
-    @RequestMapping(value = "/validate", method = {RequestMethod.POST})
+    @RequestMapping(value = "/validate", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView validate(@ModelAttribute("loginDTO")UserQueryDTO user, HttpServletRequest request){
         if(StringUtils.isEmpty(user.getAccount()) || StringUtils.isEmpty(user.getPassword())){
             return prepared().addObject("errtx", "发生未知异常！");

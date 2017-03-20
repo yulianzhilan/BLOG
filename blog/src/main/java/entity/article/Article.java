@@ -1,11 +1,11 @@
-package dto.article;
+package entity.article;
 
 import java.util.Date;
 
 /**
- * Created by scott on 2017/3/14.
+ * Created by scott on 2017/3/20.
  */
-public class ArticleDTO {
+public class Article {
     private int id;
     private String name;
     private Date create;
@@ -14,7 +14,7 @@ public class ArticleDTO {
     private String person;
     private String folder;
     private String description;
-
+    private boolean isPrivate;
     public int getId() {
         return id;
     }
@@ -77,5 +77,13 @@ public class ArticleDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 }

@@ -3,7 +3,7 @@ package service;
 import dto.CallBackDTO;
 import dto.system.SidebarDTO;
 import dto.system.UserSummaryDTO;
-import entity.User;
+import entity.system.User;
 
 import java.util.List;
 

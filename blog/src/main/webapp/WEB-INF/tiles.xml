@@ -47,5 +47,16 @@
         <put-attribute name="title" value="up_down_load"/>
         <put-attribute name="main" value="/WEB-INF/tiles/views/photo/up_down_load.jsp"/>
     </definition>
+    <!-- 2、 文章相关模块 -->
+    <!-- 2.1 查看 -->
+    <definition name="article/read" extends="default.definition">
+        <put-attribute name="title" value="read"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/article/read.jsp"/>
+    </definition>
+    <!-- 2.2 列表 -->
+    <definition name="article/list" extends="default.definition">
+        <put-attribute name="title" value="list"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/article/list.jsp"/>
+    </definition>
 
 </tiles-definitions>

@@ -16,6 +16,29 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`blog` /*!40100 DEFAULT CHARACTER SET ut
 
 USE `blog`;
 
+/*Table structure for table `article` */
+
+DROP TABLE IF EXISTS `article`;
+
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `location` varchar(32) DEFAULT NULL,
+  `content` text NOT NULL,
+  `person` varchar(32) DEFAULT NULL,
+  `folder` varchar(32) DEFAULT NULL,
+  `isPrivate` tinyint(1) DEFAULT '0',
+  `userId` int(11) NOT NULL,
+  `description` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `t_user` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `article` */
+
+insert  into `article`(`id`,`name`,`location`,`content`,`person`,`folder`,`isPrivate`,`userId`,`description`) values (1,'travel','shanghai','helloworld','jane','jane',0,1,NULL),(2,'zhongshan','nanjing','asdasdasdasdas',NULL,'jane',0,1,NULL),(3,'xihu','hangzhou','asdassassss',NULL,'okay',0,1,NULL);
+
 /*Table structure for table `role_menu` */
 
 DROP TABLE IF EXISTS `role_menu`;
@@ -48,7 +71,7 @@ CREATE TABLE `t_menu` (
 
 /*Data for the table `t_menu` */
 
-insert  into `t_menu`(`ID`,`NAME`,`URL`,`MODULE_ID`,`SEQ`) values (1,'read','/photo/read',1,1),(2,'manage','/photo/manage',1,2),(3,'upload','/photo/upload',1,3),(4,'download','/photo/download',1,4),(5,'read','/artcle/read',2,1),(6,'manage','/artcle/manage',2,2),(7,'export','/artcle/export',2,3),(8,'read','/timestamp/read',3,1),(9,'manage','/timestamp/manage',3,2),(10,'export','/timestamp/export',3,3),(11,'read','/system/read',4,1),(12,'manage','/system/manage',4,2),(13,'private','/photo/private',1,5),(14,'private','/artcle/private',2,4),(15,'private','/timestamp/private',3,4);
+insert  into `t_menu`(`ID`,`NAME`,`URL`,`MODULE_ID`,`SEQ`) values (1,'read','/photo/read',1,1),(2,'manage','/photo/manage',1,2),(3,'upload','/photo/upload',1,3),(4,'download','/photo/download',1,4),(5,'read','/article/read',2,1),(6,'manage','/article/manage',2,2),(7,'export','/article/export',2,3),(8,'read','/timestamp/read',3,1),(9,'manage','/timestamp/manage',3,2),(10,'export','/timestamp/export',3,3),(11,'read','/system/read',4,1),(12,'manage','/system/manage',4,2),(13,'private','/photo/private',1,5),(14,'private','/article/private',2,4),(15,'private','/timestamp/private',3,4);
 
 /*Table structure for table `t_module` */
 
@@ -64,7 +87,7 @@ CREATE TABLE `t_module` (
 
 /*Data for the table `t_module` */
 
-insert  into `t_module`(`ID`,`ICON`,`SEQ`,`NAME`) values (1,'glyphicon-picture',1,'photo'),(2,'glyphicon-list-alt',2,'artcle'),(3,'glyphicon-facetime-video',3,'timestamp'),(4,'glyphicon-wrench',4,'system');
+insert  into `t_module`(`ID`,`ICON`,`SEQ`,`NAME`) values (1,'glyphicon-picture',1,'photo'),(2,'glyphicon-list-alt',2,'article'),(3,'glyphicon-facetime-video',3,'timestamp'),(4,'glyphicon-wrench',4,'system');
 
 /*Table structure for table `t_role` */
 
@@ -74,7 +97,7 @@ CREATE TABLE `t_role` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(32) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_role` */
 

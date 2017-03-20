@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="service.mapper.ArticleMapper">
+
+    <!-- 用户 -->
+    <select id="getArticles" resultType="dto.article.ArticleDTO">
+        SELECT
+        ID,
+        NAME,
+        LOCATION,
+        CONTENT,
+        PERSON,
+        FOLDER,
+        ISPRIVATE
+        FROM
+        ARTICLE
+        WHERE
+        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        AND
+        USERID = #{userId, jdbcType=SMALLINT}
+    </select>
+
+    <select id="searchQ" resultType="dto.article.ArticleDTO">
+        SELECT
+        ID,
+        NAME,
+        LOCATION,
+        CONTENT,
+        PERSON,
+        FOLDER,
+        ISPRIVATE
+        FROM
+        ARTICLE
+        WHERE
+        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        AND
+        USERID = #{userId, jdbcType=SMALLINT}
+
+        <if test="q != null and q != ''">
+        AND NAME LIKE '%${q, jdbcType=VARCHAR}%'
+        OR
+        LOCATION LIKE '%${q, jdbcType=VARCHAR}%'
+        OR
+        PERSON LIKE '%${q, jdbcType=VARCHAR}%'
+        OR
+        CONTENT LIKE '%${q, jdbcType=VARCHAR}%'
+        OR
+        FOLDER LIKE '%${q, jdbcType=VARCHAR}%'
+        </if>
+    </select>
+
+    <select id="getSimpleArticles" resultType="dto.article.ArticleDTO">
+        SELECT
+        ID,
+        NAME,
+        LOCATION,
+        PERSON,
+        FOLDER
+        FROM
+        ARTICLE
+        WHERE
+        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        AND
+        USERID = #{userId, jdbcType=SMALLINT}
+    </select>
+
+    <select id="getSimpleArticlesByName" resultType="dto.article.ArticleDTO">
+        SELECT
+        ID,
+        NAME,
+        LOCATION,
+        PERSON,
+        FOLDER,
+        DESCRIPTION
+        FROM
+        ARTICLE
+        WHERE
+        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        AND
+        USERID = #{userId, jdbcType=SMALLINT}
+        <if test="folder != null">
+        AND FOLDER = #{folder, jdbcType=VARCHAR}
+        </if>
+        <if test="folder == ''">
+        AND FOLDER IS NULL
+        </if>
+        <if test="location != null">
+        AND LOCATION = #{location, jdbcType=VARCHAR}
+        </if>
+        <if test="location == ''">
+            AND LOCATION IS NULL
+        </if>
+        <if test="person != null">
+        AND PERSON = #{person, jdbcType=VARCHAR}
+        </if>
+        <if test="person == ''">
+        AND PERSON IS NULL
+        </if>
+    </select>
+</mapper>
