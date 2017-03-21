@@ -17,6 +17,7 @@
     <mvc:resources mapping="/font-awesome/**" location="/static/font-awesome/"/>
     <mvc:resources mapping="/adminLTE/**" location="/static/adminLTE/"/>
     <mvc:resources mapping="/ionicons/**" location="/static/ionicons/"/>
+    <mvc:resources mapping="/kindeditor/**" location="/static/kindeditor/"/>
 
     <mvc:default-servlet-handler/>
 

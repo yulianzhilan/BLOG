@@ -58,5 +58,10 @@
         <put-attribute name="title" value="list"/>
         <put-attribute name="main" value="/WEB-INF/tiles/views/article/list.jsp"/>
     </definition>
+    <!-- 2.3 管理 -->
+    <definition name="article/manage" extends="default.definition">
+        <put-attribute name="title" value="manage"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/article/manage.jsp"/>
+    </definition>
 
 </tiles-definitions>

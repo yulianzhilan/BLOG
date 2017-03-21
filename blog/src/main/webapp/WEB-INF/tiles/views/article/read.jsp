@@ -26,9 +26,9 @@
             <div class="box-footer">
                 <span>分类方式:</span>
                 <div class="btn-group">
-                    <a href="${ctx}/article/readByFolder?attribute=folder"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-align-left"></i>文件夹</button></a>
-                    <a href="${ctx}/article/readByFolder?attribute=location"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-align-right"></i>地点</button></a>
-                    <a href="${ctx}/article/readByFolder?attribute=person"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-align-right"></i>人物</button></a>
+                    <a href="${ctx}/article/readByFolder?attribute=folder"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-folder"></i>文件夹</button></a>
+                    <a href="${ctx}/article/readByFolder?attribute=location"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-location-arrow"></i>地点</button></a>
+                    <a href="${ctx}/article/readByFolder?attribute=person"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-user-circle"></i>人物</button></a>
                 </div>
             </div><!-- box-footer -->
             <div class="box-body">
@@ -40,7 +40,7 @@
                                 <div class="inner">
                                     <h3>${folder.articleDTOs.size()}</h3>
 
-                                    <h2 class="text-center">${folder.name==null?'空':folder.name}</h2>
+                                    <h2 class="text-center">${folder.name}</h2>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
