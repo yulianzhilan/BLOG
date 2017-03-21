@@ -71,4 +71,13 @@ dependencies {
 
     // c3p0
     compile "c3p0:c3p0:$c3p0Version"
+
+    // commons-fileupload
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2.1'
+    // commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '1.4'
+
+    // json_simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
 }

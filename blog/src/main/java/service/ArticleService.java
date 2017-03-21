@@ -1,5 +1,6 @@
 package service;
 
+import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 
 import java.util.List;
@@ -31,4 +32,20 @@ public interface ArticleService {
      * @return
      */
     ArticleFolderDTO getArticleFoldersByName(String attribute, int userId, String name);
+
+    /**
+     * 删除
+     * @param id
+     * @param userId
+     */
+    boolean deleteById(int id, int userId);
+
+    /**
+     * 预览
+     * @param isPrivate
+     * @param userId
+     * @param id
+     * @return
+     */
+    ArticleDTO preview(boolean isPrivate, int userId, int id);
 }

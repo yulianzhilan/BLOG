@@ -1,6 +1,7 @@
 package controller.artcle;
 
 import controller.BaseController;
+import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,4 +51,25 @@ public class ArticleController extends BaseController{
         return new ModelAndView("article/list").addObject("result", result);
     }
 
+    @RequestMapping(value = "delete", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView delete(HttpServletRequest request, @ModelAttribute("id")int id){
+        boolean result = articleService.deleteById(id, getCurrentUserId(request));
+        return ajaxModelAndView(result);
+    }
+
+    @RequestMapping(value = "preview", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView preview(HttpServletRequest request, @ModelAttribute("id")int id){
+        ArticleDTO result = articleService.preview(false, getCurrentUserId(request), id);
+        return ajaxModelAndView(true).addObject("result", result);
+    }
+
+    @RequestMapping(value = "manage", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView manage(HttpServletRequest request){
+        return new ModelAndView("article/manage");
+    }
+
+    @RequestMapping(value = "demo", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView demo(){
+        return new ModelAndView("demo");
+    }
 }

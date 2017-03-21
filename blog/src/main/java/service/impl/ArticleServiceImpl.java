@@ -41,6 +41,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleFolderDTO getArticleFoldersByName(String attribute, int userId, String name) {
         // fixme 这里有一个问题，如果该字段的值为null，怎么获取该列表？
+        // 现在采用非空解决
         String folder = null;
         String location = null;
         String person = null;
@@ -55,5 +56,15 @@ public class ArticleServiceImpl implements ArticleService {
         }
         List<ArticleDTO> result = articleMapper.getSimpleArticlesByName(false,userId,folder,location,person);
         return AssembleUtil.assembleArticleFolderDTO(result, name, attribute);
+    }
+
+    @Override
+    public boolean deleteById(int id, int userId) {
+        return articleMapper.deleteById(id, userId) == 1;
+    }
+
+    @Override
+    public ArticleDTO preview(boolean isPrivate, int userId, int id) {
+        return articleMapper.getArticle(isPrivate,userId,id);
     }
 }

@@ -3,7 +3,7 @@
 <mapper namespace="service.mapper.ArticleMapper">
 
     <!-- 用户 -->
-    <select id="getArticles" resultType="dto.article.ArticleDTO">
+    <select id="getArticle" resultType="dto.article.ArticleDTO">
         SELECT
         ID,
         NAME,
@@ -11,13 +11,16 @@
         CONTENT,
         PERSON,
         FOLDER,
-        ISPRIVATE
+        TITLE,
+        DESCRIPTION
         FROM
         ARTICLE
         WHERE
         ISPRIVATE = #{isPrivate, jdbcType=BIT}
         AND
         USERID = #{userId, jdbcType=SMALLINT}
+        AND
+        ID = #{id, jdbcType=SMALLINT}
     </select>
 
     <select id="searchQ" resultType="dto.article.ArticleDTO">
@@ -71,30 +74,35 @@
         LOCATION,
         PERSON,
         FOLDER,
-        DESCRIPTION
+        DESCRIPTION,
+        TITLE
         FROM
         ARTICLE
         WHERE
         ISPRIVATE = #{isPrivate, jdbcType=BIT}
         AND
         USERID = #{userId, jdbcType=SMALLINT}
-        <if test="folder != null">
+        <if test="folder != null and folder != ''">
         AND FOLDER = #{folder, jdbcType=VARCHAR}
         </if>
-        <if test="folder == ''">
-        AND FOLDER IS NULL
-        </if>
-        <if test="location != null">
+        <!--<if test="folder == ''">-->
+        <!--AND FOLDER IS NULL-->
+        <!--</if>-->
+        <if test="location != null and location != ''">
         AND LOCATION = #{location, jdbcType=VARCHAR}
         </if>
-        <if test="location == ''">
-            AND LOCATION IS NULL
-        </if>
-        <if test="person != null">
+        <!--<if test="location == ''">-->
+            <!--AND LOCATION IS NULL-->
+        <!--</if>-->
+        <if test="person != null and person != ''">
         AND PERSON = #{person, jdbcType=VARCHAR}
         </if>
-        <if test="person == ''">
-        AND PERSON IS NULL
-        </if>
+        <!--<if test="person == ''">-->
+        <!--AND PERSON IS NULL-->
+        <!--</if>-->
     </select>
+
+    <delete id="deleteById">
+        DELETE FROM ARTICLE WHERE USERID = #{userId, jdbcType=SMALLINT} AND ID = #{id, jdbcType=SMALLINT}
+    </delete>
 </mapper>
