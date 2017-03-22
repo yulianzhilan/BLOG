@@ -3,7 +3,7 @@
 request.setCharacterEncoding("UTF-8");
 String htmlData = request.getParameter("content1") != null ? request.getParameter("content1") : "";
 %>
-<%@include file="/WEB-INF/jspi/test.jspi"%>
+<%@include file="/WEB-INF/jspi/main.jspi"%>
 <!doctype html>
 <html>
 <head>

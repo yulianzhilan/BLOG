@@ -1,4 +1,4 @@
-package controller.artcle;
+package controller.article;
 
 import controller.BaseController;
 import dto.article.ArticleDTO;
@@ -68,8 +68,8 @@ public class ArticleController extends BaseController{
         return new ModelAndView("article/manage");
     }
 
-    @RequestMapping(value = "demo", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView demo(){
-        return new ModelAndView("demo");
+    @RequestMapping(value = "image", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView image(){
+        return new ModelAndView("image");
     }
 }

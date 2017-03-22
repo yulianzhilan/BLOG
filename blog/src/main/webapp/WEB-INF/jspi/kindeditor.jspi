@@ -1,0 +1,4 @@
+<link rel="stylesheet" href="${ctx}/kindeditor/themes/default/default.css"/>
+<link rel="stylesheet" href="${ctx}/kindeditor/plugins/code/prettify.css"/>
+<script charset="utf-8" src="${ctx}/kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="${ctx}/kindeditor/plugins/code/prettify.js"></script>

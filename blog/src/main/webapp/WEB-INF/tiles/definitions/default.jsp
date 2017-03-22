@@ -6,7 +6,7 @@
 <head>
     <%--<%@include file="/WEB-INF/jspi/minimal.jspi"%>--%>
     <%--<%@include file="/WEB-INF/jspi/AdminLTE.jspi"%>--%>
-        <%@include file="/WEB-INF/jspi/test.jspi"%>
+        <%@include file="/WEB-INF/jspi/main.jspi"%>
     <title><tiles:getAsString name="title" ignore="true"/></title>
 
         <script>

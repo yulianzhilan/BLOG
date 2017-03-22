@@ -5,7 +5,7 @@
 <html>
   <head>
     <title>login</title>
-    <%@include file="/WEB-INF/jspi/test.jspi"%>
+    <%@include file="/WEB-INF/jspi/main.jspi"%>
   </head>
 
   <body class="hold-transition login-page">

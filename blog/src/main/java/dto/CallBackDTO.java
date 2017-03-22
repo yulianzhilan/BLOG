@@ -9,7 +9,7 @@ public class CallBackDTO {
     /**
      * 状态
      */
-    private boolean status;
+    private boolean okay;
     /**
      * 错误消息
      */
@@ -25,12 +25,12 @@ public class CallBackDTO {
      */
     private Object obj;
 
-    public boolean isStatus() {
-        return status;
+    public boolean isOkay() {
+        return okay;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setOkay(boolean okay) {
+        this.okay = okay;
     }
 
     public String getErrtx() {
