@@ -37,3 +37,9 @@
 <!-- iCheck -->
 <script src="${ctx}/adminLTE/plugins/iCheck/icheck.min.js"></script>
 <link rel="stylesheet" href="${ctx}/adminLTE/plugins/iCheck/flat/blue.css"/>
+
+<!-- simple-validate -->
+<script src="${ctx}/js/simpleValidate.js"></script>
+
+<!-- style.css -->
+<link rel="stylesheet" href="${ctx}/css/style.css"/>

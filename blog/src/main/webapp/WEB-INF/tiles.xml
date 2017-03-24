@@ -64,4 +64,8 @@
         <put-attribute name="main" value="/WEB-INF/tiles/views/article/manage.jsp"/>
     </definition>
 
+    <definition name="file/manage" extends="default.definition">
+        <put-attribute name="title" value="manage"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/file/manage.jsp"/>
+    </definition>
 </tiles-definitions>

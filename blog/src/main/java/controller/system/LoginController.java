@@ -49,7 +49,7 @@ public class LoginController extends BaseController{
             return prepared().addObject("errtx", "发生未知异常！");
         }
         CallBackDTO callBackDTO = validateService.validate(user.getAccount(), user.getPassword());
-        if(callBackDTO.isStatus()){
+        if(callBackDTO.isOkay()){
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30*60);
             session.setAttribute("_token", callBackDTO.getObj());

@@ -1,6 +1,5 @@
 package controller;
 
-import dto.system.UserQueryDTO;
 import entity.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,10 +40,6 @@ public class BaseController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("status", status ? "success":"failure");
         return mav;
-    }
-
-    protected ModelAndView goLogin(){
-        return new ModelAndView("login").addObject("loginDTO", new UserQueryDTO());
     }
 
     protected int getCurrentUserId(HttpServletRequest request){

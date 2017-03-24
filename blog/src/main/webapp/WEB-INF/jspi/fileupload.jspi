@@ -1,0 +1,5 @@
+<script src="${ctx}/fileupload/jquery.ui.widget.js"></script>
+<script src="${ctx}/fileupload/jquery.iframe-transport.js"></script>
+<script src="${ctx}/fileupload/jquery.fileupload.js"></script>
+<script src="${ctx}/adminLTE/bootstrap/js/bootstrap.min.js"></script>
+<link href="${ctx}/adminLTE/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />

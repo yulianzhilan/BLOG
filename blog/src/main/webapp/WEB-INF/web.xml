@@ -24,4 +24,13 @@
         <servlet-name>mainservlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>login</filter-name>
+        <filter-class>controller.system.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <servlet-name>mainservlet</servlet-name>
+    </filter-mapping>
 </web-app>

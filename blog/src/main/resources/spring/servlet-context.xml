@@ -18,7 +18,7 @@
     <mvc:resources mapping="/adminLTE/**" location="/static/adminLTE/"/>
     <mvc:resources mapping="/ionicons/**" location="/static/ionicons/"/>
     <mvc:resources mapping="/kindeditor/**" location="/static/kindeditor/"/>
-
+    <mvc:resources mapping="/fileupload/**" location="/static/fileupload/"/>
     <mvc:default-servlet-handler/>
 
     <!-- JSP试图解析器 -->
@@ -86,4 +86,9 @@
     </bean>
 
     <!--<bean id="configService" class="service.impl.ConfigServiceImpl"/>-->
+
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>-->
+    <bean id="multipartResolver" class="util.MyCommonsMultipartResolver">
+        <constructor-arg name="excludeUrl" value="/file/upload"/>
+    </bean>
 </beans>

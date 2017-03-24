@@ -43,18 +43,18 @@ public class ValidateServiceImpl implements ValidateService{
         CallBackDTO result = new CallBackDTO();
         User user = getUser(_user, _token);
         if(user != null){
-            result.setStatus(true);
+            result.setOkay(true);
             result.setObj(user);
             return result;
         }
         int amount = userMapper.countUser(_user);
         if(amount != 0){
-            result.setStatus(false);
+            result.setOkay(false);
             result.setErrcode(102);
             result.setErrtx("帐号或密码错误！");
             return result;
         }
-        result.setStatus(false);
+        result.setOkay(false);
         result.setErrcode(101);
         result.setErrtx("未注册用户！");
         return result;

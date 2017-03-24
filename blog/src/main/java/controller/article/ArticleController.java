@@ -29,9 +29,9 @@ public class ArticleController extends BaseController{
     public ModelAndView read(HttpServletRequest request){
         //fixme 登录验证单独提取出去，使用拦截器或者其他技术手段
         //登录验证
-        if(!isLogin(request)){
-            return goLogin();
-        }
+//        if(!isLogin(request)){
+//            return goLogin();
+//        }
         List<ArticleFolderDTO> result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
         return new ModelAndView("article/read").addObject("result", result);
     }
@@ -68,8 +68,11 @@ public class ArticleController extends BaseController{
         return new ModelAndView("article/manage");
     }
 
-    @RequestMapping(value = "image", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView image(){
-        return new ModelAndView("image");
+    //fixme 关于中文乱码问题
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute("content")String content){
+        System.out.println(content);
+        return null;
     }
+
 }

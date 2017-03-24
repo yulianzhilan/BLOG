@@ -117,35 +117,36 @@
             </div>
         </div>
 
-        <script>
-            function deleteArticle(id) {
-                $.ajax({
-                    url: "${ctx}/article/delete.json?id="+id,
-                    success: function (data) {
-                        if(data.status == 'success'){
-                            alert("删除成功");
-                            $("#show").click();
-                        }
-                    }
-                })
-            }
-            function preview(id) {
-                $.ajax({
-                    url: "${ctx}/article/preview.json?id="+id,
-                    success: function (data) {
-                        if(data.status == 'success'){
-                            $("#title").text(data.result.title);
-                            $("#location").text(data.result.location);
-                            $("#folder").text(data.result.folder);
-                            $("#person").text(data.result.person);
-                            $("#name").text(data.result.name);
-                            $("#description").text(data.result.description);
-                            $("#content").text(data.result.content);
-                            $("#myModal").modal("show");
-                        }
-                    }
-                })
-            }
-        </script>
+
     </section>
 </div>
+<script>
+    function deleteArticle(id) {
+        $.ajax({
+            url: "${ctx}/article/delete.json?id="+id,
+            success: function (data) {
+                if(data.status == 'success'){
+                    alert("删除成功");
+                    $("#show").click();
+                }
+            }
+        })
+    }
+    function preview(id) {
+        $.ajax({
+            url: "${ctx}/article/preview.json?id="+id,
+            success: function (data) {
+                if(data.status == 'success'){
+                    $("#title").text(data.result.title);
+                    $("#location").text(data.result.location);
+                    $("#folder").text(data.result.folder);
+                    $("#person").text(data.result.person);
+                    $("#name").text(data.result.name);
+                    $("#description").text(data.result.description);
+                    $("#content").text(data.result.content);
+                    $("#myModal").modal("show");
+                }
+            }
+        })
+    }
+</script>

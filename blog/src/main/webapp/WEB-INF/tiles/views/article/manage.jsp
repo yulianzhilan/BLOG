@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/jspi/kindeditor.jspi"%>
+<%@include file="/WEB-INF/jspi/main.jspi"%>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -20,100 +21,66 @@
         <div class="box box-primary">
             <div class="box-header"></div>
             <div class="box-body">
-                <form name="example" method="post" action="${ctx}/">
-                    <textarea name="content1" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
-                    <br />
-                    <input type="submit" name="button" value="提交内容" /> (提交快捷键: Ctrl + Enter)
+                <form name="example" id="example" method="post" action="${ctx}/article/save">
+                    <div class="row">
+                        <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>标题</label>
+                                    <input type="text" name="title" class="form-control input-sm required" title="标题"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>地点</label>
+                                    <input type="text" name="location" class="form-control input-sm required" title="地点"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>人物</label>
+                                    <input type="text" name="person" class="form-control input-sm required" title="人物"/>
+                                </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea name="content" cols="100" rows="8" style="width: 100%; height:200px;visibility:hidden;"></textarea>
+                            <br />
+                            <button onclick="savecontent()">提交内容</button> (提交快捷键: Ctrl + Enter)
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="box-footer"></div>
         </div>
-
-        <div class="box box-primary">
-            <div class="box-header">
-                <div class="btn-group">
-                    <%--<a href="${ctx}/article/readByFolder?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-align-right"></i>${result.attribute}</button></a>--%>
-                    <%--<a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}" id="show"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-refresh"></i>${result.name}</button></a>--%>
-                </div>
-                <%--<h3 class="box-title">${result.name}</h3>--%>
-                <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input name="table_search" class="form-control pull-right" placeholder="Search" type="text">
-
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th class="text-center">ID</th>
-                        <th class="text-center">NAME</th>
-                        <th class="text-center">LOCATION</th>
-                        <th class="text-center">PERSON</th>
-                        <th class="text-center">FOLDER</th>
-                        <th class="text-center" style="width: 30%;">DESCRIPTION</th>
-                        <th class="text-center">TITLE</th>
-                        <th class="text-center">ACTION</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${result.articleDTOs}" var="dto">
-                        <tr>
-                            <td class="text-center">${dto.id}</td>
-                            <td class="text-center">${dto.name}</td>
-                            <td class="text-center">${dto.location}</td>
-                            <td class="text-center">${dto.person}</td>
-                            <td class="text-center">${dto.folder}</td>
-                            <td class="text-center">${dto.description}</td>
-                            <td class="text-center">${dto.title}</td>
-                            <td class="text-center">
-                                <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改"
-                                      onclick="window.location.href='${ctx}'"></span>
-                                <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览"
-                                      onclick="preview(${dto.id})"></span>
-                                <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除"
-                                      onclick="deleteArticle(${dto.id})"></span>
-                            </td>
-                                <%-- fixme 最好加上创建时间 --%>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-
-
-
 
     </section>
 </div>
 
 <script>
     KindEditor.ready(function(K) {
-        var editor1 = K.create('textarea[name="content1"]', {
+        var editor1 = K.create('textarea[name="content"]', {
             cssPath : '${ctx}/kindeditor/plugins/code/prettify.css',
             uploadJson : '${ctx}/file/upload',
-//            fileManagerJson : '../jsp/file_manager_json.jsp',
-            fileManagerJson : '${ctx}/file/manage',
+            fileManagerJson : '${ctx}/file/preview',
             allowFileManager : true,
-            afterCreate : function() {
-                var self = this;
-                K.ctrl(document, 13, function() {
-                    self.sync();
-                    document.forms['example'].submit();
-                });
-                K.ctrl(self.edit.doc, 13, function() {
-                    self.sync();
-                    document.forms['example'].submit();
-                });
-            }
+//            afterCreate : function() {
+//                var self = this;
+//                K.ctrl(document, 13, function() {
+//                    self.sync();
+//                    document.forms['example'].submit();
+//                });
+//                K.ctrl(self.edit.doc, 13, function() {
+//                    self.sync();
+//                    document.forms['example'].submit();
+//                });
+//            }
         });
         prettyPrint();
     });
+</script>
+
+<script>
+    function savecontent() {
+        alert("first");
+        if(!$("#example").formValidate()){
+            alert("i am here");
+            return false;
+        }
+        alert("outer");
+    }
 </script>
