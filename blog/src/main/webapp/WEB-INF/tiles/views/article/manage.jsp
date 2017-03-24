@@ -40,7 +40,7 @@
                         <div class="col-sm-8">
                             <textarea name="content" cols="100" rows="8" style="width: 100%; height:200px;visibility:hidden;"></textarea>
                             <br />
-                            <button onclick="savecontent()">提交内容</button> (提交快捷键: Ctrl + Enter)
+                            <button type="button" onclick="savecontent()">提交内容</button> (提交快捷键: Ctrl + Enter)
                         </div>
                     </div>
                 </form>
@@ -57,7 +57,7 @@
             cssPath : '${ctx}/kindeditor/plugins/code/prettify.css',
             uploadJson : '${ctx}/file/upload',
             fileManagerJson : '${ctx}/file/preview',
-            allowFileManager : true,
+            allowFileManager : true
 //            afterCreate : function() {
 //                var self = this;
 //                K.ctrl(document, 13, function() {
