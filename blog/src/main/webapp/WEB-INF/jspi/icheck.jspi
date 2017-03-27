@@ -1,3 +1,7 @@
 <!-- iCheck -->
-<script src="http://cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
+<!-- <script src="http://cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
 <link href="http://cdn.bootcss.com/iCheck/1.0.2/skins/all.css" rel="stylesheet"/>
+-->
+<script src="${ctx}/adminLTE/plugins/iCheck/icheck.min.js"></script>
+<link href="${ctx}/adminLTE/plugins/iCheck/line/_all.css" rel="stylesheet"/>
+<link href="${ctx}/adminLTE/plugins/iCheck/flat/_all.css" rel="stylesheet"/>

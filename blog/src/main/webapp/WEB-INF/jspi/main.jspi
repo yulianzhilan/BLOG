@@ -40,6 +40,13 @@
 
 <!-- simple-validate -->
 <script src="${ctx}/js/simpleValidate.js"></script>
+<script src="${ctx}/js/simple-validate.zh-CN.js"></script>
 
 <!-- style.css -->
 <link rel="stylesheet" href="${ctx}/css/style.css"/>
+
+
+<link rel="stylesheet" href="${ctx}/adminLTE/plugins/select2/select2.css"/>
+<script src="${ctx}/adminLTE/plugins/select2/select2.full.js"></script>
+<script src="${ctx}/adminLTE/plugins/select2/i18n/zh-CN.js"></script>
+
