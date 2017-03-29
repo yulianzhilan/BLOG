@@ -9,7 +9,7 @@
         ]]>
       WHERE
       <if test="query != null and query != ''">
-      ${column} = #{query, jdbcType=VARCHAR}
+      ${column} LIKE concat('%', #{query}, '%')
       AND
       </if>
       USERID = ${id}

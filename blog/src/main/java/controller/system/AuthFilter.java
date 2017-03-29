@@ -25,13 +25,13 @@ public class AuthFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         String path = httpServletRequest.getRequestURI();
         User user =  (User)session.getAttribute("_token");
-        if(user != null){
-            chain.doFilter(httpServletRequest,httpServletResponse);
-        } else if(path.contains("/blog/article")||path.contains("/blog/file")||path.contains("/blog/photo")){
-            ((HttpServletResponse) response).sendRedirect("/blog/login");
-        } else{
+//        if(user != null){
+//            chain.doFilter(httpServletRequest,httpServletResponse);
+//        } else if(path.contains("/blog/article")||path.contains("/blog/file")||path.contains("/blog/photo")){
+//            ((HttpServletResponse) response).sendRedirect("/blog/login");
+//        } else{
             chain.doFilter(httpServletRequest, httpServletResponse);
-        }
+//        }
     }
 
     @Override

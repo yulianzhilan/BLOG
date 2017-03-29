@@ -1,5 +1,6 @@
 package controller;
 
+import dto.DataBaseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +24,7 @@ public class HelperController extends BaseController{
 
     @RequestMapping(value = "/getInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getInfoFromDataBase(HttpServletRequest request, @ModelAttribute("table")String table, @ModelAttribute("column")String column, @ModelAttribute("query")String query){
-        List result =  helperService.getInfoFromDataBase(getCurrentUserId(request),table,column,query);
+        List<DataBaseDTO> result =  helperService.getInfoFromDataBase(getCurrentUserId(request),table,column,query);
         return ajaxModelAndView(true).addObject("result", result);
     }
 

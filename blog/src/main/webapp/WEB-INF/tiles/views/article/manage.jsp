@@ -34,10 +34,23 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>文件夹</label>
-                                        <%--<input type="text" name="folder" class="form-control input-sm required" title="文件夹"/>--%>
-                                        <select name="folder" class="form-control input-sm required" title="文件夹">
+                                        <li id="fat-menu" class="dropdown" style="list-style: none;">
+                                            <input type="text" name="folder" id="folder" class="form-control input-sm required" title="文件夹"/>
+                                            <ul class="dropdown-menu" aria-labelledby="drop3" id="fat-detail">
 
-                                        </select>
+                                            </ul>
+                                        </li>
+                                        <%--<div class="input-group">--%>
+                                            <%--<select name="folder" id="selectFolder" class="form-control input-sm required" title="文件夹">--%>
+                                                <%--<option></option>--%>
+                                                <%--<c:forEach items="${folders}" var="folder">--%>
+                                                    <%--<option value="${folder.dictName}">${folder.dictName}</option>--%>
+                                                <%--</c:forEach>--%>
+                                            <%--</select>--%>
+                                            <%--<div class="input-group-btn">--%>
+                                                <%--<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">NEW</button>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -72,9 +85,9 @@
                                 </div>
                         </div>
                         <div class="col-sm-8">
-                            <textarea name="content" cols="100" rows="8" style="width: 100%; height:200px;visibility:hidden;"></textarea>
+                            <%--<textarea name="content" cols="100" rows="8" style="width: 100%; height:200px;visibility:hidden;"></textarea>--%>
                             <br />
-                            <button type="button" onclick="savecontent()">提交内容</button> (提交快捷键: Ctrl + Enter)
+                            <button type="button" onclick="saveContent()">提交内容</button>
                         </div>
                     </div>
                 </form>
@@ -85,71 +98,78 @@
     </section>
 </div>
 
+<%@include file="/WEB-INF/jspi/jsrender.jspi"%>
+<script type="text/x-jsrender" id="li">
+{{for result}}
+<li><a href="#" onclick="addFolder('{{:#data.dictName}}')">{{:#data.dictName}}</a></li>
+{{/for}}
+</script>
 <script>
     KindEditor.ready(function(K) {
         var editor1 = K.create('textarea[name="content"]', {
             cssPath : '${ctx}/kindeditor/plugins/code/prettify.css',
             uploadJson : '${ctx}/file/upload',
             fileManagerJson : '${ctx}/file/preview',
-            allowFileManager : true
-//            afterCreate : function() {
-//                var self = this;
-//                K.ctrl(document, 13, function() {
-//                    self.sync();
+            allowFileManager : true,
+            afterCreate : function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
 //                    document.forms['example'].submit();
-//                });
-//                K.ctrl(self.edit.doc, 13, function() {
-//                    self.sync();
+                    saveContent();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
 //                    document.forms['example'].submit();
-//                });
-//            }
+                    saveContent();
+                });
+            },
+            afterBlur: function () { this.sync(); }
         });
         prettyPrint();
     });
 </script>
 
 <script>
-    function savecontent() {
-        alert("first");
+
+    function saveContent() {
+        if($("#example select").val() == ""){
+            alert("folder 不能为空！");
+            return;
+        }
         if(!$("#example").formValidate()){
             alert("i am here");
             return false;
         }
-        alert("outer");
+        document.charset = "UTF-8"
+        $("#example").submit();
     }
-    $(function () {
-        $("select[name=folder]").select2({
-            ajax: {
-                url: "${ctx}/helper/getInfo.json",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        query: params.term, // search term
-                        table: 'ARTICLE',
-                        column: 'FOLDER',
-                    };
-                },
-                processResults: function (data) {
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
 
-                    return {
-                        results: data.result
-                    };
-                },
-                cache: true
-            },
-//            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-//            minimumInputLength: 1,
-//            templateResult: formatRepo, // omitted for brevity, see the source of this page
-            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-        });
-    })
-    function formatRepoSelection() {
-        
+    function addFolder(value) {
+        $("#folder").val(value);
+        $("#fat-menu").removeClass('open');
     }
-    
+
+    $(function () {
+        $("#folder").keyup(function () {
+            $.ajax({
+                url: '${ctx}/helper/getInfo.json?table=ARTICLE&column=FOLDER&query='+$("#folder").val(),
+                type: 'GET',
+                success: function (data) {
+                    if(data.status == 'success'){
+                        if(data.result.length > 0){
+                            $("#fat-detail").html($.templates("#li").render({result: data.result}));
+                            $("#fat-menu").addClass("open");
+                        } else{
+                            $("#fat-menu").removeClass("open");
+                        }
+                    }
+                }
+            })
+        });
+
+        $("#folder").blur(function () {
+            $("#fat-menu").removeClass("open");
+        })
+    });
 </script>

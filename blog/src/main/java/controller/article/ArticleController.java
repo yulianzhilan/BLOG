@@ -1,6 +1,7 @@
 package controller.article;
 
 import controller.BaseController;
+import dto.DataBaseDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import service.ArticleService;
+import service.HelperService;
 import util.Constants;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,9 @@ import java.util.List;
 public class ArticleController extends BaseController{
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private HelperService helperService;
 
     @RequestMapping(value = "read", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView read(HttpServletRequest request){
@@ -65,13 +70,19 @@ public class ArticleController extends BaseController{
 
     @RequestMapping(value = "manage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView manage(HttpServletRequest request){
-        return new ModelAndView("article/manage");
+        List<DataBaseDTO> result = helperService.getInfoFromDataBase(getCurrentUserId(request), "ARTICLE", "FOLDER", null);
+        return new ModelAndView("article/manage").addObject("folders", result);
     }
 
     //fixme 关于中文乱码问题
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("content")String content){
+    public ModelAndView save(@ModelAttribute("content")String content,String name,String folder,String person, HttpServletRequest request) throws Exception{
+        System.out.println(request.getCharacterEncoding());
         System.out.println(content);
+        System.out.println(name);
+        System.out.println(person);
+        System.out.println(new String(person.getBytes("ISO8859-1"),"utf-8"));
+        System.out.println(folder);
         return null;
     }
 
