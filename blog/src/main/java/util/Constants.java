@@ -12,6 +12,7 @@ public class Constants {
     public static final String ATTRIBUTE_PERSON = "person";
     public static final String ATTRIBUTE_CREATE = "create";
     public static final String SAVE_PATH = "SAVE_PATH";
+
     //定义允许上传的文件扩展名
 //    public static class ExtName{
 //        public static final String IMAGE = "gif,jpg,jpeg,png,bmp";

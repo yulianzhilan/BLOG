@@ -21,4 +21,5 @@ public interface ArticleMapper {
     List<ArticleDTO> getSimpleArticlesByName(@Param("isPrivate")boolean isPrivate, @Param("userId")int userId,@Param("folder")String folder,@Param("location")String location,@Param("person")String person);
     //删除文章(id，userId)
     int deleteById(@Param("id") int id, @Param("userId") int userId);
+    List<ArticleDTO> getArticles(@Param("userId")int userId, @Param("isPrivate")boolean isPrivate);
 }

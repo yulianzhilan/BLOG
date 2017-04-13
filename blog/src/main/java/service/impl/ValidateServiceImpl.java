@@ -63,7 +63,7 @@ public class ValidateServiceImpl implements ValidateService{
     @Override
     public List<SidebarDTO> getSideBar(User user) {
         if(user == null){
-            // fixme 这里增加重新登录机制
+            //  这里增加重新登录机制 重新登录机制已经加在controller
             return null;
         }
         return sidebarMapper.getSidebar(user.getRoleId());

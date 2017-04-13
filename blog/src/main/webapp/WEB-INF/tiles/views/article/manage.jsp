@@ -85,7 +85,7 @@
                                 </div>
                         </div>
                         <div class="col-sm-8">
-                            <%--<textarea name="content" cols="100" rows="8" style="width: 100%; height:200px;visibility:hidden;"></textarea>--%>
+                            <textarea name="content" cols="100" rows="8" style="width: 100%; height:200px;visibility:hidden;"></textarea>
                             <br />
                             <button type="button" onclick="saveContent()">提交内容</button>
                         </div>

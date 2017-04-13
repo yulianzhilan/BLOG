@@ -4,33 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/jspi/kindeditor.jspi"%>
 <%@include file="/WEB-INF/jspi/fileupload.jspi"%>
-<style>
-    #dropzone {
-        background: #cccccc;
-        width: 150px;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
-        font-weight: bold;
-    }
-    #dropzone.in {
-        width: 600px;
-        height: 200px;
-        line-height: 200px;
-        font-size: larger;
-    }
-    #dropzone.hover {
-        background: lawngreen;
-    }
-    #dropzone.fade {
-        -webkit-transition: all 0.3s ease-out;
-        -moz-transition: all 0.3s ease-out;
-        -ms-transition: all 0.3s ease-out;
-        -o-transition: all 0.3s ease-out;
-        transition: all 0.3s ease-out;
-        opacity: 1;
-    }
-</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -48,20 +21,24 @@
         <div class="box box-primary">
             <div class="box-header"></div>
             <div class="box-body">
-                <input id="fileupload" type="file" name="files[]" data-url="${ctx}/file/fileupload.json" multiple>
 
-                <div id="dropzone">Drop files here</div>
-
-                <div id="progress">
-                    <div style="width: 0%;"></div>
-                </div>
+                <%--<input id="fileupload" type="file" name="files[]" data-url="${ctx}/file/fileupload.json" multiple>--%>
+                    <div class="row">
+                        <form method="POST" name="fileUpload" id="fileUpload" enctype="multipart/form-data">
+                            <div class="col-sm-4">
+                                <label>文件上传</label>
+                                <input id="file" name="uploadFile" type="file" class="btn btn-sm btn-primary form-control">
+                                <div id="fileError" class="help-block"></div>
+                            </div>
+                        </form>
+                    </div>
 
                 <table id="uploaded-files">
                     <tr>
-                        <th>File Name</th>
-                        <th>File Size</th>
-                        <th>File Type</th>
-                        <th>Download</th>
+                        <th class="text-center">File Name</th>
+                        <th class="text-center">File Size</th>
+                        <th class="text-center">File Type</th>
+                        <th class="text-center">Download</th>
                     </tr>
                 </table>
             </div>
@@ -71,33 +48,72 @@
     </section>
 </div>
 <script>
+    <%--$(function () {--%>
+        <%--$('#fileupload').fileupload({--%>
+            <%--dataType: 'json',--%>
+
+            <%--done: function (e, data) {--%>
+                <%--$("tr:has(td)").remove();--%>
+                <%--$.each(data.result.result, function (index, file) {--%>
+
+                    <%--$("#uploaded-files").append(--%>
+                        <%--$('<tr/>')--%>
+                            <%--.append($('<td/>').text(file.fileName))--%>
+                            <%--.append($('<td/>').text(file.fileSize))--%>
+                            <%--.append($('<td/>').text(file.fileType))--%>
+                            <%--.append($('<td/>').html("<a href='${ctx}/file/get/"+index+"'>Click</a>"))--%>
+                    <%--)//end $("#uploaded-files").append()--%>
+                <%--});--%>
+            <%--},--%>
+
+            <%--progressall: function (e, data) {--%>
+                <%--var progress = parseInt(data.loaded / data.total * 100, 10);--%>
+                <%--$('#progress .bar').css(--%>
+                    <%--'width',--%>
+                    <%--progress + '%'--%>
+                <%--);--%>
+            <%--},--%>
+
+            <%--dropZone: $('#dropzone')--%>
+        <%--});--%>
+    <%--});--%>
+
     $(function () {
-        $('#fileupload').fileupload({
+        //文件上传初始化
+        $("#file").fileinput({
+            showPreview : false,
+//            allowedFileExtensions : [ "xls", "xlsx"], //限制文件类型
+            elErrorContainer : "#fileError"
+        });
+    })
+
+    // 文件上传提交
+    $("#fileUpload").submit(function(event) {
+        event.preventDefault(); //阻止当前提交事件
+
+        $('#fileUpload').ajaxSubmit({
+            url: '${ctx}/file/fileUpload.json',
             dataType: 'json',
-
-            done: function (e, data) {
-                $("tr:has(td)").remove();
-                $.each(data.result.result, function (index, file) {
-
-                    $("#uploaded-files").append(
-                        $('<tr/>')
-                            .append($('<td/>').text(file.fileName))
-                            .append($('<td/>').text(file.fileSize))
-                            .append($('<td/>').text(file.fileType))
-                            .append($('<td/>').html("<a href='${ctx}/file/get/"+index+"'>Click</a>"))
-                    )//end $("#uploaded-files").append()
-                });
+            success: function (data) {
+                afterUpdate(data);
             },
-
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .bar').css(
-                    'width',
-                    progress + '%'
-                );
-            },
-
-            dropZone: $('#dropzone')
+            error: function () {
+                alert("导入失败！");
+            }
         });
     });
+
+    function afterUpdate(data) {
+        $("tr:has(td)").remove();
+        $.each(data.result, function (index, file) {
+
+            $("#uploaded-files").append(
+                $('<tr/>')
+                    .append($('<td/>').text(file.fileName))
+                    .append($('<td/>').text(file.fileSize))
+                    .append($('<td/>').text(file.fileType))
+                    .append($('<td/>').html("<a href='${ctx}/file/get/"+index+"'>Click</a>"))
+            );
+        });
+    }
 </script>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="service.mapper.FileMapper">
+    <select id="getFiles" resultType="dto.file.FileDTO">
+        SELECT
+          FILENAME,
+          FILEID,
+          FILESIZE,
+          FILETYPE,
+          FILEPATH,
+          USERID
+        FROM
+          FILE
+        WHERE
+          USERID = #{userId}
+          <if test="fileName != null and fileName != ''">
+              AND
+              FILENAME = #{fileName}
+          </if>
+          <if test="fileType != null and fileType != ''">
+              AND
+              FILETYPE = #{fileType}
+          </if>
+          <if test="fileId != null and fileId != ''">
+              AND
+              FILEID = #{fileId}
+          </if>
+    </select>
+
+    <insert id="saveFile" parameterType="dto.file.FileDTO"  useGeneratedKeys="true" keyProperty="fileId">
+
+        INSERT INTO
+        FILE
+        (
+          FILENAME,
+          FILESIZE,
+          FILETYPE,
+          FILEPATH,
+          USERID
+        )
+        VALUES
+        (
+          #{fileName},
+          #{fileSize},
+          #{fileType},
+          #{filePath},
+          #{userId}
+        )
+    </insert>
+</mapper>

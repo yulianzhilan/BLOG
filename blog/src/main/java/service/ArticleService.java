@@ -48,4 +48,12 @@ public interface ArticleService {
      * @return
      */
     ArticleDTO preview(boolean isPrivate, int userId, int id);
+
+    /**
+     * 获取所有文章
+     * @param isPrivate
+     * @param userId
+     * @return
+     */
+    List<ArticleDTO> getArticles(boolean isPrivate, int userId);
 }

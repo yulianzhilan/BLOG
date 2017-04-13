@@ -123,7 +123,7 @@ public class FileUpDownloadServiceImpl implements FileUpDownloadService {
     public CallBackDTO preview(String path,String dir,String order, int userId){
         // 文件在本地的位置
         CallBackDTO result = new CallBackDTO();
-        String rootPath = configService.getConfig("SAVE_PATH")+userId+"/";
+        String rootPath = configService.getConfig(Constants.SAVE_PATH)+userId+"/";
         String rootUrl = "";
         if(dir != null){
             if(!Arrays.<String>asList(Constants.FILEEXTCATEGORY).contains(dir)){
@@ -199,7 +199,7 @@ public class FileUpDownloadServiceImpl implements FileUpDownloadService {
         CallBackDTO result = new CallBackDTO();
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("E:"+File.separator+"attachment"+File.separator+userId+File.separator+category+File.separator+location+File.separator+name+"."+ext));
+            image = ImageIO.read(new File(configService.getConfig(Constants.SAVE_PATH)+userId+File.separator+category+File.separator+location+File.separator+name+"."+ext));
         } catch(IOException e){
             e.printStackTrace();
         }

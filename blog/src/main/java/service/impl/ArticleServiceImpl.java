@@ -40,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleFolderDTO getArticleFoldersByName(String attribute, int userId, String name) {
-        // fixme 这里有一个问题，如果该字段的值为null，怎么获取该列表？
+        // fixme 这里有一个问题，如果该字段的值为null，怎么获取该列表？mybatis查询
         // 现在采用非空解决
         String folder = null;
         String location = null;
@@ -66,5 +66,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleDTO preview(boolean isPrivate, int userId, int id) {
         return articleMapper.getArticle(isPrivate,userId,id);
+    }
+
+    @Override
+    public List<ArticleDTO> getArticles(boolean isPrivate, int userId) {
+        return articleMapper.getArticles(userId,isPrivate);
     }
 }

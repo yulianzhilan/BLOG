@@ -22,6 +22,24 @@
         AND
         ID = #{id, jdbcType=SMALLINT}
     </select>
+    <!-- 用户 -->
+    <select id="getArticles" resultType="dto.article.ArticleDTO">
+        SELECT
+        ID,
+        NAME,
+        LOCATION,
+        CONTENT,
+        PERSON,
+        FOLDER,
+        TITLE,
+        DESCRIPTION
+        FROM
+        ARTICLE
+        WHERE
+        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        AND
+        USERID = #{userId, jdbcType=SMALLINT}
+    </select>
 
     <select id="searchQ" resultType="dto.article.ArticleDTO">
         SELECT

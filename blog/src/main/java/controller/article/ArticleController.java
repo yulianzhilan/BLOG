@@ -4,8 +4,15 @@ import controller.BaseController;
 import dto.DataBaseDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +22,10 @@ import service.ArticleService;
 import service.HelperService;
 import util.Constants;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -86,4 +96,56 @@ public class ArticleController extends BaseController{
         return null;
     }
 
+    @RequestMapping(value = "/export", method = {RequestMethod.GET, RequestMethod.POST})
+    public void export(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        List<ArticleDTO> result = articleService.getArticles(false, getCurrentUserId(request));
+        HSSFWorkbook workbook = generateExcel(result);
+//        response.setHeader("Content-disposition", "attachment; filename=\"" + workbook.getSheetName(0)+"\"");
+//        FileCopyUtils.copy(, response.getOutputStream());
+//        ByteArrayOutputStream os = new ByteArrayOutputStream();
+//        workbook.write(os);// 将excel写入流
+//        byte[] content = os.toByteArray();
+//        InputStream is = new ByteArrayInputStream(content);
+//        BufferedInputStream bis = null;
+//        BufferedOutputStream bos = null;
+    //        response.reset();
+    //        response.setContentType("application/vnd.ms-excel;charset=utf-8"); // msexcel
+    //        response.setHeader("Content-Disposition", "attachment;filename=" + new String((workbook.getSheetName(0)+".xlsx").getBytes(), "iso-8859-1"));
+    //        FileCopyUtils.copy(content, response.getOutputStream());
+//        ServletOutputStream out = response.getOutputStream();
+//        bis = new BufferedInputStream(is);
+//        bos = new BufferedOutputStream(out);
+//        byte[] buff = new byte[2048];
+//        int bytesRead;
+//        while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
+//            bos.write(buff, 0, bytesRead);
+//        }
+//        out.flush();
+//        out.close();
+
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Content-Disposition","attachment; filename=" + workbook.getSheetName(0) +".xls");
+        workbook.write(response.getOutputStream());
+    }
+
+    protected HSSFWorkbook generateExcel(List<ArticleDTO> list) throws Exception{
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet("article");
+        sheet.autoSizeColumn(0);
+        sheet.autoSizeColumn(1);
+        int rowNum = 0;
+        Row row = sheet.createRow(rowNum++);
+        Cell cell0 = row.createCell(0);
+        cell0.setCellValue("id");
+        Cell cell1 = row.createCell(1);
+        cell1.setCellValue("name");
+        for(int j=0; j<list.size(); j++){
+            Row newRow = sheet.createRow(rowNum++);
+            Cell cella = newRow.createCell(0);
+            cella.setCellValue(list.get(j).getId());
+            Cell cellb = newRow.createCell(1);
+            cellb.setCellValue(list.get(j).getName());
+        }
+        return workbook;
+    }
 }
