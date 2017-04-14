@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>home</title>
-</head>
-<body>
+<div class="content-wrapper">
+    <section class="content-header"></section>
 
-</body>
-</html>
+    <section class="content">
+        <p>this is home page, you can edit some produce of this project here!</p>
+    </section>
+</div>

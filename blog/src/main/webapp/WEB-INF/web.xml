@@ -27,7 +27,7 @@
 
     <filter>
         <filter-name>login</filter-name>
-        <filter-class>controller.system.AuthFilter</filter-class>
+        <filter-class>util.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>login</filter-name>

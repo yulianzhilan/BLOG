@@ -3,6 +3,7 @@ package controller.system;
 import controller.BaseController;
 import dto.CallBackDTO;
 import dto.system.UserQueryDTO;
+import entity.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -58,4 +59,13 @@ public class LoginController extends BaseController{
         return prepared().addObject("errtx", callBackDTO.getErrtx());
     }
 
+    @RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView home(HttpServletRequest request){
+        //fixme 这里解决重启后sidebar消失问题——因为开发时需要不停地重启，所以这个直接用admin作为默认登录用户
+        User user = new User();
+        user.setRoleId(1);
+        request.getSession().setAttribute("modules",validateService.getSideBar(user));
+        // ***************************************分割线*****************************************
+        return new ModelAndView("home");
+    }
 }

@@ -30,5 +30,6 @@
         RM.MENU_ID = MENU.ID
         AND
         MENU.MODULE_ID = MD.ID
+        ORDER BY MD.SEQ ASC
     </select>
 </mapper>
