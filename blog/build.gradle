@@ -85,4 +85,7 @@ dependencies {
     compile "org.apache.poi:poi-ooxml:$poiVersion"
     compile "org.apache.poi:poi-ooxml-schemas:$poiVersion"
 
+    // jsqlparser & Mybatis-PageHelper
+    compile "com.github.pagehelper:pagehelper:4.1.6"
+    compile "com.github.jsqlparser:jsqlparser:0.9.6"
 }

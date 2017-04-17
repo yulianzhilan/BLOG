@@ -8,13 +8,16 @@ import java.util.Date;
 public class ArticleDTO {
     private int id;
     private String name;
-    private Date create;
     private String location;
     private String content;
     private String person;
     private String folder;
     private String description;
     private String title;
+    private int isPrivate;
+    private int userId;
+    private Date created;
+    private Date modify;
 
     public int getId() {
         return id;
@@ -32,12 +35,12 @@ public class ArticleDTO {
         this.name = name;
     }
 
-    public Date getCreate() {
-        return create;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreate(Date create) {
-        this.create = create;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     public String getLocation() {
@@ -86,5 +89,29 @@ public class ArticleDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getIsPrivate() {
+        return isPrivate;
+    }
+
+    public void setIsPrivate(int isPrivate) {
+        this.isPrivate = isPrivate;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Date getModify() {
+        return modify;
+    }
+
+    public void setModify(Date modify) {
+        this.modify = modify;
     }
 }

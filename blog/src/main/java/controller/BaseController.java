@@ -1,6 +1,9 @@
 package controller;
 
 import entity.system.User;
+import framework.core.pagination.OrderablePagination;
+import framework.web.pagination.AbstractWebPagination;
+import framework.web.pagination.Bootstrap3KeyboardableWebPagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import service.ConfigService;
 import service.ValidateService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by scott on 2017/3/15.
@@ -53,5 +57,17 @@ public class BaseController {
         }
         //fixme 如果没有id，处理
         return 1;
+    }
+    /**
+     * 分页默认使用Bootstrap3KeyboardableWebPagination的实现
+     */
+    protected List<?> executeQuery(HttpServletRequest request, PaginationQueryCallback pqc) throws Exception {
+        return this.executeQuery(request, AbstractWebPagination.PAGER_ATTRIBUTE, 20, Bootstrap3KeyboardableWebPagination.class, pqc);
+    }
+    protected List<?> executeQuery(HttpServletRequest request, int size, PaginationQueryCallback pqc) throws Exception {
+        return this.executeQuery(request, AbstractWebPagination.PAGER_ATTRIBUTE, size, Bootstrap3KeyboardableWebPagination.class, pqc);
+    }
+    protected interface PaginationQueryCallback {
+        List<?> query(OrderablePagination var1) throws Exception;
     }
 }

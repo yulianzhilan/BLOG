@@ -44,7 +44,7 @@
                             <span class="fa fa-angle-left pull-right"></span>
                         </span>
                     </a>
-                    <ul class="treeview-menu">
+                    <ul class="treeview-menu" style="margin-top: -3px">
                         <c:forEach items="${module.menus}" var="menu">
                             <li><a href="${ctx}${menu.url}"><i class="fa fa-circle-o"></i>${menu.name}</a></li>
                         </c:forEach>

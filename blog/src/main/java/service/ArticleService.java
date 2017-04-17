@@ -1,5 +1,7 @@
 package service;
 
+import dto.OrderablePaginationDTO;
+import dto.PaginationResultDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 
@@ -47,7 +49,7 @@ public interface ArticleService {
      * @param id
      * @return
      */
-    ArticleDTO preview(boolean isPrivate, int userId, int id);
+    ArticleDTO preview(int isPrivate, int userId, int id);
 
     /**
      * 获取所有文章
@@ -55,5 +57,18 @@ public interface ArticleService {
      * @param userId
      * @return
      */
-    List<ArticleDTO> getArticles(boolean isPrivate, int userId);
+    PaginationResultDTO<ArticleDTO> getArticles(OrderablePaginationDTO op, int isPrivate, int userId);
+
+    /**
+     * 保存文章
+     * @param articleDTO
+     * @param userId
+     */
+    void saveArticle(ArticleDTO articleDTO, int userId);
+
+    /**
+     * 编辑文章
+     * @param articleDTO
+     */
+    void editArticle(ArticleDTO articleDTO);
 }

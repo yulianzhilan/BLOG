@@ -8,6 +8,8 @@
     <%--<%@include file="/WEB-INF/jspi/AdminLTE.jspi"%>--%>
         <%@include file="/WEB-INF/jspi/main.jspi"%>
     <title><tiles:getAsString name="title" ignore="true"/></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <%--<link rel="BookMark" href="http://dev.infoccsp.com/staticNG/favicon-eal.ico" type="image/x-icon">--%>
         <%-- fixme 这里添加网页名称前面的小图标 --%>
         <link rel="shortcut icon" href="" type="image/x-icon">
@@ -29,7 +31,6 @@
                 });
             });
         </script>
-
 </head>
 <%--<body class="fixed skin-blue sidebar-mini">--%>
 <body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto;">

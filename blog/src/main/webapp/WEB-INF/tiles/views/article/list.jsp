@@ -19,8 +19,8 @@
         <div class="box box-primary">
             <div class="box-header">
                 <div class="btn-group">
-                    <a href="${ctx}/article/readByFolder?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-align-right"></i>${result.attribute}</button></a>
-                    <a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}" id="show"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-refresh"></i>${result.name}</button></a>
+                    <a href="${ctx}/article/classifyByFolder?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat">${result.attribute}</button></a>
+                    <a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}"><button type="button" id="show" class="btn btn-info btn-flat">${result.name}</button></a>
                 </div>
                 <%--<h3 class="box-title">${result.name}</h3>--%>
                 <div class="box-tools">
@@ -38,28 +38,32 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th class="text-center">ID</th>
+                        <th class="text-center">NO</th>
                         <th class="text-center">NAME</th>
                         <th class="text-center">LOCATION</th>
                         <th class="text-center">PERSON</th>
                         <th class="text-center">FOLDER</th>
                         <th class="text-center" style="width: 30%;">DESCRIPTION</th>
                         <th class="text-center">TITLE</th>
+                        <th class="text-center">CREATED</th>
+                        <th class="text-center">MODIFY</th>
                         <th class="text-center">ACTION</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${result.articleDTOs}" var="dto">
+                        <c:forEach items="${result.articleDTOs}" var="dto" varStatus="item">
                             <tr>
-                                <td class="text-center">${dto.id}</td>
+                                <td class="text-center">${item.index+1}</td>
                                 <td class="text-center">${dto.name}</td>
                                 <td class="text-center">${dto.location}</td>
                                 <td class="text-center">${dto.person}</td>
                                 <td class="text-center">${dto.folder}</td>
                                 <td class="text-center">${dto.description}</td>
                                 <td class="text-center">${dto.title}</td>
+                                <td class="text-center"><fmt:formatDate value="${dto.created}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                <td class="text-center"><fmt:formatDate value="${dto.modify}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                 <td class="text-center">
-                                    <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick="window.location.href='${ctx}'"></span>
+                                    <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick="window.location.href='${ctx}/article/modify?id=${dto.id}'"></span>
                                     <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="preview(${dto.id})"></span>
                                     <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deleteArticle(${dto.id})"></span>
                                 </td>
@@ -70,6 +74,10 @@
                 </table>
             </div>
             <!-- /.box-body -->
+
+            <div class="box-footer clearfix">
+                <framework:pagination />
+            </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="service.mapper.ArticleMapper">
 
-    <!-- 用户 -->
     <select id="getArticle" resultType="dto.article.ArticleDTO">
         SELECT
         ID,
@@ -12,7 +11,9 @@
         PERSON,
         FOLDER,
         TITLE,
-        DESCRIPTION
+        DESCRIPTION,
+        CREATED,
+        MODIFY
         FROM
         ARTICLE
         WHERE
@@ -32,13 +33,16 @@
         PERSON,
         FOLDER,
         TITLE,
-        DESCRIPTION
+        DESCRIPTION,
+        CREATED,
+        MODIFY
         FROM
         ARTICLE
         WHERE
         ISPRIVATE = #{isPrivate, jdbcType=BIT}
         AND
         USERID = #{userId, jdbcType=SMALLINT}
+        ORDER BY MODIFY DESC
     </select>
 
     <select id="searchQ" resultType="dto.article.ArticleDTO">
@@ -68,6 +72,7 @@
         OR
         FOLDER LIKE '%${q, jdbcType=VARCHAR}%'
         </if>
+        ORDER BY MODIFY DESC
     </select>
 
     <select id="getSimpleArticles" resultType="dto.article.ArticleDTO">
@@ -76,13 +81,16 @@
         NAME,
         LOCATION,
         PERSON,
-        FOLDER
+        FOLDER,
+        CREATED,
+        MODIFY
         FROM
         ARTICLE
         WHERE
-        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        ISPRIVATE = #{isPrivate}
         AND
         USERID = #{userId, jdbcType=SMALLINT}
+        ORDER BY MODIFY DESC
     </select>
 
     <select id="getSimpleArticlesByName" resultType="dto.article.ArticleDTO">
@@ -93,7 +101,9 @@
         PERSON,
         FOLDER,
         DESCRIPTION,
-        TITLE
+        TITLE,
+        CREATED,
+        MODIFY
         FROM
         ARTICLE
         WHERE
@@ -118,9 +128,57 @@
         <!--<if test="person == ''">-->
         <!--AND PERSON IS NULL-->
         <!--</if>-->
+        ORDER BY MODIFY DESC
     </select>
 
     <delete id="deleteById">
         DELETE FROM ARTICLE WHERE USERID = #{userId, jdbcType=SMALLINT} AND ID = #{id, jdbcType=SMALLINT}
     </delete>
+
+    <update id="editArticle" parameterType="dto.article.ArticleDTO">
+      UPDATE
+      ARTICLE
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">NAME=#{name},</if>
+            <if test="location != null and location != ''">LOCATION=#{location},</if>
+            <if test="content != null and content != ''">CONTENT=#{content},</if>
+            <if test="person != null and person != ''">PERSON=#{person},</if>
+            <if test="folder != null and folder != ''">FOLDER=#{folder},</if>
+            <if test="isPrivate != null and isPrivate != ''">ISPRIVATE=#{isPrivate},</if>
+            <if test="userId != null and userId != ''">USERID=#{userId},</if>
+            <if test="description != null and description != ''">DESCRIPTION=#{description},</if>
+            <if test="title != null and title != ''">TITLE=#{title},</if>
+            MODIFY = now()
+        </trim>
+        WHERE ID = #{id}
+    </update>
+
+    <insert id="saveArticle" parameterType="dto.article.ArticleDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        ARTICLE
+        (name,
+        location,
+        content,
+        person,
+        folder,
+        isPrivate,
+        userId,
+        description,
+        title,
+        created,
+        modify)
+        VALUES
+        (#{name},
+        #{location},
+        #{content},
+        #{person},
+        #{folder},
+        #{isPrivate},
+        #{userId},
+        #{description},
+        #{title},
+        now(),
+        now()
+        )
+    </insert>
 </mapper>

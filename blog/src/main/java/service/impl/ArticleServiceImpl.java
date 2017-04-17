@@ -1,5 +1,9 @@
 package service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import dto.OrderablePaginationDTO;
+import dto.PaginationResultDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleFolderDTO> getDefaultArticleFolders(int userId) {
-        List<ArticleDTO> result = articleMapper.getSimpleArticles(false, userId);
+        List<ArticleDTO> result = articleMapper.getSimpleArticles(0, userId);
         if(result == null){
             return  null;
         }
@@ -31,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleFolderDTO> getArticleFolders(String flag , int userId) {
-        List<ArticleDTO> result = articleMapper.getSimpleArticles(false, userId);
+        List<ArticleDTO> result = articleMapper.getSimpleArticles(0, userId);
         if(result == null){
             return null;
         }
@@ -54,7 +58,7 @@ public class ArticleServiceImpl implements ArticleService {
         } else {
             return null;
         }
-        List<ArticleDTO> result = articleMapper.getSimpleArticlesByName(false,userId,folder,location,person);
+        List<ArticleDTO> result = articleMapper.getSimpleArticlesByName(0,userId,folder,location,person);
         return AssembleUtil.assembleArticleFolderDTO(result, name, attribute);
     }
 
@@ -64,12 +68,24 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO preview(boolean isPrivate, int userId, int id) {
+    public ArticleDTO preview(int isPrivate, int userId, int id) {
         return articleMapper.getArticle(isPrivate,userId,id);
     }
 
     @Override
-    public List<ArticleDTO> getArticles(boolean isPrivate, int userId) {
-        return articleMapper.getArticles(userId,isPrivate);
+    public PaginationResultDTO<ArticleDTO> getArticles(OrderablePaginationDTO op, int isPrivate, int userId) {
+        Page<ArticleDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> articleMapper.getArticles(isPrivate, userId));
+        return new PaginationResultDTO<>(op, page.getResult());
+    }
+
+    @Override
+    public void saveArticle(ArticleDTO articleDTO, int userId) {
+        articleDTO.setUserId(userId);
+        articleMapper.saveArticle(articleDTO);
+    }
+
+    @Override
+    public void editArticle(ArticleDTO articleDTO) {
+        articleMapper.editArticle(articleDTO);
     }
 }
