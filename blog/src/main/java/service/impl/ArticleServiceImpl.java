@@ -2,8 +2,8 @@ package service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import dto.OrderablePaginationDTO;
-import dto.PaginationResultDTO;
+import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
+import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +73,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public PaginationResultDTO<ArticleDTO> getArticles(OrderablePaginationDTO op, int isPrivate, int userId) {
-        Page<ArticleDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> articleMapper.getArticles(isPrivate, userId));
+    public List<ArticleDTO> getArticles(int isPrivate, int userId) {
+        return articleMapper.getArticles(userId,isPrivate);
+    }
+
+    @Override
+    public PaginationResultDTO<ArticleDTO> getArticles(OrderablePaginationDTO op,final int isPrivate,final int userId) {
+        Page<ArticleDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> articleMapper.getArticles(userId, isPrivate));
+        op.setTotalCount((int)page.getTotal());
         return new PaginationResultDTO<>(op, page.getResult());
     }
 

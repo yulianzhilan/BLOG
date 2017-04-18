@@ -1,7 +1,7 @@
 package service;
 
-import dto.OrderablePaginationDTO;
-import dto.PaginationResultDTO;
+import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
+import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
 
@@ -58,6 +58,14 @@ public interface ArticleService {
      * @return
      */
     PaginationResultDTO<ArticleDTO> getArticles(OrderablePaginationDTO op, int isPrivate, int userId);
+
+    /**
+     * 获取所有文章
+     * @param isPrivate
+     * @param userId
+     * @return
+     */
+    List<ArticleDTO> getArticles(int isPrivate, int userId);
 
     /**
      * 保存文章

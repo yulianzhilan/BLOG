@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="framework" uri="/framework-tags" %>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -25,9 +26,9 @@
             <div class="box-footer">
                 <span>分类方式:</span>
                 <div class="btn-group">
-                    <a href="${ctx}/article/classifyByFolder?attribute=folder"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-folder"></i>文件夹</button></a>
-                    <a href="${ctx}/article/classifyByFolder?attribute=location"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-location-arrow"></i>地点</button></a>
-                    <a href="${ctx}/article/classifyByFolder?attribute=person"><button type="button" class="btn btn-info btn-flat"><i class="fa fa-user-circle"></i>人物</button></a>
+                    <a href="${ctx}/article/classifyByFolder?attribute=folder"><button type="button" class="btn <c:if test="${attribute == 'folder'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-folder"></i>文件夹</button></a>
+                    <a href="${ctx}/article/classifyByFolder?attribute=location"><button type="button" class="btn <c:if test="${attribute == 'location'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-location-arrow"></i>地点</button></a>
+                    <a href="${ctx}/article/classifyByFolder?attribute=person"><button type="button" class="btn <c:if test="${attribute == 'person'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-user-circle"></i>人物</button></a>
                 </div>
             </div><!-- box-footer -->
             <div class="box-body">
@@ -99,8 +100,8 @@
                 </div>
                 </c:forEach>
             </div>
-            <div class="box-footer">
-
+            <div class="box-footer clearfix">
+                <framework:pagination />
             </div>
         </div>
     </section>

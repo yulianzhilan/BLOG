@@ -1,5 +1,8 @@
 package controller.article;
 
+import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
+import com.infoccsp.framework.core.pagination.PaginationResultDTO;
+import com.infoccsp.framework.web.springmvc.controller.PaginationableController;
 import controller.BaseController;
 import dto.DataBaseDTO;
 import dto.article.ArticleDTO;
@@ -41,21 +44,32 @@ public class ArticleController extends BaseController{
     private HelperService helperService;
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView execute(HttpServletRequest request){
+    public ModelAndView execute(HttpServletRequest request) throws Exception{
         return read(request);
     }
 
     @RequestMapping(value = "/classify", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView read(HttpServletRequest request){
+    public ModelAndView read(HttpServletRequest request) throws Exception{
         List<ArticleFolderDTO> result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
-
-        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOS);
+        List<?> articleDTOS = executeQuery(request, new SerializablePaginationQueryCallback() {
+            @Override
+            public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
+                return articleService.getArticles(op, 0, getCurrentUserId(request));
+            }
+        });
+        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOS).addObject("attribute","folder");
     }
 
     @RequestMapping(value = "/classifyByFolder", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView readByFolder(@ModelAttribute("attribute")String attribute, HttpServletRequest request){
+    public ModelAndView readByFolder(@ModelAttribute("attribute")String attribute, HttpServletRequest request) throws Exception{
         List<ArticleFolderDTO> result = articleService.getArticleFolders(attribute, getCurrentUserId(request));
-        return new ModelAndView("article/classify").addObject("result", result);
+        List<?> articleDTOS = executeQuery(request, new SerializablePaginationQueryCallback() {
+            @Override
+            public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
+                return articleService.getArticles(op, 0, getCurrentUserId(request));
+            }
+        });
+        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOS);
     }
 
     @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
@@ -101,6 +115,7 @@ public class ArticleController extends BaseController{
         }
         return null;
     }
+
     @RequestMapping(value = "/show", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView show(int id, HttpServletRequest request){
         ArticleDTO result = articleService.preview(0, getCurrentUserId(request), id);

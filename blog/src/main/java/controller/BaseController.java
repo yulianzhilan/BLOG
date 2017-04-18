@@ -1,13 +1,10 @@
 package controller;
 
+import com.infoccsp.framework.web.springmvc.controller.PaginationableController;
 import entity.system.User;
-import framework.core.pagination.OrderablePagination;
 import framework.web.pagination.AbstractWebPagination;
 import framework.web.pagination.Bootstrap3KeyboardableWebPagination;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import service.ConfigService;
 import service.ValidateService;
@@ -18,7 +15,7 @@ import java.util.List;
 /**
  * Created by scott on 2017/3/15.
  */
-public class BaseController {
+public class BaseController extends PaginationableController {
     @Autowired
     private ConfigService configService;
 
@@ -61,13 +58,12 @@ public class BaseController {
     /**
      * 分页默认使用Bootstrap3KeyboardableWebPagination的实现
      */
-    protected List<?> executeQuery(HttpServletRequest request, PaginationQueryCallback pqc) throws Exception {
-        return this.executeQuery(request, AbstractWebPagination.PAGER_ATTRIBUTE, 20, Bootstrap3KeyboardableWebPagination.class, pqc);
+    @Override
+    protected List<?> executeQuery(HttpServletRequest request, PaginationableController.PaginationQueryCallback pqc) throws Exception {
+        return this.executeQuery(request, AbstractWebPagination.PAGER_ATTRIBUTE, DEFAULT_PAGE_SIZE, Bootstrap3KeyboardableWebPagination.class, pqc);
     }
-    protected List<?> executeQuery(HttpServletRequest request, int size, PaginationQueryCallback pqc) throws Exception {
+    @Override
+    protected List<?> executeQuery(HttpServletRequest request, int size, PaginationableController.PaginationQueryCallback pqc) throws Exception {
         return this.executeQuery(request, AbstractWebPagination.PAGER_ATTRIBUTE, size, Bootstrap3KeyboardableWebPagination.class, pqc);
-    }
-    protected interface PaginationQueryCallback {
-        List<?> query(OrderablePagination var1) throws Exception;
     }
 }
