@@ -8,6 +8,7 @@ repositories {
 
     mavenLocal()
     maven{url 'http://maven.aliyun.com/nexus/content/repositories/central/'}
+    maven { url "http://172.21.129.59:8081/nexus/content/groups/public/" }
 }
 
 ext{
@@ -24,6 +25,8 @@ ext{
     ibatisVersion = '2.3.4.726'
     c3p0Version = '0.9.1.2'
     poiVersion = '3.15'
+    frameworkExtVersion   = '2.0.0-SNAPSHOT'
+    frameworkVersion      = '2.0.0'
 }
 
 dependencies {
@@ -88,4 +91,8 @@ dependencies {
     // jsqlparser & Mybatis-PageHelper
     compile "com.github.pagehelper:pagehelper:4.1.6"
     compile "com.github.jsqlparser:jsqlparser:0.9.6"
+
+    // framework-core
+    compile "com.infoccsp:framework-core:$frameworkVersion"
+    compile "com.infoccsp:framework-ext:$frameworkExtVersion"
 }
