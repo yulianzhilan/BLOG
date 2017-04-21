@@ -2,7 +2,6 @@ package controller.article;
 
 import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
-import com.infoccsp.framework.web.springmvc.controller.PaginationableController;
 import controller.BaseController;
 import dto.DataBaseDTO;
 import dto.article.ArticleDTO;
@@ -11,11 +10,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +21,8 @@ import service.ArticleService;
 import service.HelperService;
 import util.Constants;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
 import java.util.List;
 
 /**
