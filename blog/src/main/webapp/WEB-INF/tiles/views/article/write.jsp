@@ -17,7 +17,6 @@
         </ol>
     </section>
     <section class="content">
-
         <div class="box box-primary">
             <div class="box-header"></div>
             <div class="box-body">
@@ -33,10 +32,10 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>文件夹</label>
-                                <li id="fat-menu" class="dropdown" style="list-style: none;">
-                                    <form:input path="folder" cssClass="form-control input-sm required" title="文件夹"/>
+                                <form:input path="folder" cssClass="form-control input-sm required" title="文件夹"/>
+                                <li id="fat-menu" class="dropdown dropdown-toggle" style="list-style: none;">
                                     <%--<input type="text" name="folder" id="folder" class="form-control input-sm required" title="文件夹"/>--%>
-                                    <ul class="dropdown-menu" aria-labelledby="drop3" id="fat-detail">
+                                    <ul class="dropdown-menu" aria-labelledby="drop3" id="fat-detail" data-toggle="dropdown" aria-expanded="false">
 
                                     </ul>
                                 </li>
@@ -185,8 +184,5 @@
             })
         });
 
-        $("#folder").blur(function () {
-            $("#fat-menu").removeClass("open");
-        })
     });
 </script>

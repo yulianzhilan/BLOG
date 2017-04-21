@@ -35,8 +35,6 @@ public class PhotoController extends BaseController{
 
     @RequestMapping(value = "/upload", method = {RequestMethod.POST})
     public ModelAndView upload(HttpServletRequest request){
-
-
         return new ModelAndView("kindeditor/upload_json");
     }
 
