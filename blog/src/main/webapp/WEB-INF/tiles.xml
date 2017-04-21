@@ -63,7 +63,14 @@
         <put-attribute name="title" value="write"/>
         <put-attribute name="main" value="/WEB-INF/tiles/views/article/write.jsp"/>
     </definition>
+    <!-- 2.4 阅读 -->
+    <definition name="article/read">
+        <put-attribute name="title" value="read"/>
+        <put-attribute name="main" value="/WEB-INF/tiles/views/article/read.jsp"/>
+    </definition>
 
+    <!-- 3 文件相关模块 -->
+    <!-- 3.1 管理 -->
     <definition name="file/manage" extends="default.definition">
         <put-attribute name="title" value="manage"/>
         <put-attribute name="main" value="/WEB-INF/tiles/views/file/manage.jsp"/>

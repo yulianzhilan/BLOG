@@ -6,6 +6,7 @@ import controller.BaseController;
 import dto.DataBaseDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
+import framework.service.ServiceException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -39,11 +40,11 @@ public class ArticleController extends BaseController{
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView execute(HttpServletRequest request) throws Exception{
-        return read(request);
+        return classify(request);
     }
 
     @RequestMapping(value = "/classify", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView read(HttpServletRequest request) throws Exception{
+    public ModelAndView classify(HttpServletRequest request) throws Exception{
         List<ArticleFolderDTO> result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
         List<?> articleDTOS = executeQuery(request, new SerializablePaginationQueryCallback() {
             @Override
@@ -123,6 +124,15 @@ public class ArticleController extends BaseController{
         response.setContentType("application/vnd.ms-excel;charset=UTF-8");
         response.setHeader("Content-Disposition","attachment; filename=" + workbook.getSheetName(0) +".xls");
         workbook.write(response.getOutputStream());
+    }
+
+    @RequestMapping(value = "/read", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView read(HttpServletRequest request, String id){
+        if(StringUtils.isEmpty(id)){
+            throw new ServiceException("文章id不能为空！");
+        }
+        ArticleDTO result = articleService.preview(0,getCurrentUserId(request),Integer.valueOf(id));
+        return new ModelAndView("article/read").addObject("result", result);
     }
 
     protected HSSFWorkbook generateExcel(List<ArticleDTO> list) throws Exception{

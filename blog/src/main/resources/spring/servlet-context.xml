@@ -91,4 +91,25 @@
     <bean id="multipartResolver" class="util.MyCommonsMultipartResolver">
         <constructor-arg name="excludeUrl" value="/file/upload"/>
     </bean>
+
+    <!-- 同一的异常处理机制 -->
+    <bean class="util.DefaultMappingExceptionResolver">
+        <!-- 定义默认的异常处理页面，当该异常类型没有注册时使用 -->
+        <property name="defaultErrorView" value="500"/>
+        <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
+        <property name="exceptionAttribute" value="exception"/>
+        <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常处理页面作为值 -->
+        <property name="exceptionMappings">
+            <props>
+                <!-- 认证异常 -->
+                <!--<prop key="com.infoccsp.framework.exception.AuthenticationException">401</prop>-->
+                <!-- 系统异常 -->
+                <prop key="java.lang.Exception">500</prop>
+            </props>
+        </property>
+        <!-- 表示在发生异常时默认的HttpServletResponse的返回码是多少，默认是200 -->
+        <property name="defaultStatusCode" value="200"/>
+        <!-- 异常监控 -->
+        <!--<property name="errorMonitor" ref="throwableCompositeMonitor"/>-->
+    </bean>
 </beans>

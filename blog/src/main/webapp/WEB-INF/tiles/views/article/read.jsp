@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            文章列表
+            文章阅读
         </h1>
         <ol class="breadcrumb">
             <li><a href="${ctx}"><i class="fa fa-home"></i>主页</a></li>
@@ -14,139 +14,157 @@
             <li class="active">list</li>
         </ol>
     </section>
-    <section class="content">
-
-        <div class="box box-primary">
-            <div class="box-header">
-                <div class="btn-group">
-                    <a href="${ctx}/article/classifyByFolder?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat">${result.attribute}</button></a>
-                    <a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}"><button type="button" id="show" class="btn btn-info btn-flat">${result.name}</button></a>
-                </div>
-                <%--<h3 class="box-title">${result.name}</h3>--%>
-                <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input name="table_search" class="form-control pull-right" placeholder="Search" type="text">
-
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
+    <section class="invoice">
+        <!-- title row -->
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="page-header">
+                    <i class="fa fa-globe"></i> AdminLTE, Inc.
+                    <small class="pull-right">Date: 2/10/2014</small>
+                </h2>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
+            <!-- /.col -->
+        </div>
+        <!-- info row -->
+        <div class="row invoice-info">
+            <div class="col-sm-4 invoice-col">
+                From
+                <address>
+                    <strong>Admin, Inc.</strong><br>
+                    795 Folsom Ave, Suite 600<br>
+                    San Francisco, CA 94107<br>
+                    Phone: (804) 123-5432<br>
+                    Email: info@almasaeedstudio.com
+                </address>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+                To
+                <address>
+                    <strong>John Doe</strong><br>
+                    795 Folsom Ave, Suite 600<br>
+                    San Francisco, CA 94107<br>
+                    Phone: (555) 539-1037<br>
+                    Email: john.doe@example.com
+                </address>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+                <b>Invoice #007612</b><br>
+                <br>
+                <b>Order ID:</b> 4F3S8J<br>
+                <b>Payment Due:</b> 2/22/2014<br>
+                <b>Account:</b> 968-34567
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Table row -->
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th class="text-center">NO</th>
-                        <th class="text-center">NAME</th>
-                        <th class="text-center">LOCATION</th>
-                        <th class="text-center">PERSON</th>
-                        <th class="text-center">FOLDER</th>
-                        <th class="text-center" style="width: 30%;">DESCRIPTION</th>
-                        <th class="text-center">TITLE</th>
-                        <th class="text-center">ACTION</th>
+                        <th>Qty</th>
+                        <th>Product</th>
+                        <th>Serial #</th>
+                        <th>Description</th>
+                        <th>Subtotal</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${result.articleDTOs}" var="dto" varStatus="item">
-                            <tr>
-                                <td class="text-center">${item.index+1}</td>
-                                <td class="text-center">${dto.name}</td>
-                                <td class="text-center">${dto.location}</td>
-                                <td class="text-center">${dto.person}</td>
-                                <td class="text-center">${dto.folder}</td>
-                                <td class="text-center">${dto.description}</td>
-                                <td class="text-center">${dto.title}</td>
-                                <td class="text-center">
-                                    <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick="window.location.href='${ctx}/article/modify?id=${dto.id}'"></span>
-                                    <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="preview(${dto.id})"></span>
-                                    <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deleteArticle(${dto.id})"></span>
-                                </td>
-                                <%-- fixme 最好加上创建时间 --%>
-                            </tr>
-                        </c:forEach>
+                    <tr>
+                        <td>1</td>
+                        <td>Call of Duty</td>
+                        <td>455-981-221</td>
+                        <td>El snort testosterone trophy driving gloves handsome</td>
+                        <td>$64.50</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Need for Speed IV</td>
+                        <td>247-925-726</td>
+                        <td>Wes Anderson umami biodiesel</td>
+                        <td>$50.00</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Monsters DVD</td>
+                        <td>735-845-642</td>
+                        <td>Terry Richardson helvetica tousled street art master</td>
+                        <td>$10.70</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Grown Ups Blue Ray</td>
+                        <td>422-568-642</td>
+                        <td>Tousled lomo letterpress</td>
+                        <td>$25.99</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- /.box-body -->
+            <!-- /.col -->
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title text-center" id="title"></h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h4>location</h4>
-                                <p id="location"></p>
-                            </div>
-                            <div class="col-sm-4">
-                                <h4>folder</h4>
-                                <p id="folder"></p>
-                            </div>
-                            <div class="col-sm-4">
-                                <h4>person</h4>
-                                <p id="person"></p>
-                            </div>
-                        </div>
+        <!-- /.row -->
 
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h4>person</h4>
-                                <p id="name"></p>
-                            </div>
-                            <div class="col-sm-8">
-                                <h4>description</h4>
-                                <p id="description"></p>
-                            </div>
-                        </div>
+        <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-xs-6">
+                <p class="lead">Payment Methods:</p>
+                <img src="../../dist/img/credit/visa.png" alt="Visa">
+                <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+                <img src="../../dist/img/credit/american-express.png" alt="American Express">
+                <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
-                        <hr>
+                <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
+                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                </p>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-6">
+                <p class="lead">Amount Due 2/22/2014</p>
 
-                        <div id="content" style="word-wrap: break-word; word-break: normal;"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody><tr>
+                            <th style="width:50%">Subtotal:</th>
+                            <td>$250.30</td>
+                        </tr>
+                        <tr>
+                            <th>Tax (9.3%)</th>
+                            <td>$10.34</td>
+                        </tr>
+                        <tr>
+                            <th>Shipping:</th>
+                            <td>$5.80</td>
+                        </tr>
+                        <tr>
+                            <th>Total:</th>
+                            <td>$265.24</td>
+                        </tr>
+                        </tbody></table>
                 </div>
             </div>
+            <!-- /.col -->
         </div>
+        <!-- /.row -->
 
-
+        <!-- this row will not appear when printing -->
+        <div class="row no-print">
+            <div class="col-xs-12">
+                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
+                </button>
+                <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                    <i class="fa fa-download"></i> Generate PDF
+                </button>
+            </div>
+        </div>
     </section>
 </div>
 <script>
-    function deleteArticle(id) {
-        $.ajax({
-            url: "${ctx}/article/delete.json?id="+id,
-            success: function (data) {
-                if(data.status == 'success'){
-                    alert("删除成功");
-                    $("#show").click();
-                }
-            }
-        })
-    }
-    function preview(id) {
-        $.ajax({
-            url: "${ctx}/article/preview.json?id="+id,
-            success: function (data) {
-                if(data.status == 'success'){
-                    $("#title").text(data.result.title);
-                    $("#location").text(data.result.location);
-                    $("#folder").text(data.result.folder);
-                    $("#person").text(data.result.person);
-                    $("#name").text(data.result.name);
-                    $("#description").text(data.result.description);
-                    $("#content").text(data.result.content);
-                    $("#myModal").modal("show");
-                }
-            }
-        })
-    }
+
 </script>
