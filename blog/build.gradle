@@ -74,7 +74,7 @@ dependencies {
     compile "org.mybatis:mybatis-spring:$mybatisSpringVersion"
 
     // c3p0
-    compile "c3p0:c3p0:$c3p0Version"
+//    compile "c3p0:c3p0:$c3p0Version"
 
     // commons-fileupload
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2.1'

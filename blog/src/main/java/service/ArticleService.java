@@ -4,6 +4,7 @@ import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
+import dto.article.ArticleSummaryDTO;
 
 import java.util.List;
 
@@ -79,4 +80,19 @@ public interface ArticleService {
      * @param articleDTO
      */
     void editArticle(ArticleDTO articleDTO);
+
+    /**
+     * 获取文章
+     * 暂时用于加载home页
+     * @param isHome
+     * @return
+     */
+    PaginationResultDTO<ArticleSummaryDTO> getArticles(OrderablePaginationDTO op, boolean isHome, int userId);
+
+    /**
+     * 文章id获取文章
+     * @param id
+     * @return
+     */
+    ArticleSummaryDTO getArticle(int id);
 }

@@ -64,7 +64,7 @@
         <put-attribute name="main" value="/WEB-INF/tiles/views/article/write.jsp"/>
     </definition>
     <!-- 2.4 阅读 -->
-    <definition name="article/read">
+    <definition name="article/read" extends="default.definition">
         <put-attribute name="title" value="read"/>
         <put-attribute name="main" value="/WEB-INF/tiles/views/article/read.jsp"/>
     </definition>

@@ -27,6 +27,21 @@
         USER.PASSWORD = #{password, jdbcType=VARCHAR}
     </select>
 
+    <select id="getUserById" resultType="entity.system.User">
+        SELECT
+        USER.ID as id,
+        USER.NICK_NAME as nickName,
+        USER.ACCOUNT as account,
+        USER.PASSWORD as password,
+        USER.PHONE as phone,
+        USER.EMAIL as email,
+        USER.ROLE_ID as roleId
+        FROM
+        T_USER USER
+        WHERE
+        USER.ID = #{userId}
+    </select>
+
     <select id="countUser" resultType="int">
         SELECT
         COUNT(*)

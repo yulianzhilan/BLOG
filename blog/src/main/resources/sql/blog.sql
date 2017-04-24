@@ -16,6 +16,30 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`blog` /*!40100 DEFAULT CHARACTER SET ut
 
 USE `blog`;
 
+/*Table structure for table `a_comments` */
+
+DROP TABLE IF EXISTS `a_comments`;
+
+CREATE TABLE `a_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(256) NOT NULL,
+  `articleId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `articleId` (`articleId`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `a_comments_ibfk_1` FOREIGN KEY (`articleId`) REFERENCES `article` (`id`),
+  CONSTRAINT `a_comments_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `t_user` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `a_comments` */
+
+LOCK TABLES `a_comments` WRITE;
+
+insert  into `a_comments`(`id`,`content`,`articleId`,`userId`) values (1,'nice',12,3),(2,'excellent',12,2),(3,'good',11,2);
+
+UNLOCK TABLES;
+
 /*Table structure for table `article` */
 
 DROP TABLE IF EXISTS `article`;

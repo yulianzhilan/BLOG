@@ -6,6 +6,8 @@ import controller.BaseController;
 import dto.DataBaseDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
+import dto.article.ArticleSummaryDTO;
+import entity.system.User;
 import framework.service.ServiceException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import service.ArticleService;
 import service.HelperService;
+import service.ValidateService;
 import util.Constants;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +41,9 @@ public class ArticleController extends BaseController{
     @Autowired
     private HelperService helperService;
 
+    @Autowired
+    private ValidateService validateService;
+
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView execute(HttpServletRequest request) throws Exception{
         return classify(request);
@@ -46,13 +52,13 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/classify", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView classify(HttpServletRequest request) throws Exception{
         List<ArticleFolderDTO> result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
-        List<?> articleDTOS = executeQuery(request, new SerializablePaginationQueryCallback() {
+        List<?> articleDTOs = executeQuery(request, new SerializablePaginationQueryCallback() {
             @Override
             public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
                 return articleService.getArticles(op, 0, getCurrentUserId(request));
             }
         });
-        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOS).addObject("attribute","folder");
+        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOs).addObject("attribute","folder");
     }
 
     @RequestMapping(value = "/classifyByFolder", method = {RequestMethod.GET, RequestMethod.POST})
@@ -127,12 +133,13 @@ public class ArticleController extends BaseController{
     }
 
     @RequestMapping(value = "/read", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView read(HttpServletRequest request, String id){
-        if(StringUtils.isEmpty(id)){
+    public ModelAndView read(HttpServletRequest request, Integer id){
+        if(id == null || id == 0){
             throw new ServiceException("文章id不能为空！");
         }
-        ArticleDTO result = articleService.preview(0,getCurrentUserId(request),Integer.valueOf(id));
-        return new ModelAndView("article/read").addObject("result", result);
+        ArticleSummaryDTO result = articleService.getArticle(id);
+        ArticleDTO articleDTO = articleService.preview(0, result.getUserId(), result.getId());
+        return new ModelAndView("article/read").addObject("result", result).addObject("articleDTO", articleDTO);
     }
 
     protected HSSFWorkbook generateExcel(List<ArticleDTO> list) throws Exception{

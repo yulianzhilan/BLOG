@@ -83,4 +83,14 @@ public class User {
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
+
+    public User() {
+    }
+
+    // fixme 增加登录机制以后删除
+    public User(Integer id, String nickName, String account) {
+        this.id = id;
+        this.nickName = nickName;
+        this.account = account;
+    }
 }

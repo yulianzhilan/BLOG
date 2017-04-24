@@ -1,6 +1,8 @@
 package service.mapper;
 
 import dto.article.ArticleDTO;
+import dto.article.ArticleSummaryDTO;
+import entity.article.Article;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -27,4 +29,5 @@ public interface ArticleMapper {
     void saveArticle(ArticleDTO articleDTO);
     //编辑文章
     void editArticle(ArticleDTO articleDTO);
+    List<ArticleSummaryDTO> getArticlesForHome(@Param("userId") int userId, @Param("id") int id);
 }

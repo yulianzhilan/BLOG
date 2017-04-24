@@ -10,7 +10,7 @@
                 <img src="${ctx}/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>${sessionUser.username}</p>
+                <p>${requestScope.userDTO.nickName}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>

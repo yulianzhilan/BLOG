@@ -11,4 +11,5 @@ import org.springframework.stereotype.Component;
 public interface UserMapper {
     User getUser(@Param("account")String account, @Param("password")String password);
     int countUser(@Param("account")String account);
+    User getUserById(@Param("userId")int userId);
 }

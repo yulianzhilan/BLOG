@@ -2,6 +2,7 @@ package util;
 
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
+import dto.article.ArticleSummaryDTO;
 import dto.system.UserSummaryDTO;
 import entity.system.User;
 
@@ -44,7 +45,7 @@ public class AssembleUtil {
         return result;
     }
 
-    public static List<ArticleFolderDTO> assmbleArticleFolderDTOs(Map<String,List<ArticleDTO>> source, String attribute){
+    public static List<ArticleFolderDTO> assembleArticleFolderDTOs(Map<String,List<ArticleDTO>> source, String attribute){
         if(source == null){
             return null;
         }
@@ -55,7 +56,7 @@ public class AssembleUtil {
         return result;
     }
 
-    public static Map<String, List<ArticleDTO>> assmbleArticleMaps(List<ArticleDTO> result,String attribute) {
+    public static Map<String, List<ArticleDTO>> assembleArticleMaps(List<ArticleDTO> result,String attribute) {
         Map<String, List<ArticleDTO>> map = new HashMap<>();
         if(Constants.ATTRIBUTE_FOLDER.equals(attribute)){
             for (int i = 0; i < result.size(); i++) {

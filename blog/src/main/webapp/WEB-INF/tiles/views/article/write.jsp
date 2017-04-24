@@ -185,4 +185,11 @@
         });
 
     });
+
+    window.onbeforeunload = function() {
+        if(confirm("是否保存后退出?")){
+            alert("保存失败！")
+            return false; // 可以阻止关闭
+        }
+    }
 </script>

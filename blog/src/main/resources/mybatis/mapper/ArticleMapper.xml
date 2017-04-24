@@ -181,4 +181,32 @@
         now()
         )
     </insert>
+
+    <select id="getArticlesForHome" resultType="dto.article.ArticleSummaryDTO" parameterType="int">
+        SELECT ONE.*,c.comments FROM
+        (SELECT
+        a.id AS id,
+        a.name AS name,
+        a.description AS description,
+        a.userId AS userId,
+        a.modify AS modify,
+        u.nick_Name AS nickName
+        FROM
+        article a,
+        t_user u
+        WHERE
+        a.userId = u.id
+        ) ONE LEFT JOIN
+        (SELECT articleId, COUNT(*) comments FROM a_comments GROUP BY articleId) c ON
+        ONE.id = c.articleId where 1=1
+        <if test="userId != 0">
+            AND
+            ONE.userId = #{userId}
+        </if>
+        <if test="id != 0">
+            AND
+            ONE.id = #{id}
+        </if>
+        order by ONE.modify DESC
+    </select>
 </mapper>

@@ -39,6 +39,14 @@ public class ValidateServiceImpl implements ValidateService{
     }
 
     @Override
+    public User getUser(int userId) {
+        if(userId == 0){
+            return null;
+        }
+        return userMapper.getUserById(userId);
+    }
+
+    @Override
     public CallBackDTO validate(String _user, String _token) {
         CallBackDTO result = new CallBackDTO();
         User user = getUser(_user, _token);

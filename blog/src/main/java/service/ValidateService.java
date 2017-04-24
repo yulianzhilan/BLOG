@@ -15,4 +15,5 @@ public interface ValidateService {
     User getUser(String _user, String _token);
     CallBackDTO validate(String _user, String _token);
     List<SidebarDTO> getSideBar(User user);
+    User getUser(int userId);
 }

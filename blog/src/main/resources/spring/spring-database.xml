@@ -15,31 +15,38 @@
         <property name="location" value="classpath:jdbc.properties" />
     </bean>
 
-    <!-- c3p0数据源 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <!-- JDBC驱动 -->
-        <property name="driverClass" value="${c3p0.driverClass}"/>
-        <!-- 数据库连接串 -->
-        <property name="jdbcUrl" value="${c3p0.jdbcUrl}"/>
-        <!-- 数据库用户 -->
-        <property name="user" value="${c3p0.user}"/>
-        <!-- 数据库密码 -->
-        <property name="password" value="${c3p0.password}"/>
-        <!-- 连接池中保留的最小连接数 -->
-        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
-        <!-- 连接池中保留的最大连接数 -->
-        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
-        <!-- 连接池初始化连接数 -->
-        <property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
-        <!-- 最大空闲时间，空闲内未使用则连接被丢弃。若为0则永不丢弃。单位：秒 -->
-        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
-        <!-- 当连接池中的连接耗尽的时候一次获取的连接数。-->
-        <property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
-        <!-- 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
-        <property name="maxStatements" value="${c3p0.maxStatements}"/>
-        <!-- 定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
-        <property name="maxStatementsPerConnection" value="${c3p0.maxStatementsPerConnection}"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="scott"/>
+        <property name="password" value="root123"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/blog?characterEncoding=utf8&amp;useSSL=true"/>
     </bean>
+
+    <!-- c3p0数据源 -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
+        <!--&lt;!&ndash; JDBC驱动 &ndash;&gt;-->
+        <!--<property name="driverClass" value="${c3p0.driverClass}"/>-->
+        <!--&lt;!&ndash; 数据库连接串 &ndash;&gt;-->
+        <!--<property name="jdbcUrl" value="${c3p0.jdbcUrl}"/>-->
+        <!--&lt;!&ndash; 数据库用户 &ndash;&gt;-->
+        <!--<property name="user" value="${c3p0.user}"/>-->
+        <!--&lt;!&ndash; 数据库密码 &ndash;&gt;-->
+        <!--<property name="password" value="${c3p0.password}"/>-->
+        <!--&lt;!&ndash; 连接池中保留的最小连接数 &ndash;&gt;-->
+        <!--<property name="minPoolSize" value="${c3p0.minPoolSize}"/>-->
+        <!--&lt;!&ndash; 连接池中保留的最大连接数 &ndash;&gt;-->
+        <!--<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>-->
+        <!--&lt;!&ndash; 连接池初始化连接数 &ndash;&gt;-->
+        <!--<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>-->
+        <!--&lt;!&ndash; 最大空闲时间，空闲内未使用则连接被丢弃。若为0则永不丢弃。单位：秒 &ndash;&gt;-->
+        <!--<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>-->
+        <!--&lt;!&ndash; 当连接池中的连接耗尽的时候一次获取的连接数。&ndash;&gt;-->
+        <!--<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>-->
+        <!--&lt;!&ndash; 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 &ndash;&gt;-->
+        <!--<property name="maxStatements" value="${c3p0.maxStatements}"/>-->
+        <!--&lt;!&ndash; 定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 &ndash;&gt;-->
+        <!--<property name="maxStatementsPerConnection" value="${c3p0.maxStatementsPerConnection}"/>-->
+    <!--</bean>-->
 
     <!-- 集成Hibernate -->
     <!-- 配置SessionFactory -->

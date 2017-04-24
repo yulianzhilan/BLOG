@@ -6,6 +6,7 @@ import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
+import dto.article.ArticleSummaryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.ArticleService;
@@ -30,7 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
             return  null;
         }
 
-        return AssembleUtil.assmbleArticleFolderDTOs(AssembleUtil.assmbleArticleMaps(result, Constants.ATTRIBUTE_FOLDER), Constants.ATTRIBUTE_FOLDER);
+        return AssembleUtil.assembleArticleFolderDTOs(AssembleUtil.assembleArticleMaps(result, Constants.ATTRIBUTE_FOLDER), Constants.ATTRIBUTE_FOLDER);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
         if(result == null){
             return null;
         }
-        return AssembleUtil.assmbleArticleFolderDTOs(AssembleUtil.assmbleArticleMaps(result, flag), flag);
+        return AssembleUtil.assembleArticleFolderDTOs(AssembleUtil.assembleArticleMaps(result, flag), flag);
     }
 
     @Override
@@ -93,5 +94,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void editArticle(ArticleDTO articleDTO) {
         articleMapper.editArticle(articleDTO);
+    }
+
+    @Override
+    public PaginationResultDTO<ArticleSummaryDTO> getArticles(OrderablePaginationDTO op, boolean isHome, int userId) {
+        Page<ArticleSummaryDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> articleMapper.getArticlesForHome(userId, 0));
+        op.setTotalCount((int)page.getTotal());
+        return new PaginationResultDTO<>(op, page.getResult());
+    }
+
+    @Override
+    public ArticleSummaryDTO getArticle(int id) {
+        return articleMapper.getArticlesForHome(0, id).get(0);
     }
 }
