@@ -111,10 +111,11 @@ public class ArticleController extends BaseController{
     public ModelAndView save(@ModelAttribute("articleDTO")ArticleDTO articleDTO, HttpServletRequest request) throws Exception{
         if(articleDTO.getId() == 0){
             articleService.saveArticle(articleDTO, getCurrentUserId(request));
+            return null;
         } else{
             articleService.editArticle(articleDTO);
+            return new ModelAndView("redirect:read").addObject("id", articleDTO.getId());
         }
-        return null;
     }
 
     @RequestMapping(value = "/show", method = {RequestMethod.GET, RequestMethod.POST})
@@ -133,7 +134,7 @@ public class ArticleController extends BaseController{
     }
 
     @RequestMapping(value = "/read", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView read(HttpServletRequest request, Integer id){
+    public ModelAndView read(Integer id){
         if(id == null || id == 0){
             throw new ServiceException("文章id不能为空！");
         }

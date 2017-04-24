@@ -21,6 +21,7 @@
             <div class="box-header"></div>
             <div class="box-body">
                 <form:form name="example" id="example" modelAttribute="articleDTO" method="post" action="${ctx}/article/save">
+                    <form:input path="id" cssClass="hidden"/>
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group">
