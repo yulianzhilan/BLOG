@@ -19,7 +19,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="scott"/>
         <property name="password" value="root123"/>
-        <property name="url" value="jdbc:mysql://119.23.207.124:3306/blog?characterEncoding=utf8&amp;useSSL=true"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/blog?characterEncoding=utf8&amp;useSSL=true"/>
     </bean>
 
     <!-- c3p0数据源 -->
