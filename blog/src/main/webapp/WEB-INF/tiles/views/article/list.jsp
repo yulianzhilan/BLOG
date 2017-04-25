@@ -21,7 +21,9 @@
             <div class="box-header">
                 <div class="btn-group">
                     <a href="${ctx}/article/classifyByFolder?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat">${result.attribute}</button></a>
-                    <a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}"><button type="button" id="show" class="btn btn-info btn-flat">${result.name}</button></a>
+                    <c:if test="${not empty result.name}">
+                        <a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}"><button type="button" id="show" class="btn btn-info btn-flat">${result.name}</button></a>
+                    </c:if>
                 </div>
                 <%--<h3 class="box-title">${result.name}</h3>--%>
                 <div class="box-tools">
