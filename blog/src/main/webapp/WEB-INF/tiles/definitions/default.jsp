@@ -12,7 +12,7 @@
 
     <%--<link rel="BookMark" href="http://dev.infoccsp.com/staticNG/favicon-eal.ico" type="image/x-icon">--%>
         <%-- fixme 这里添加网页名称前面的小图标 --%>
-        <link rel="shortcut icon" href="" type="image/x-icon">
+        <link rel="shortcut icon" href="${ctx}/images/js2.png" type="image/x-icon">
         <script>
             $(document).ready(function () {
                 var pgurl = window.location.href;

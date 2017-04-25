@@ -1,0 +1,12 @@
+评论系统
+    包括：comment\like\dislike等功能。
+    操作表：a_comment\i_comment(暂缺此表，暂时还没有开发到照片模块)\t_comment(暂缺，理由同上)
+
+    考虑到通用性，故在Constance中增加文件类型常量和数据库表名常量
+    在开发此评论系统时应充分考虑到扩张性，为以后增加新功能做准备。
+    Controller：CommentController
+    Service: CommentService/CommentServiceImpl
+    Interface: CommentMapper;
+    Mapper: CommentMapper.xml
+
+    注意：评论系统作为插件系统，所有功能均用json格式传输数据。

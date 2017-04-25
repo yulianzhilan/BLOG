@@ -81,9 +81,8 @@
                     </p>
                     <ul class="list-inline">
                         <!-- fixme 加上评论相关方法 -->
-                        <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                        </li>
+                        <li><a href="${ctx}/article/read?id=${article.id}" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Show more</a></li>
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>
                         <li class="pull-right">
                             <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
                                 (5)</a></li>

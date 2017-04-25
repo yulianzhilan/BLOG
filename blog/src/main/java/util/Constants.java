@@ -13,6 +13,16 @@ public class Constants {
     public static final String ATTRIBUTE_CREATE = "create";
     public static final String SAVE_PATH = "SAVE_PATH";
 
+//  文件类型
+    public static final String ARTICLE = "ARTICLE";
+    public static final String IMAGE = "IMAGE";
+    public static final String TIMESTAMP = "TIMESTAMP";
+
+//  数据库表名称
+    public static final String T_ARTICLE = "ARTICLE";
+    public static final String T_A_COMMENT = "A_COMMENTS";
+
+
     //定义允许上传的文件扩展名
 //    public static class ExtName{
 //        public static final String IMAGE = "gif,jpg,jpeg,png,bmp";

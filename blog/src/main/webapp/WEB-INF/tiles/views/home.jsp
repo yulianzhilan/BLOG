@@ -34,10 +34,9 @@
                                     ${article.description}
                                 </p>
                                 <ul class="list-inline">
-                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i>Show more</a>
-                                    </li>
-                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                                    </li>
+                                    <li><a href="${ctx}/article/read?id=${article.id}" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i>Show more</a></li>
+                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>
+                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-down margin-r-5"></i> Dislike</a></li>
                                     <li class="pull-right">
                                         <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
                                             Comments
@@ -224,11 +223,6 @@
 
 
 <script>
-    function showMore() {
-        $.ajax({
-
-        })
-    }
     function likeOrDisike() {
 
     }
