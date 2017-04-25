@@ -1,9 +1,14 @@
-<script src="${ctx}/fileupload/jquery.ui.widget.js"></script>
+<!-- <script src="${ctx}/fileupload/jquery.ui.widget.js"></script>
 <script src="${ctx}/fileupload/jquery.iframe-transport.js"></script>
 <script src="${ctx}/fileupload/jquery.fileupload.js"></script>
 <script src="${ctx}/adminLTE/bootstrap/js/bootstrap.min.js"></script>
 <link href="${ctx}/adminLTE/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
 
+
 <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/css/fileinput.min.css" rel="stylesheet">
 <script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/js/fileinput.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery.form/3.51/jquery.form.min.js"></script>
+-->
+<link href="${ctx}/fileupload/fileinput.css" rel="stylesheet">
+<script src="${ctx}/fileupload/fileinput.js"></script>
+<script src="${ctx}/fileupload/jquery.form.js"></script>

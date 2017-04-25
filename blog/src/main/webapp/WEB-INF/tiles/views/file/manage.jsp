@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="/WEB-INF/jspi/kindeditor.jspi"%>
+<%--<%@include file="/WEB-INF/jspi/kindeditor.jspi"%>--%>
 <%@include file="/WEB-INF/jspi/fileupload.jspi"%>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,13 +11,12 @@
             文件管理
         </h1>
         <ol class="breadcrumb">
-            <li><a href="${ctx}"><i class="fa fa-home"></i>主页</a></li>
+            <li><a href="${ctx}/login/home"><i class="fa fa-home"></i>主页</a></li>
             <li>article</li>
             <li class="active">manage</li>
         </ol>
     </section>
     <section class="content">
-
         <div class="box box-primary">
             <div class="box-header"></div>
             <div class="box-body">

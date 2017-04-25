@@ -11,7 +11,7 @@
             创建文章
         </h1>
         <ol class="breadcrumb">
-            <li><a href="${ctx}"><i class="fa fa-home"></i>主页</a></li>
+            <li><a href="${ctx}/login/home"><i class="fa fa-home"></i>主页</a></li>
             <li>article</li>
             <li class="active">write</li>
         </ol>
@@ -162,11 +162,6 @@
         $("#example").submit();
     }
 
-    function addFolder(value) {
-        $("#folder").val(value);
-        $("#fat-menu").removeClass('open');
-    }
-
     $(function () {
         $("#folder").keyup(function () {
             $.ajax({
@@ -186,7 +181,7 @@
         });
 
     });
-
+// fixme 需要增加关闭窗口是提醒保存的功能！
     window.onbeforeunload = function() {
         if(confirm("是否保存后退出?")){
             alert("保存失败！")

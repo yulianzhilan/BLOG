@@ -1,10 +1,13 @@
 package service;
 
-import dto.CallBackDTO;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by scott on 2017/3/22.
  */
 public interface PhotoService {
-//    CallBackDTO upload(String savePath,);
+    String upload(MultipartHttpServletRequest request, int userId);
+
+
+
 }

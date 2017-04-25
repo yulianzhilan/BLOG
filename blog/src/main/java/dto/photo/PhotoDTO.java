@@ -7,23 +7,42 @@ import java.util.Date;
  * Created by scott on 2017/3/14.
  */
 public class PhotoDTO {
+    private int id;
+
+    private int userId;
     //创建时间
-    private Date date;
+    private Date created;
     //名称
     private String name;
-    //地点
-    private String location;
+
+    private String folder;
     //描述
     private String description;
     //路径
-    private String url;
+    private String path;
 
-    public Date getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     public String getName() {
@@ -34,12 +53,12 @@ public class PhotoDTO {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getFolder() {
+        return folder;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setFolder(String folder) {
+        this.folder = folder;
     }
 
     public String getDescription() {
@@ -50,11 +69,11 @@ public class PhotoDTO {
         this.description = description;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPath() {
+        return path;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPath(String path) {
+        this.path = path;
     }
 }

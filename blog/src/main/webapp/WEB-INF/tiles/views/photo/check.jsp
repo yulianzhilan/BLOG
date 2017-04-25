@@ -9,7 +9,7 @@
             照片列表
         </h1>
         <ol class="breadcrumb">
-            <li><a href="${ctx}"><i class="fa fa-home"></i>主页</a></li>
+            <li><a href="${ctx}/login/home"><i class="fa fa-home"></i>主页</a></li>
             <li>photo</li>
             <li class="active">list</li>
         </ol>

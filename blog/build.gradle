@@ -97,4 +97,7 @@ dependencies {
 //    // framework-core
 //    compile "com.infoccsp:framework-core:$frameworkVersion"
 //    compile "com.infoccsp:framework-ext:$frameworkExtVersion"
+    
+    // 七牛
+    compile 'com.qiniu:qiniu-java-sdk:7.1.3'
 }

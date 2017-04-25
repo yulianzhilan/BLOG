@@ -22,6 +22,13 @@ public class Constants {
     public static final String T_ARTICLE = "ARTICLE";
     public static final String T_A_COMMENT = "A_COMMENTS";
 
+//  七牛云储存
+    public static final String ACCESS_KEY = "IQpmM-5rhBcCHPm2MDhtpRCkYA8I4JzxJ4-y85R6";
+    public static final String SECRET_KEY = "UB3zrs4v5p_qPGpJNqk9aYCFIvTdPJhSAbH3s7o2";
+    public static final String BUCKET_NAME = "janescott";
+    public static final String QINIUDOMAIN = "http://ooxxhoti3.bkt.clouddn.com/";
+
+
 
     //定义允许上传的文件扩展名
 //    public static class ExtName{
