@@ -7,4 +7,12 @@
       VALUES
       (#{name},#{userId},#{path},DEFAULT,now())
     </insert>
+
+    <select id="getPhotos" resultType="dto.photo.PhotoDTO">
+        select
+        *
+        from PHOTO
+        WHERE userId = #{userId}
+        and isprivate  = #{isPrivate}
+    </select>
 </mapper>

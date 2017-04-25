@@ -1,5 +1,7 @@
 package controller.photo;
 
+import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
+import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import service.PhotoService;
 import util.Constants;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by scott on 2017/3/14.
@@ -47,8 +50,16 @@ public class PhotoController extends BaseController{
     }
 
     @RequestMapping(value = "/manage", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView manage(){
-        return new ModelAndView("photo/manage");
+    public ModelAndView manage(HttpServletRequest request) throws Exception{
+        List<?> result = executeQuery(request, new SerializablePaginationQueryCallback() {
+            @Override
+            public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
+                return photoService.getPhotos(op, getCurrentUserId(request), 0);
+            }
+        });
+
+        return new ModelAndView("photo/manage").addObject("result", result);
     }
+
 
 }

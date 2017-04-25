@@ -1,5 +1,9 @@
 package service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
+import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -70,7 +74,7 @@ public class PhotoServiceImpl implements PhotoService {
         while(it.hasNext()){
             multipartFile = request.getFile(it.next());
             String fileName = multipartFile.getOriginalFilename();
-            String fileType = fileName.split("\\.").length>1 ? fileName.split("\\.")[1] : "jpg";
+            String fileType = fileName.split("\\.").length>1 ? fileName.substring(fileName.lastIndexOf(".")) : "jpg";
             String path = CodeUtil.encode(userId+"") + "." + fileType;
             Response response = null;
             try{
@@ -86,7 +90,22 @@ public class PhotoServiceImpl implements PhotoService {
         return null;
     }
 
+    @Override
+    public PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate) {
+        Page<PhotoDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> assembleUrls(photoMapper.getPhotos(userId, isPrivate)));
+        op.setTotalCount((int)page.getTotal());
+        return new PaginationResultDTO<>(op, page.getResult());
+    }
+
     protected String assembleUrl(String path){
         return Constants.QINIUDOMAIN+path;
     }
+
+    protected List<PhotoDTO> assembleUrls(List<PhotoDTO> source){
+        for(PhotoDTO photoDTO : source){
+            photoDTO.setPath(assembleUrl(photoDTO.getPath()));
+        }
+        return source;
+    }
+
 }

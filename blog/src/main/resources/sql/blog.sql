@@ -102,20 +102,21 @@ DROP TABLE IF EXISTS `photo`;
 
 CREATE TABLE `photo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL,
+  `name` varchar(64) NOT NULL,
   `userid` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `folder` varchar(32) NOT NULL DEFAULT 'default',
   `description` varchar(256) DEFAULT NULL,
-  `path` varchar(32) NOT NULL,
+  `path` varchar(64) NOT NULL,
+  `isPrivate` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `photo` */
 
 LOCK TABLES `photo` WRITE;
 
-insert  into `photo`(`id`,`name`,`userid`,`created`,`folder`,`description`,`path`) values (2,'远程计算机网络配置.png',1,'2017-04-25 14:01:09','default',NULL,'1_2017042514010840666.png'),(3,'背景.jpg',1,'2017-04-25 14:10:37','default',NULL,'1_2017042514103704995.jpg'),(4,'数据库.png',1,'2017-04-25 14:44:17','default',NULL,'1_2017042514441645280.png'),(5,'sql2.txt',1,'2017-04-25 15:11:41','default',NULL,'1_2017042515114179042.txt');
+insert  into `photo`(`id`,`name`,`userid`,`created`,`folder`,`description`,`path`,`isPrivate`) values (2,'远程计算机网络配置.png',1,'2017-04-25 14:01:09','default',NULL,'1_2017042514010840666.png',0),(3,'背景.jpg',1,'2017-04-25 14:10:37','default',NULL,'1_2017042514103704995.jpg',0),(4,'数据库.png',1,'2017-04-25 14:44:17','default',NULL,'1_2017042514441645280.png',0),(5,'sql2.txt',1,'2017-04-25 15:11:41','default',NULL,'1_2017042515114179042.txt',0),(6,'背景.jpg',1,'2017-04-25 15:34:26','default',NULL,'1_2017042515342542531..jpg',0),(7,'prog_js_128px_1097206_easyicon.net.png',1,'2017-04-25 15:38:15','default',NULL,'1_2017042515380926927..png',0),(8,'更新.PNG',1,'2017-04-25 15:40:50','default',NULL,'1_2017042515404484686..PNG',0),(9,'prog_js_128px_1097206_easyicon.net.png',1,'2017-04-25 15:41:00','default',NULL,'1_2017042515410024290..png',0);
 
 UNLOCK TABLES;
 
