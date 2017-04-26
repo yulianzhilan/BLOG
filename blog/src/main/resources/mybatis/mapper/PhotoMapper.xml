@@ -36,7 +36,7 @@
       WHERE
       userId = #{userId}
       <if test="path != null and path != ''">
-          AND path = #{path}
+          AND folder = #{path}
       </if>
       <if test="order != null and order != ''">
           ORDER BY ${order} DESC

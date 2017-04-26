@@ -84,7 +84,7 @@ public class PhotoController extends BaseController{
         if(!result.isOkay()){
             return result.getErrtx();
         } else{
-            response.setContentType("application/json; charset=UTF-8");
+            response.setContentType("application/json;charset=UTF-8");
             return ((JSONObject)result.getObj()).toJSONString();
         }
     }

@@ -88,6 +88,11 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public CallBackDTO preview(String path, String order, int userId){
         CallBackDTO result = new CallBackDTO();
+        JSONObject obj = new JSONObject();
+        obj.put("moveup_dir_path", path);
+        obj.put("current_dir_path", path);
+        obj.put("current_url", path);
+
         // 这里修改一下filemanage.js中对于path自动加/ 的问题
         if(!StringUtils.isEmpty(path)){
             path = path.substring(0,path.length()-1);
@@ -106,10 +111,7 @@ public class PhotoServiceImpl implements PhotoService {
             Collections.sort(fileList,new ComparatorUtil.SizeComparator());
         }
 
-        JSONObject obj = new JSONObject();
-        obj.put("moveup_dir_path", path);
-        obj.put("current_dir_path", path);
-        obj.put("current_url", path);
+
         obj.put("total_count", fileList.size());
         obj.put("file_list", fileList);
 
@@ -141,7 +143,7 @@ public class PhotoServiceImpl implements PhotoService {
                 hs.put("filesize", countSize(next.getValue()));
                 hs.put("is_photo", false);
                 hs.put("filetype", "");
-                hs.put("filename", next.getKey());
+                hs.put("filename", "向日葵");
                 hs.put("datetime", "");
                 result.add(hs);
             }
