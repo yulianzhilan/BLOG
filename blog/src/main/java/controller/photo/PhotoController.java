@@ -3,12 +3,15 @@ package controller.photo;
 import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import controller.BaseController;
+import dto.CallBackDTO;
 import framework.service.ServiceException;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import service.ConfigService;
@@ -17,6 +20,7 @@ import util.Constants;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -74,4 +78,14 @@ public class PhotoController extends BaseController{
         return ajaxModelAndView(true);
     }
 
+    @RequestMapping(value = "/kindGroup", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody String kindGroup(HttpServletRequest request, String path, String order, HttpServletResponse response){
+        CallBackDTO result = photoService.preview(path,order,getCurrentUserId(request));
+        if(!result.isOkay()){
+            return result.getErrtx();
+        } else{
+            response.setContentType("application/json; charset=UTF-8");
+            return ((JSONObject)result.getObj()).toJSONString();
+        }
+    }
 }

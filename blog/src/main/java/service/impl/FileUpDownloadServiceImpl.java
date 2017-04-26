@@ -174,9 +174,9 @@ public class FileUpDownloadServiceImpl implements FileUpDownloadService {
 
         List<Hashtable> fileList = findFiles(currentFile);
 
-        if("size".equals(order)){
+        if("size".equalsIgnoreCase(order)){
             Collections.sort(fileList,new ComparatorUtil.SizeComparator());
-        } else if("type".equals(order)){
+        } else if("type".equalsIgnoreCase(order)){
             Collections.sort(fileList, new ComparatorUtil.TypeComparator());
         } else{
             Collections.sort(fileList, new ComparatorUtil.NameComparator());

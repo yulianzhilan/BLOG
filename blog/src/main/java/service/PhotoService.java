@@ -2,6 +2,7 @@ package service;
 
 import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
+import dto.CallBackDTO;
 import dto.photo.PhotoDTO;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -14,4 +15,6 @@ public interface PhotoService {
     PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate);
 
     void delete(int id, int userId);
+
+    CallBackDTO preview(String path, String order, int userId);
 }

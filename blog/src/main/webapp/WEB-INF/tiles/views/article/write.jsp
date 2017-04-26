@@ -126,7 +126,7 @@
         var editor1 = K.create('textarea[name="content"]', {
             cssPath : '${ctx}/kindeditor/plugins/code/prettify.css',
             uploadJson : '${ctx}/file/upload',
-            fileManagerJson : '${ctx}/file/preview',
+            fileManagerJson : '${ctx}/photo/kindGroup',
             allowFileManager : true,
             afterCreate : function() {
                 var self = this;

@@ -18,4 +18,6 @@ public interface PhotoMapper {
     void delete(@Param("id")int id, @Param("userId")int userId);
 
     String getQiNiuKey(@Param("id")int id, @Param("userId")int userId);
+
+    List<PhotoDTO> kindEditGet(@Param("path")String path, @Param("order")String order, @Param("userId")int userId);
 }
