@@ -1,6 +1,5 @@
 package util;
 
-import dto.system.UserQueryDTO;
 import framework.service.ServiceException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
