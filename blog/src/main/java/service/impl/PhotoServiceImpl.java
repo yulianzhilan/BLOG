@@ -88,6 +88,10 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public CallBackDTO preview(String path, String order, int userId){
         CallBackDTO result = new CallBackDTO();
+        // 这里修改一下filemanage.js中对于path自动加/ 的问题
+        if(!StringUtils.isEmpty(path)){
+            path = path.substring(0,path.length()-1);
+        }
         List<PhotoDTO> photos = photoMapper.kindEditGet(path, order, userId);
         if(CollectionUtils.isEmpty(photos)){
             result.setOkay(false);
@@ -147,7 +151,7 @@ public class PhotoServiceImpl implements PhotoService {
                 hash.put("is_dir", false);
                 hash.put("has_file", false);
                 hash.put("filesize", photoDTO.getSize());
-                hash.put("is_photo", Arrays.<String>asList(Constants.PICEXTNAME).contains(photoDTO.getType()));
+                hash.put("is_photo", Arrays.asList(Constants.PICEXTNAME).contains(photoDTO.getType()));
                 hash.put("filetype", photoDTO.getType());
                 hash.put("filename", photoDTO.getName());
                 hash.put("datetime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(photoDTO.getCreated()));
