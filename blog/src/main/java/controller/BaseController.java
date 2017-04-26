@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import service.ConfigService;
 import service.ValidateService;
+import util.LoginException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,12 +25,11 @@ public class BaseController extends PaginationableController {
 
     // fixme 此处关于登录验证，SSO单点登录需要研究
     protected User getCurrentUser(HttpServletRequest request){
-        return (User)request.getSession().getAttribute("_token");
-
-//        String account = configService.decode(pre_account);
-//        String password = configService.decode(pre_password);
-
-//        return validateService.getUser(account, password);
+        User user =  (User)request.getSession().getAttribute("_token");
+        if(user == null){
+            throw new LoginException("登录失效，请重新登录！");
+        }
+        return user;
     }
 
     /**
@@ -38,7 +38,11 @@ public class BaseController extends PaginationableController {
      * @return
      */
     protected boolean isLogin(HttpServletRequest request){
-        return getCurrentUser(request) != null;
+        try{
+            return getCurrentUser(request) != null;
+        } catch(Exception e){
+            return false;
+        }
     }
 
     protected ModelAndView ajaxModelAndView(boolean status){
@@ -49,11 +53,7 @@ public class BaseController extends PaginationableController {
 
     protected int getCurrentUserId(HttpServletRequest request){
         User user = getCurrentUser(request);
-        if(user != null){
-            return user.getId();
-        }
-        //fixme 如果没有id，处理
-        return 1;
+        return user.getId();
     }
     /**
      * 分页默认使用Bootstrap3KeyboardableWebPagination的实现

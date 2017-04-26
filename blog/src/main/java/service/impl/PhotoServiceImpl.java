@@ -6,6 +6,7 @@ import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import dto.CallBackDTO;
@@ -50,12 +51,24 @@ public class PhotoServiceImpl implements PhotoService {
 
         try{
             auth.uploadToken(Constants.BUCKET_NAME);
-            Response response = uploadManager.put(data, name, token);
-            return response;
+             return uploadManager.put(data, name, token);
+
         } catch(QiniuException ex){
             ex.printStackTrace();
         }
         return null;
+    }
+
+    protected void delete(String key){
+        Auth auth = Auth.create(Constants.ACCESS_KEY, Constants.SECRET_KEY);
+
+        BucketManager bucketManager = new BucketManager(auth);
+        try {
+            bucketManager.delete(Constants.BUCKET_NAME, key);
+        } catch(QiniuException e){
+            e.printStackTrace();
+        }
+
     }
 
     protected void insert(String name, int userId, String path){
@@ -108,4 +121,10 @@ public class PhotoServiceImpl implements PhotoService {
         return source;
     }
 
+    @Override
+    public void delete(int id, int userId) {
+        String key = photoMapper.getQiNiuKey(id, userId);
+        delete(key);
+        photoMapper.delete(id, userId);
+    }
 }

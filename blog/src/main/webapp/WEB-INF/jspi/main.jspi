@@ -53,3 +53,5 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!-- init.js -->
+<script src="${ctx}/js/init.js"></script>

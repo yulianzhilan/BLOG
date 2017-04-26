@@ -13,4 +13,5 @@ public interface PhotoService {
 
     PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate);
 
+    void delete(int id, int userId);
 }

@@ -6,16 +6,14 @@ import controller.BaseController;
 import dto.CallBackDTO;
 import dto.system.UserQueryDTO;
 import dto.system.UserSummaryDTO;
-import entity.system.User;
+import framework.core.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import service.ArticleService;
-import service.ConfigService;
 import service.ValidateService;
 import util.AssembleUtil;
 
@@ -29,8 +27,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/login")
 public class LoginController extends BaseController{
-    @Autowired
-    private ConfigService configService;
 
     @Autowired
     private ValidateService validateService;
@@ -43,13 +39,17 @@ public class LoginController extends BaseController{
     }
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView execute(HttpServletRequest request) throws Exception{
+    public ModelAndView execute(HttpServletRequest request, String errtx) throws Exception{
         if(isLogin(request)){
             request.getSession().setAttribute("modules",validateService.getSideBar(getCurrentUser(request)));
             return home(request);
         }
-//        System.out.println(configService.getConfig("_TOKEN_KEY"));
-        return prepared().addObject("loginDTO", new UserQueryDTO());
+        ModelAndView mav = prepared().addObject("loginDTO", new UserQueryDTO());
+
+        if(!StringUtils.isEmpty(errtx)){
+            mav.addObject("errtx",errtx);
+        }
+        return mav;
     }
 
     @RequestMapping(value = "/validate", method = {RequestMethod.POST, RequestMethod.GET})
@@ -62,22 +62,14 @@ public class LoginController extends BaseController{
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30*60);
             session.setAttribute("_token", callBackDTO.getObj());
-            return execute(request);
+            return execute(request, null);
         }
         return prepared().addObject("errtx", callBackDTO.getErrtx());
     }
 
     @RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView home(HttpServletRequest request) throws Exception{
-        //fixme 这里解决重启后sidebar消失问题——因为开发时需要不停地重启，所以这个直接用admin作为默认登录用户
-        if(!isLogin(request)){
-            User user = new User();
-            user.setRoleId(1);
-            request.getSession().setAttribute("modules",validateService.getSideBar(user));
-            HttpSession session = request.getSession();
-            session.setMaxInactiveInterval(30*60);
-            session.setAttribute("_token", new User(1,"SUPERADMIN","JANE"));
-        }
+        // 这里解决重启后sidebar消失问题——因为开发时需要不停地重启，所以这个直接用admin作为默认登录用户
         UserSummaryDTO userSummaryDTO = AssembleUtil.assembleUserSummaryDTO(getCurrentUser(request));
         // ***************************************分割线*****************************************
         List<?> articleDTOs = executeQuery(request, 5, new SerializablePaginationQueryCallback() {

@@ -14,4 +14,8 @@ public interface PhotoMapper {
     void insert(PhotoDTO photo);
 
     List<PhotoDTO> getPhotos(@Param("userId") int userId, @Param("isPrivate") int isPrivate);
+
+    void delete(@Param("id")int id, @Param("userId")int userId);
+
+    String getQiNiuKey(@Param("id")int id, @Param("userId")int userId);
 }

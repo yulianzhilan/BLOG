@@ -1,5 +1,6 @@
 package util;
 
+import dto.system.UserQueryDTO;
 import framework.service.ServiceException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -19,6 +20,8 @@ public class DefaultMappingExceptionResolver extends SimpleMappingExceptionResol
             mav.addObject("errcd", "B01");
             // 错误内容
             mav.addObject("errtx", ex.getMessage());
+        } else if(ex instanceof LoginException){
+            return new ModelAndView("redirect:/login").addObject("errtx", ex.getMessage());
         } else{
             mav.addObject("errcd", "S01");
             mav.addObject("errtx", "an unexpected error occurred.");

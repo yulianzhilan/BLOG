@@ -15,4 +15,19 @@
         WHERE userId = #{userId}
         and isprivate  = #{isPrivate}
     </select>
+
+    <delete id="delete">
+        DELETE from photo where id = #{id} AND userId = #{userId}
+    </delete>
+
+    <select id="getQiNiuKey" resultType="string">
+        SELECT
+        path
+        FROM
+        PHOTO
+        WHERE
+        id = #{id}
+        AND
+        userId = #{userId}
+    </select>
 </mapper>

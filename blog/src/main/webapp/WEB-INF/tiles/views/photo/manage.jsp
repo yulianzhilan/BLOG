@@ -67,7 +67,7 @@
                         <td>
                             <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick=""></span>
                             <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="showDetail('${photo.path}')"></span>
-                            <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick=""></span>
+                            <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deletePhoto(this,'${photo.id}');"></span>
                         </td>
                     </tr>
                     </c:forEach>
@@ -120,7 +120,25 @@
     }
 
     $('#myModal').on('hidden.bs.modal', function () {
-        $("#updatedImg").attr("src","");
+//        $("#updatedImg").attr("src","");
+        window.location.reload();
     })
+
+    function deletePhoto(del, id) {
+        $.ajax({
+            data: {id: id},
+            url: "${ctx}/photo/delete.json",
+            type: "POST",
+            success: function (data) {
+                if(ajaxValidate(data)){
+                    window.location.reload();
+//                    $(del).parent().parent().remove();
+                }
+            },
+            error: function () {
+                alert("删除失败！");
+            }
+        })
+    }
 
 </script>
