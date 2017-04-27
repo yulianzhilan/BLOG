@@ -1,5 +1,6 @@
 package service.impl;
 
+import com.qiniu.http.Response;
 import dto.article.ArticleDTO;
 import dto.file.FileDTO;
 import dto.file.FileMeta;
@@ -14,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import service.ConfigService;
 import service.FileService;
+import service.QiNiuService;
 import service.mapper.FileMapper;
+import util.CodeUtil;
 import util.Constants;
 
 import java.io.*;
@@ -35,6 +38,9 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private FileMapper fileMapper;
 
+    @Autowired
+    private QiNiuService qiNiuService;
+
     @Override
     public List<FileDTO> getFiles(int userId, String fileName, String fileType, Integer fileId) {
         return fileMapper.getFiles(userId, fileName, fileType, fileId);
@@ -45,10 +51,7 @@ public class FileServiceImpl implements FileService {
         fileDTO.setFileId(userId);
         int id = fileMapper.saveFile(fileDTO);
         List result = fileMapper.getFiles(userId, null, null, id);
-        if(result == null || result.size() == 0){
-            return false;
-        }
-        return true;
+        return !(result == null || result.size() == 0);
     }
 
     @Override
@@ -112,5 +115,40 @@ public class FileServiceImpl implements FileService {
             e.printStackTrace();
         }
         return fileMeta;
+    }
+
+    @Override
+    public String upload(MultipartHttpServletRequest request, int userId) {
+        Iterator<String> it = request.getFileNames();
+        MultipartFile multipartFile ;
+        //2.
+        while(it.hasNext()){
+            multipartFile = request.getFile(it.next());
+            String fileName = multipartFile.getOriginalFilename();
+            long size = multipartFile.getSize();
+            String fileType = fileName.split("\\.").length>1 ? fileName.substring(fileName.lastIndexOf(".")+1) : "unknown";
+            String path = CodeUtil.encode(userId+"") + "." + fileType;
+            Response response = null;
+            try{
+                response = qiNiuService.put(multipartFile.getBytes(), path, Constants.BUCKET_NAME_FILE);
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+            if(response != null && response.isOK()){
+                insert(fileName,userId,path,size,fileType);
+                return qiNiuService.assembleUrl(Constants.QINIUDOMAIN_FILE, path);
+            }
+        }
+        return null;
+    }
+
+    protected void insert(String name, int userId, String path, long size, String type){
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setUserId(userId);
+        fileDTO.setFilePath(path);
+        fileDTO.setFileName(name);
+        fileDTO.setFileSize(size+"");
+        fileDTO.setFileType(type);
+        fileMapper.saveFile(fileDTO);
     }
 }

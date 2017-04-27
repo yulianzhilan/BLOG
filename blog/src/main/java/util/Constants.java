@@ -25,8 +25,10 @@ public class Constants {
 //  七牛云储存
     public static final String ACCESS_KEY = "IQpmM-5rhBcCHPm2MDhtpRCkYA8I4JzxJ4-y85R6";
     public static final String SECRET_KEY = "UB3zrs4v5p_qPGpJNqk9aYCFIvTdPJhSAbH3s7o2";
-    public static final String BUCKET_NAME = "janescott";
-    public static final String QINIUDOMAIN = "http://ooxxhoti3.bkt.clouddn.com/";
+    public static final String BUCKET_NAME_PHOTO = "janescott";
+    public static final String BUCKET_NAME_FILE = "filespace";
+    public static final String QINIUDOMAIN_PHOTO = "http://ooxxhoti3.bkt.clouddn.com/";
+    public static final String QINIUDOMAIN_FILE = "http://ooyjlvxri.bkt.clouddn.com/";
 
 
 

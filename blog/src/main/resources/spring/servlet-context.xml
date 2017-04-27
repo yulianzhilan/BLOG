@@ -19,7 +19,7 @@
     <mvc:resources mapping="/ionicons/**" location="/static/ionicons/"/>
     <mvc:resources mapping="/kindeditor/**" location="/static/kindeditor/"/>
     <mvc:resources mapping="/fileupload/**" location="/static/fileupload/"/>
-    <mvc:resources mapping="/froalaeditor/**" location="/static/froalaeditor/"/>
+    <mvc:resources mapping="/froala_editor/**" location="/static/froalaeditor/"/>
     <mvc:default-servlet-handler/>
 
     <!-- JSP试图解析器 -->
@@ -90,7 +90,8 @@
 
     <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>-->
     <bean id="multipartResolver" class="util.MyCommonsMultipartResolver">
-        <constructor-arg name="excludeUrl" value="/file/upload"/>
+        <constructor-arg name="excludeUrl" value=""/>
+        <constructor-arg name="includeUrl" value="/blog/file/upload,/blog/file/upload_file,/blog/photo/upload"/>
     </bean>
 
     <!-- 同一的异常处理机制 -->

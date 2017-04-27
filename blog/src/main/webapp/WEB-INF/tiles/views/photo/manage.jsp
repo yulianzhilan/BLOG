@@ -106,7 +106,7 @@
             url: '${ctx}/photo/upload.json',
             dataType: 'json',
             success: function (data) {
-                showDetail(data.url)
+                showDetail(data.link)
             },
             error: function () {
                 alert("导入失败！");
@@ -122,7 +122,7 @@
     $('#myModal').on('hidden.bs.modal', function () {
 //        $("#updatedImg").attr("src","");
         window.location.reload();
-    })
+    });
 
     function deletePhoto(del, id) {
         $.ajax({

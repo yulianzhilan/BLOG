@@ -11,12 +11,12 @@ public interface QiNiuService<E>{
     /**
      * 上传到七牛云储存空间
      */
-    Response put(byte[]data, String name);
+    Response put(byte[]data, String name, String bucketName);
 
-    void delete(String key);
+    void delete(String key, String bucketName);
 
-    String assembleUrl(String path);
+    String assembleUrl(String domain,String path);
 
-    List<E> assembleUrls(List<E> source);
+    List<E> assembleUrls(String domain, List<E> source);
 
 }

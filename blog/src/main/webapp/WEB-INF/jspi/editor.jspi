@@ -1,0 +1,54 @@
+<!-- 核心样式表 -->
+<link rel="stylesheet" href="${ctx}/froala_editor/css/froala_editor.min.css" />
+<link rel="stylesheet" href="${ctx}/froala_editor/css/froala_style.min.css" />
+<!-- 各个插件样式表，按需求使用 -->
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/char_counter.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/code_view.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/colors.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/emoticons.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/file.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/fullscreen.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/image.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/image_manager.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/line_breaker.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/quick_insert.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/table.css">
+<link rel="stylesheet" href="${ctx}/froala_editor/css/plugins/video.css">
+<!-- 主题样式表，可选择使用 -->
+<link href="${ctx}/froala_editor/css/themes/dark.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/froala_editor/css/themes/red.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/froala_editor/css/themes/gray.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/froala_editor/css/themes/royal.min.css" rel="stylesheet" type="text/css" />
+
+
+<!-- 核心脚本 -->
+<script type="text/javascript" src="${ctx}/froala_editor/js/froala_editor.min.js"></script>
+<!-- 各个插件脚本 -->
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/align.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/char_counter.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/code_beautifier.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/code_view.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/draggable.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/emoticons.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/entities.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/file.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/fullscreen.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/image.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/image_manager.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/inline_style.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/line_breaker.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/link.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/paragraph_format.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/paragraph_style.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/quick_insert.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/quote.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/table.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/save.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/url.min.js"></script>
+<script type="text/javascript" src="${ctx}/froala_editor/js/plugins/video.min.js"></script>
+<!-- 语言脚本 -->
+<script type="text/javascript" src="${ctx}/froala_editor/js/languages/zh_cn.js"></script>

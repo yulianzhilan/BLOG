@@ -48,11 +48,13 @@ public class PhotoController extends BaseController{
 
     @RequestMapping(value = "/upload", method = {RequestMethod.POST})
     public ModelAndView upload(MultipartHttpServletRequest request){
-        String url = photoService.upload(request, getCurrentUserId(request));
+        // fixme 暂时测试
+//        String url = photoService.upload(request, getCurrentUserId(request));
+        String url = photoService.upload(request, 1);
         if(url == null){
             return ajaxModelAndView(false);
         }
-        return ajaxModelAndView(true).addObject("url", url);
+        return ajaxModelAndView(true).addObject("link", url);
     }
 
     @RequestMapping(value = "/manage", method = {RequestMethod.GET, RequestMethod.POST})
@@ -88,5 +90,15 @@ public class PhotoController extends BaseController{
             response.setContentType("application/json;charset=UTF-8");
             return ((JSONObject)result.getObj()).toJSONString();
         }
+    }
+
+    @RequestMapping(value = "/editor")
+    public ModelAndView editor(){
+        return new ModelAndView("editor");
+    }
+
+    @RequestMapping(value = "/save")
+    public ModelAndView save(HttpServletRequest request){
+        return null;
     }
 }

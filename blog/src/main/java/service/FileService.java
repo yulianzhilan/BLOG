@@ -17,4 +17,6 @@ public interface FileService {
     List<FileDTO> writeFile(MultipartHttpServletRequest request, int userId);
 
     FileMeta loadFile(String filePath);
+
+    String upload(MultipartHttpServletRequest request, int userId);
 }

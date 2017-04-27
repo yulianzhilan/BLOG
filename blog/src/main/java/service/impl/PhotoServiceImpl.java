@@ -59,13 +59,13 @@ public class PhotoServiceImpl implements PhotoService {
             String path = CodeUtil.encode(userId+"") + "." + fileType;
             Response response = null;
             try{
-                response = qiNiuService.put(multipartFile.getBytes(), path);
+                response = qiNiuService.put(multipartFile.getBytes(), path, Constants.BUCKET_NAME_PHOTO);
             } catch(IOException ex){
                 ex.printStackTrace();
             }
             if(response != null && response.isOK()){
                 insert(fileName,userId,path,size,fileType);
-                return qiNiuService.assembleUrl(path);
+                return qiNiuService.assembleUrl(Constants.QINIUDOMAIN_PHOTO, path);
             }
         }
         return null;
@@ -73,7 +73,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate) {
-        Page<PhotoDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> qiNiuService.assembleUrls(photoMapper.getPhotos(userId, isPrivate)));
+        Page<PhotoDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> qiNiuService.assembleUrls(Constants.QINIUDOMAIN_PHOTO, photoMapper.getPhotos(userId, isPrivate)));
         op.setTotalCount((int)page.getTotal());
         return new PaginationResultDTO<>(op, page.getResult());
     }
@@ -81,7 +81,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public void delete(int id, int userId) {
         String key = photoMapper.getQiNiuKey(id, userId);
-        qiNiuService.delete(key);
+        qiNiuService.delete(key, Constants.QINIUDOMAIN_PHOTO);
         photoMapper.delete(id, userId);
     }
 

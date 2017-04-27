@@ -142,4 +142,14 @@ public class FileController extends BaseController{
         }
     }
 
+    @RequestMapping(value = "/upload_file",method = {RequestMethod.POST})
+    public ModelAndView uploadFile(MultipartHttpServletRequest request){
+        //fixme 暂时测试
+//        String path = fileService.upload(request,getCurrentUserId(request));
+        String path = fileService.upload(request, 1);
+        if(path == null){
+           return ajaxModelAndView(false);
+        }
+        return ajaxModelAndView(true).addObject("link", path);
+    }
 }

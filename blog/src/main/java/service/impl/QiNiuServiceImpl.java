@@ -5,6 +5,7 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import dto.file.FileDTO;
 import dto.photo.PhotoDTO;
 import org.springframework.stereotype.Service;
 import service.QiNiuService;
@@ -20,12 +21,12 @@ public class QiNiuServiceImpl implements QiNiuService{
     private Auth auth = Auth.create(Constants.ACCESS_KEY, Constants.SECRET_KEY);
 
     @Override
-    public Response put(byte[] data, String name) {
+    public Response put(byte[] data, String name, String bucketName) {
         UploadManager uploadManager = new UploadManager();
-        String token = auth.uploadToken(Constants.BUCKET_NAME);
+        String token = auth.uploadToken(bucketName);
 
         try{
-            auth.uploadToken(Constants.BUCKET_NAME);
+            auth.uploadToken(bucketName);
             return uploadManager.put(data, name, token);
 
         } catch(QiniuException ex){
@@ -35,26 +36,29 @@ public class QiNiuServiceImpl implements QiNiuService{
     }
 
     @Override
-    public void delete(String key) {
+    public void delete(String key, String bucketName) {
         BucketManager bucketManager = new BucketManager(auth);
         try {
-            bucketManager.delete(Constants.BUCKET_NAME, key);
+            bucketManager.delete(bucketName, key);
         } catch(QiniuException e){
             e.printStackTrace();
         }
     }
 
     @Override
-    public String assembleUrl(String path) {
-        return Constants.QINIUDOMAIN+path;
+    public String assembleUrl(String domain, String path) {
+        return domain+path;
     }
 
     @Override
-    public List assembleUrls(List source) {
+    public List assembleUrls(String domain, List source) {
         for(Object object : source){
             if(object instanceof PhotoDTO){
                 PhotoDTO photoDTO = (PhotoDTO)object;
-                photoDTO.setPath(assembleUrl(photoDTO.getPath()));
+                photoDTO.setPath(assembleUrl(domain, photoDTO.getPath()));
+            }else if(object instanceof FileDTO){
+                FileDTO fileDTO = (FileDTO) object;
+                fileDTO.setFilePath(assembleUrl(domain, fileDTO.getFilePath()));
             }
         }
         return source;

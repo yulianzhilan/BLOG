@@ -41,9 +41,6 @@ public class ArticleController extends BaseController{
     @Autowired
     private HelperService helperService;
 
-    @Autowired
-    private ValidateService validateService;
-
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView execute(HttpServletRequest request) throws Exception{
         return classify(request);
