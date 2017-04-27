@@ -19,6 +19,7 @@
     <mvc:resources mapping="/ionicons/**" location="/static/ionicons/"/>
     <mvc:resources mapping="/kindeditor/**" location="/static/kindeditor/"/>
     <mvc:resources mapping="/fileupload/**" location="/static/fileupload/"/>
+    <mvc:resources mapping="/froalaeditor/**" location="/static/froalaeditor/"/>
     <mvc:default-servlet-handler/>
 
     <!-- JSP试图解析器 -->
