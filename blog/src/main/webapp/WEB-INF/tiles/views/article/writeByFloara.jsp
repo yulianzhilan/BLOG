@@ -114,6 +114,8 @@
         }
         $("#content").val($('#edit').froalaEditor('html.get', true));
 
+        $(window).unbind('beforeunload');
+
         $("#example").submit();
     }
 
@@ -137,12 +139,5 @@
 
     });
 // fixme 需要增加关闭窗口是提醒保存的功能！
-//    $(window).unload(function() {
-//        if(confirm("是否保存后退出?")){
-//            alert("保存失败！");
-//            return false; // 可以阻止关闭
-//        }
-//    });
-
     $(window).bind('beforeunload',function(){return '您输入的内容尚未保存，确定离开此页面吗？';});
 </script>

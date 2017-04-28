@@ -39,17 +39,12 @@ public class LoginController extends BaseController{
     }
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView execute(HttpServletRequest request, String errtx) throws Exception{
+    public ModelAndView execute(HttpServletRequest request) throws Exception{
         if(isLogin(request)){
             request.getSession().setAttribute("modules",validateService.getSideBar(getCurrentUser(request)));
             return home(request);
         }
-        ModelAndView mav = prepared().addObject("loginDTO", new UserQueryDTO());
-
-        if(!StringUtils.isEmpty(errtx)){
-            mav.addObject("errtx",errtx);
-        }
-        return mav;
+        return prepared().addObject("loginDTO", new UserQueryDTO());
     }
 
     @RequestMapping(value = "/validate", method = {RequestMethod.POST, RequestMethod.GET})
@@ -62,7 +57,7 @@ public class LoginController extends BaseController{
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30*60);
             session.setAttribute("_token", callBackDTO.getObj());
-            return execute(request, null);
+            return execute(request);
         }
         return prepared().addObject("errtx", callBackDTO.getErrtx());
     }

@@ -103,8 +103,8 @@
         <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常处理页面作为值 -->
         <property name="exceptionMappings">
             <props>
-                <!-- 认证异常 -->
-                <!--<prop key="com.infoccsp.framework.exception.AuthenticationException">401</prop>-->
+                 <!--认证异常-->
+                <prop key="util.LoginException">login</prop>
                 <!-- 系统异常 -->
                 <prop key="java.lang.Exception">500</prop>
             </props>

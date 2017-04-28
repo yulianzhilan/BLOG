@@ -17,17 +17,11 @@ import java.util.List;
  * Created by scott on 2017/3/15.
  */
 public class BaseController extends PaginationableController {
-    @Autowired
-    private ConfigService configService;
 
-    @Autowired
-    private ValidateService validateService;
-
-    // fixme 此处关于登录验证，SSO单点登录需要研究
     protected User getCurrentUser(HttpServletRequest request){
         User user =  (User)request.getSession().getAttribute("_token");
         if(user == null){
-            throw new LoginException("登录失效，请重新登录！");
+            throw new LoginException("登录已失效，请重新登录！");
         }
         return user;
     }

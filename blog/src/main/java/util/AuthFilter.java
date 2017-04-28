@@ -25,7 +25,8 @@ public class AuthFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         String path = httpServletRequest.getRequestURI();
         User user =  (User)session.getAttribute("_token");
-        //FIXME 此处先暂时不进行登录验证
+        // 此处先暂时不进行登录验证
+        // 验证已经加在baseController
 //        if(user != null){
 //            chain.doFilter(httpServletRequest,httpServletResponse);
 //        } else if(path.contains("/blog/article")||path.contains("/blog/file")||path.contains("/blog/photo")){

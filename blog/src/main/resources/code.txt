@@ -1,3 +1,4 @@
 errCode:
-    101   no such user
-    102   account or password error
+    L101   no such user
+    L102   account or password error
+    L103   expired login

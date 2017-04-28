@@ -29,7 +29,9 @@
         <put-attribute name="title" value="Home"/>
         <put-attribute name="main" value="/WEB-INF/tiles/views/home.jsp"/>
     </definition>
-
+    <!-- login -->
+    <definition name="login" template="/WEB-INF/jsp/login.jsp">
+    </definition>
     <!-- =================================================== -->
     <!-- 1、相册相关模块 -->
     <!-- 1.1、 查看 -->
