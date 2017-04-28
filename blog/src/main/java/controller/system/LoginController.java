@@ -62,6 +62,14 @@ public class LoginController extends BaseController{
         return prepared().addObject("errtx", callBackDTO.getErrtx());
     }
 
+    @RequestMapping(value = "/passerby", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView passerby(HttpServletRequest request) throws Exception{
+        UserQueryDTO user = new UserQueryDTO();
+        user.setAccount("PASSERBY");
+        user.setPassword("PASSERBY");
+        return validate(user, request);
+    }
+
     @RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView home(HttpServletRequest request) throws Exception{
         // 这里解决重启后sidebar消失问题——因为开发时需要不停地重启，所以这个直接用admin作为默认登录用户
@@ -75,4 +83,13 @@ public class LoginController extends BaseController{
         });
         return new ModelAndView("home").addObject("userDTO", userSummaryDTO).addObject("articleDTOs", articleDTOs);
     }
+
+    @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView logout(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        session.setAttribute("_token", null);
+        return execute(request);
+    }
+
+
 }

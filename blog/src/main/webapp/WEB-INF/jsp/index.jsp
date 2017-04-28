@@ -16,6 +16,20 @@
     <div class="login-logo">
       <a href="#"><b>Jane</b>Scott</a>
     </div>
+    <div class="login-box-body">
+      <h4 class="login-box-msg">welcome, using this blog system, if you find any inconvenient bugs, please contact us via email. </h4>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="input-group margin-bottom-sm">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <input value="18516669265@163.com" class="btn-default form-control input-sm" type="text"/>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-sm btn-primary" onclick="window.location.href='${ctx}/login'">Entrance</button>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
