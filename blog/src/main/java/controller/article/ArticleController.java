@@ -43,32 +43,37 @@ public class ArticleController extends BaseController{
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView execute(HttpServletRequest request) throws Exception{
-        return classify(request);
+        return classify(null,request);
     }
 
     @RequestMapping(value = "/classify", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView classify(HttpServletRequest request) throws Exception{
-        List<ArticleFolderDTO> result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
+    public ModelAndView classify(@ModelAttribute("attribute")String attribute,HttpServletRequest request) throws Exception{
+        List<ArticleFolderDTO> result = null;
+        if(StringUtils.isEmpty(attribute)){
+            result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
+        } else{
+            result = articleService.getArticleFolders(attribute, getCurrentUserId(request));
+        }
         List<?> articleDTOs = executeQuery(request, new SerializablePaginationQueryCallback() {
             @Override
             public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
-                return articleService.getArticles(op, 0, getCurrentUserId(request));
+                return articleService.getArticles(op, false, getCurrentUserId(request));
             }
         });
         return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOs).addObject("attribute","folder");
     }
 
-    @RequestMapping(value = "/classifyByFolder", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView readByFolder(@ModelAttribute("attribute")String attribute, HttpServletRequest request) throws Exception{
-        List<ArticleFolderDTO> result = articleService.getArticleFolders(attribute, getCurrentUserId(request));
-        List<?> articleDTOS = executeQuery(request, new SerializablePaginationQueryCallback() {
-            @Override
-            public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
-                return articleService.getArticles(op, 0, getCurrentUserId(request));
-            }
-        });
-        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOS);
-    }
+//    @RequestMapping(value = "/classifyByFolder", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ModelAndView readByFolder(@ModelAttribute("attribute")String attribute, HttpServletRequest request) throws Exception{
+//        List<ArticleFolderDTO> result = articleService.getArticleFolders(attribute, getCurrentUserId(request));
+//        List<?> articleDTOS = executeQuery(request, new SerializablePaginationQueryCallback() {
+//            @Override
+//            public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
+//                return articleService.getArticles(op, false, getCurrentUserId(request));
+//            }
+//        });
+//        return new ModelAndView("article/classify").addObject("result", result).addObject("articleDTOs", articleDTOS);
+//    }
 
     @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView list(@ModelAttribute("name")String name,@ModelAttribute("attribute")String attribute, HttpServletRequest request){
@@ -107,12 +112,12 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("articleDTO")ArticleDTO articleDTO, HttpServletRequest request) throws Exception{
         if(articleDTO.getId() == 0){
-            articleService.saveArticle(articleDTO, getCurrentUserId(request));
-            return null;
+            int id = articleService.saveArticle(articleDTO, getCurrentUserId(request));
+            articleDTO.setId(id);
         } else{
             articleService.editArticle(articleDTO);
-            return new ModelAndView("redirect:read").addObject("id", articleDTO.getId());
         }
+        return new ModelAndView("redirect:read").addObject("id", articleDTO.getId());
     }
 
     @RequestMapping(value = "/show", method = {RequestMethod.GET, RequestMethod.POST})

@@ -19,24 +19,6 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
-                <%--<li class="dropdown notifications-menu">--%>
-                    <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">--%>
-                        <%--<i class="fa fa-bell-o"></i>--%>
-                    <%--</a>--%>
-                    <%--<ul class="dropdown-menu">--%>
-                        <%--<li class="header">You have no notifications</li>--%>
-                        <%--<li>--%>
-                            <%--<!-- inner menu: contains the actual data -->--%>
-                            <%--<ul class="menu">--%>
-                                <%--<li>--%>
-                                <%--</li>--%>
-                            <%--</ul>--%>
-                        <%--</li>--%>
-                        <%--<li class="footer"><a href="#">View all</a></li>--%>
-                    <%--</ul>--%>
-                <%--</li>--%>
-
-
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

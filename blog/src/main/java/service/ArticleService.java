@@ -73,7 +73,7 @@ public interface ArticleService {
      * @param articleDTO
      * @param userId
      */
-    void saveArticle(ArticleDTO articleDTO, int userId);
+    int saveArticle(ArticleDTO articleDTO, int userId);
 
     /**
      * 编辑文章

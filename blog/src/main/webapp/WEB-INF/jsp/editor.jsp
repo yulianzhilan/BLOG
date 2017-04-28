@@ -7,6 +7,8 @@
     <title>editor</title>
     <%@include file="/WEB-INF/jspi/main.jspi"%>
     <%@include file="/WEB-INF/jspi/editor.jspi"%>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="shortcut icon" href="${ctx}/images/js2.png" type="image/x-icon">
   </head>
   <body>
       <!-- 此处加载编辑器 -->

@@ -4,14 +4,10 @@
 
 <!DOCTYPE html>
 <head>
-    <%--<%@include file="/WEB-INF/jspi/minimal.jspi"%>--%>
-    <%--<%@include file="/WEB-INF/jspi/AdminLTE.jspi"%>--%>
         <%@include file="/WEB-INF/jspi/main.jspi"%>
     <title><tiles:getAsString name="title" ignore="true"/></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <%--<link rel="BookMark" href="http://dev.infoccsp.com/staticNG/favicon-eal.ico" type="image/x-icon">--%>
-        <%-- fixme 这里添加网页名称前面的小图标 --%>
         <link rel="shortcut icon" href="${ctx}/images/js2.png" type="image/x-icon">
         <script>
             $(document).ready(function () {

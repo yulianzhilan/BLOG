@@ -27,9 +27,9 @@
             <div class="box-footer">
                 <span>分类方式:</span>
                 <div class="btn-group">
-                    <a href="${ctx}/article/classifyByFolder?attribute=folder"><button type="button" class="btn <c:if test="${attribute == 'folder'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-folder"></i>文件夹</button></a>
-                    <a href="${ctx}/article/classifyByFolder?attribute=location"><button type="button" class="btn <c:if test="${attribute == 'location'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-location-arrow"></i>地点</button></a>
-                    <a href="${ctx}/article/classifyByFolder?attribute=person"><button type="button" class="btn <c:if test="${attribute == 'person'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-user-circle"></i>人物</button></a>
+                    <a href="${ctx}/article/classify?attribute=folder"><button type="button" class="btn <c:if test="${attribute == 'folder'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-folder"></i>文件夹</button></a>
+                    <a href="${ctx}/article/classify?attribute=location"><button type="button" class="btn <c:if test="${attribute == 'location'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-location-arrow"></i>地点</button></a>
+                    <a href="${ctx}/article/classify?attribute=person"><button type="button" class="btn <c:if test="${attribute == 'person'}">btn-warning</c:if> btn-info btn-flat"><i class="fa fa-user-circle"></i>人物</button></a>
                 </div>
             </div><!-- box-footer -->
             <div class="box-body">
@@ -64,41 +64,47 @@
                 </div>
             </div>
             <div class="box-body">
-                <c:forEach items="${articleDTOs}" var="article">
-                    <div class="post">
-                    <div class="user-block">
-                        <!-- fixme 这里需要添加用户头像相关的方法 -->
-                        <img class="img-circle img-bordered-sm" src="" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                <c:if test="${not empty articleDTOs}">
+                    <c:forEach items="${articleDTOs}" var="article">
+                        <!-- Post -->
+                        <div class="post">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" src=""
+                                     alt="user image">
+                                <span class="username">
+                          <a href="#">${article.nickName}</a>
+                          <a href="#" onclick="$(this).parent().parent().parent().remove();" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
-                        <span class="description">Shared publicly - 7:30 PM today</span>
-                    </div>
-                    <!-- /.user-block -->
-                    <p>
-                       ${article.description}
-                    </p>
-                    <ul class="list-inline">
-                        <!-- fixme 加上评论相关方法 -->
-                        <li><a href="${ctx}/article/read?id=${article.id}" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Show more</a></li>
-                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>
-                        <li class="pull-right">
-                            <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                                (5)</a></li>
-                    </ul>
-                    <form class="form-horizontal">
-                        <div class="form-group margin-bottom-none">
-                            <div class="col-sm-9">
-                                <input class="form-control input-sm" placeholder="Type a comment" type="text">
+                                <span class="description"><fmt:formatDate value="${article.modify}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
                             </div>
-                            <div class="col-sm-3">
-                                <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
-                            </div>
+                            <!-- /.user-block -->
+                            <p>
+                                    ${article.description}
+                            </p>
+                            <ul class="list-inline">
+                                <li><a href="${ctx}/article/read?id=${article.id}" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i>Show more</a></li>
+                                <li class="pull-right">
+                                    <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
+                                        Comments
+                                        (${article.comments})</a></li>
+                            </ul>
+                            <form class="form-horizontal">
+                                <div class="form-group margin-bottom-none">
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-sm" placeholder="Type a comment" type="text">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
+                        <!-- /.post -->
                 </c:forEach>
+                </c:if>
+                <c:if test="${empty articleDTOs}">
+                    <h3 class="text-center">没有相关数据</h3>
+                </c:if>
             </div>
             <div class="box-footer clearfix">
                 <framework:pagination />

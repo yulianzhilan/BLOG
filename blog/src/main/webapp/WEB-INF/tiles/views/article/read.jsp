@@ -2,7 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="/WEB-INF/jspi/kindeditor.jspi"%>
+<link rel="stylesheet" href="${ctx}/froala_editor/css/froala_style.min.css"/>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -61,7 +62,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3 class="text-center">${articleDTO.title}</h3>
-                ${articleDTO.content}
+                <div id="content" class="fr-view">
+                    ${articleDTO.content}
+                </div>
             </div>
         </div>
     </section>

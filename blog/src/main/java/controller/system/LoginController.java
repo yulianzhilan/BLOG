@@ -70,7 +70,7 @@ public class LoginController extends BaseController{
         List<?> articleDTOs = executeQuery(request, 5, new SerializablePaginationQueryCallback() {
             @Override
             public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
-                return articleService.getArticles(op, true, 0);
+            return articleService.getArticles(op, true, 0);
             }
         });
         return new ModelAndView("home").addObject("userDTO", userSummaryDTO).addObject("articleDTOs", articleDTOs);

@@ -6,6 +6,8 @@
   <head>
     <title>login</title>
     <%@include file="/WEB-INF/jspi/main.jspi"%>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" href="${ctx}/images/js2.png" type="image/x-icon">
   </head>
 
   <body class="hold-transition login-page">

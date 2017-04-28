@@ -2,8 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@include file="/WEB-INF/jspi/kindeditor.jspi"%>--%>
-<%@include file="/WEB-INF/jspi/main.jspi"%>
 <%@include file="/WEB-INF/jspi/editor.jspi"%>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -138,6 +136,5 @@
         });
 
     });
-// fixme 需要增加关闭窗口是提醒保存的功能！
     $(window).bind('beforeunload',function(){return '您输入的内容尚未保存，确定离开此页面吗？';});
 </script>

@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="framework" uri="/framework-tags" %>
-<%@include file="/WEB-INF/jspi/main.jspi"%>
 <div class="content-wrapper">
     <section class="content-header"></section>
 

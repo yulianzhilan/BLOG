@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/jspi/kindeditor.jspi"%>
-<%@include file="/WEB-INF/jspi/main.jspi"%>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -158,7 +157,7 @@
             alert("i am here");
             return false;
         }
-        document.charset = "UTF-8"
+        document.charset = "UTF-8";
         $("#example").submit();
     }
 
@@ -181,11 +180,4 @@
         });
 
     });
-// fixme 需要增加关闭窗口是提醒保存的功能！
-    window.onbeforeunload = function() {
-        if(confirm("是否保存后退出?")){
-            alert("保存失败！")
-            return false; // 可以阻止关闭
-        }
-    }
 </script>

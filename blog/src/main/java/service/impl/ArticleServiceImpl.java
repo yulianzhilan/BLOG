@@ -45,7 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleFolderDTO getArticleFoldersByName(String attribute, int userId, String name) {
-        // fixme 这里有一个问题，如果该字段的值为null，怎么获取该列表？mybatis查询
+        //  这里有一个问题，如果该字段的值为null，怎么获取该列表？mybatis查询
         // 现在采用非空解决
         String folder = null;
         String location = null;
@@ -86,9 +86,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void saveArticle(ArticleDTO articleDTO, int userId) {
+    public int saveArticle(ArticleDTO articleDTO, int userId) {
         articleDTO.setUserId(userId);
         articleMapper.saveArticle(articleDTO);
+        return articleDTO.getId();
     }
 
     @Override
@@ -98,7 +99,14 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PaginationResultDTO<ArticleSummaryDTO> getArticles(OrderablePaginationDTO op, boolean isHome, int userId) {
-        Page<ArticleSummaryDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> articleMapper.getArticlesForHome(userId, 0));
+        Page<ArticleSummaryDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(()->{
+            if(isHome){
+                articleMapper.getArticlesForHome(0, 0);
+            } else{
+                articleMapper.getArticlesForHome(userId, 0);
+            }
+        });
+
         op.setTotalCount((int)page.getTotal());
         return new PaginationResultDTO<>(op, page.getResult());
     }

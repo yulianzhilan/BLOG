@@ -66,11 +66,11 @@
                                 <td class="text-center"><fmt:formatDate value="${dto.created}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                 <td class="text-center"><fmt:formatDate value="${dto.modify}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                 <td class="text-center">
+                                    <span class="fa fa-arrows-alt" style="cursor: pointer; margin-right: 5px;" title="阅读" onclick="window.location.href='${ctx}/article/read?id=${dto.id}'"></span>
                                     <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick="window.location.href='${ctx}/article/modify?id=${dto.id}'"></span>
                                     <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="preview(${dto.id})"></span>
                                     <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deleteArticle(${dto.id})"></span>
                                 </td>
-                                <%-- fixme 最好加上创建时间 --%>
                             </tr>
                         </c:forEach>
                     </tbody>

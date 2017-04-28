@@ -26,7 +26,7 @@ public interface ArticleMapper {
 
     List<ArticleDTO> getArticles(@Param("userId")int userId, @Param("isPrivate")int isPrivate);
     //保存文章
-    void saveArticle(ArticleDTO articleDTO);
+    int saveArticle(ArticleDTO articleDTO);
     //编辑文章
     void editArticle(ArticleDTO articleDTO);
     List<ArticleSummaryDTO> getArticlesForHome(@Param("userId") int userId, @Param("id") int id);

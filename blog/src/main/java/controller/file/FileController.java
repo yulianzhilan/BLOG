@@ -144,9 +144,7 @@ public class FileController extends BaseController{
 
     @RequestMapping(value = "/upload_file",method = {RequestMethod.POST})
     public ModelAndView uploadFile(MultipartHttpServletRequest request){
-        //fixme 暂时测试
-//        String path = fileService.upload(request,getCurrentUserId(request));
-        String path = fileService.upload(request, 1);
+        String path = fileService.upload(request,getCurrentUserId(request));
         if(path == null){
            return ajaxModelAndView(false);
         }

@@ -2,7 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@include file="/WEB-INF/jspi/kindeditor.jspi"%>--%>
 <%@include file="/WEB-INF/jspi/fileupload.jspi"%>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -84,7 +83,7 @@
 //            allowedFileExtensions : [ "xls", "xlsx"], //限制文件类型
             elErrorContainer : "#fileError"
         });
-    })
+    });
 
     // 文件上传提交
     $("#fileUpload").submit(function(event) {

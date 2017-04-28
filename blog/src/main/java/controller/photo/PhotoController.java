@@ -48,9 +48,7 @@ public class PhotoController extends BaseController{
 
     @RequestMapping(value = "/upload", method = {RequestMethod.POST})
     public ModelAndView upload(MultipartHttpServletRequest request){
-        // fixme 暂时测试
-//        String url = photoService.upload(request, getCurrentUserId(request));
-        String url = photoService.upload(request, 1);
+        String url = photoService.upload(request, getCurrentUserId(request));
         if(url == null){
             return ajaxModelAndView(false);
         }
