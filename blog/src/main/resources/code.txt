@@ -1,4 +1,5 @@
-errCode:
+errcd:
     L101   no such user
     L102   account or password error
     L103   expired login
+    L104   发生未知异常！

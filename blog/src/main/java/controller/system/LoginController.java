@@ -6,6 +6,7 @@ import controller.BaseController;
 import dto.CallBackDTO;
 import dto.system.UserQueryDTO;
 import dto.system.UserSummaryDTO;
+import entity.system.User;
 import framework.core.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,8 @@ public class LoginController extends BaseController{
     public ModelAndView execute(HttpServletRequest request) throws Exception{
         if(isLogin(request)){
             request.getSession().setAttribute("modules",validateService.getSideBar(getCurrentUser(request)));
+            request.getSession().setAttribute("userSummaryDTO", validateService.getUserInfo(getCurrentUserId(request)));
+//            request.getSession().setAttribute("nickName",getCurrentUser(request).getNickName());
             return home(request);
         }
         return prepared().addObject("loginDTO", new UserQueryDTO());
@@ -50,16 +53,17 @@ public class LoginController extends BaseController{
     @RequestMapping(value = "/validate", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView validate(@ModelAttribute("loginDTO")UserQueryDTO user, HttpServletRequest request) throws Exception{
         if(StringUtils.isEmpty(user.getAccount()) || StringUtils.isEmpty(user.getPassword())){
-            return prepared().addObject("errtx", "发生未知异常！");
+            return prepared().addObject("errcd", "L104");
         }
         CallBackDTO callBackDTO = validateService.validate(user.getAccount(), user.getPassword());
         if(callBackDTO.isOkay()){
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30*60);
+//            session.setAttribute("userSummaryDTO",AssembleUtil.assembleUserSummaryDTO((User) callBackDTO.getObj()));
             session.setAttribute("_token", callBackDTO.getObj());
             return execute(request);
         }
-        return prepared().addObject("errtx", callBackDTO.getErrtx());
+        return prepared().addObject("errcd", callBackDTO.getErrcd());
     }
 
     @RequestMapping(value = "/passerby", method = {RequestMethod.GET, RequestMethod.POST})
@@ -72,16 +76,16 @@ public class LoginController extends BaseController{
 
     @RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView home(HttpServletRequest request) throws Exception{
-        // 这里解决重启后sidebar消失问题——因为开发时需要不停地重启，所以这个直接用admin作为默认登录用户
-        UserSummaryDTO userSummaryDTO = AssembleUtil.assembleUserSummaryDTO(getCurrentUser(request));
-        // ***************************************分割线*****************************************
+        if(!isLogin(request)){
+            return execute(request);
+        }
         List<?> articleDTOs = executeQuery(request, 5, new SerializablePaginationQueryCallback() {
             @Override
             public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
             return articleService.getArticles(op, true, 0);
             }
         });
-        return new ModelAndView("home").addObject("userDTO", userSummaryDTO).addObject("articleDTOs", articleDTOs);
+        return new ModelAndView("home").addObject("articleDTOs", articleDTOs);
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
@@ -91,5 +95,19 @@ public class LoginController extends BaseController{
         return execute(request);
     }
 
+    //fixme 注册还没有写完，前端控制还有问题
+    @RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView register(){
+        return ajaxModelAndView(true);
+    }
 
+    @RequestMapping(value = "/getInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView getInfo(HttpServletRequest request){
+        return ajaxModelAndView(true).addObject("infoDTO",validateService.getUserInfo(getCurrentUserId(request)));
+    }
+
+    @RequestMapping(value = "/setting", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView setting(){
+        return null;
+    }
 }

@@ -18,7 +18,7 @@ public class CallBackDTO {
     /**
      * 错误代码
      */
-    private int errcode;
+    private String errcd;
 
     /**
      * 结果对象
@@ -41,12 +41,12 @@ public class CallBackDTO {
         this.errtx = errtx;
     }
 
-    public int getErrcode() {
-        return errcode;
+    public String getErrcd() {
+        return errcd;
     }
 
-    public void setErrcode(int errcode) {
-        this.errcode = errcode;
+    public void setErrcd(String errcd) {
+        this.errcd = errcd;
     }
 
     public Object getObj() {

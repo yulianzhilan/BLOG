@@ -1,7 +1,4 @@
 /**
- * Created by scott on 2017/3/24.
- */
-/**
  * 非空
  * <input type="text" class="required"/>
  * 字母
@@ -25,7 +22,7 @@
  * $("#inputID").bindValidator({inclusion: ["A", "B", "C"]});       // A或B或C
  */
 (function ($) {
-    $.simplevalidate = {}
+    $.simplevalidate = {};
     $.fn.bindValidator= function(options) {
         this.each(function (i, elem) {
             var $elem = $(elem);
@@ -34,7 +31,7 @@
             $.extend(optionsToUse, options);
             $elem.data("simple-validate-options", optionsToUse)
         });
-    }
+    };
     $.fn.formValidate = function () {
         var ret = true;
         this.each(function (i, formElem) {
@@ -57,7 +54,7 @@
 
             // required
             if ($elem.hasClass("required") && isBlank(elem.value)) {
-                showMessage(elem, i18nMessages.required, [elem.title])
+                showMessage(elem, i18nMessages.required, [elem.title]);
                 ret = false;
                 return false;
             }
@@ -69,47 +66,47 @@
 
             // alpha
             if ($elem.hasClass("alpha") && !isAlpha(elem.value)) {
-                showMessage(elem, i18nMessages.alpha, [elem.title])
+                showMessage(elem, i18nMessages.alpha, [elem.title]);
                 ret = false;
                 return false;
             }
 
             // num
             if ($elem.hasClass("num") && !isNum(elem.value)) {
-                showMessage(elem, i18nMessages.num, [elem.title])
+                showMessage(elem, i18nMessages.num, [elem.title]);
                 ret = false;
                 return false;
             }
 
             // alphanum
             if ($elem.hasClass("alphanum") && !isAlphaNum(elem.value)) {
-                showMessage(elem, i18nMessages.alphanum, [elem.title])
+                showMessage(elem, i18nMessages.alphanum, [elem.title]);
                 ret = false;
                 return false;
             }
 
             // awb
             if ($elem.hasClass("awb") && !isAWBNumber(elem.value)) {
-                showMessage(elem, i18nMessages.awb, [elem.title])
+                showMessage(elem, i18nMessages.awb, [elem.title]);
                 ret = false;
                 return false;
             }
 
             // apt
             if ($elem.hasClass("apt") && !isAlpha(elem.value) && getLength(elem.value) != 3) {
-                showMessage(elem, i18nMessages.apt, [elem.title])
+                showMessage(elem, i18nMessages.apt, [elem.title]);
                 ret = false;
                 return false;
             }
             // pcs
             if ($elem.hasClass("pcs") && isNumeric(elem.value, 5)) {
-                showMessage(elem, i18nMessages.pcs, [elem.title])
+                showMessage(elem, i18nMessages.pcs, [elem.title]);
                 ret = false;
                 return false;
             }
             // wgt
             if ($elem.hasClass("wgt") && isNumeric(elem.value, 8, 4)) {
-                showMessage(elem, i18nMessages.wgt, [elem.title])
+                showMessage(elem, i18nMessages.wgt, [elem.title]);
                 ret = false;
                 return false;
             }

@@ -17,4 +17,6 @@ public interface PhotoService {
     void delete(int id, int userId);
 
     CallBackDTO preview(String path, String order, int userId);
+
+    String getUrl(int photoId);
 }

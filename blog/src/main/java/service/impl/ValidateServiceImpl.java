@@ -2,11 +2,13 @@ package service.impl;
 
 import dto.CallBackDTO;
 import dto.system.SidebarDTO;
+import dto.system.UserInfoSummaryDTO;
 import dto.system.UserSummaryDTO;
 import entity.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import service.PhotoService;
 import service.ValidateService;
 import service.mapper.SidebarMapper;
 import service.mapper.UserMapper;
@@ -21,6 +23,9 @@ import java.util.List;
 public class ValidateServiceImpl implements ValidateService{
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PhotoService photoService;
 
     @Autowired
     private SidebarMapper sidebarMapper;
@@ -58,12 +63,12 @@ public class ValidateServiceImpl implements ValidateService{
         int amount = userMapper.countUser(_user);
         if(amount != 0){
             result.setOkay(false);
-            result.setErrcode(102);
+            result.setErrcd("L102");
             result.setErrtx("帐号或密码错误！");
             return result;
         }
         result.setOkay(false);
-        result.setErrcode(101);
+        result.setErrcd("L101");
         result.setErrtx("未注册用户！");
         return result;
     }
@@ -75,5 +80,12 @@ public class ValidateServiceImpl implements ValidateService{
             return null;
         }
         return sidebarMapper.getSidebar(user.getRoleId());
+    }
+
+    @Override
+    public UserInfoSummaryDTO getUserInfo(int id) {
+        UserInfoSummaryDTO userInfoSummaryDTO = userMapper.getUserInfo(id);
+        userInfoSummaryDTO.setPhotoUrl(photoService.getUrl(userInfoSummaryDTO.getPhotoId()));
+        return userInfoSummaryDTO;
     }
 }

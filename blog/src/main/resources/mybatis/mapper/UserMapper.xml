@@ -50,4 +50,18 @@
         WHERE
         ACCOUNT = #{account, jdbcType=VARCHAR}
     </select>
+
+    <select id="getUserInfo" resultType="dto.system.UserInfoSummaryDTO">
+        SELECT
+        USER.ID as userId,
+        USER.NICK_NAME as nickName,
+        USER.ACCOUNT as account,
+        <!-- USER.PASSWORD as password, -->
+        INFO.photoId as photoId
+        from T_USER USER,U_INFO INFO WHERE
+        USER.id = INFO.userId
+        <if test="userId != 0">
+            AND USER.id = #{userId}
+        </if>
+    </select>
 </mapper>

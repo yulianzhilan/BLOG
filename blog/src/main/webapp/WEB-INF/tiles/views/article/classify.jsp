@@ -69,7 +69,7 @@
                         <!-- Post -->
                         <div class="post">
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src=""
+                                <img class="img-circle img-bordered-sm" src="${article.photoUrl}"
                                      alt="user image">
                                 <span class="username">
                           <a href="#">${article.nickName}</a>
@@ -78,9 +78,16 @@
                                 <span class="description"><fmt:formatDate value="${article.modify}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
                             </div>
                             <!-- /.user-block -->
-                            <p>
-                                    ${article.description}
-                            </p>
+                            <h3 class="text-center">
+                                <c:choose>
+                                    <c:when test="${not empty article.description}">
+                                        ${article.description}
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${article.title}
+                                    </c:otherwise>
+                                </c:choose>
+                            </h3>
                             <ul class="list-inline">
                                 <li><a href="${ctx}/article/read?id=${article.id}" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i>Show more</a></li>
                                 <li class="pull-right">

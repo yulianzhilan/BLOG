@@ -19,19 +19,34 @@
       <!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Log in to start your session</p>
-        <form:form modelAttribute="loginDTO" method="post" action="${pageContext.request.contextPath}/login/validate">
+        <form:form modelAttribute="loginDTO" method="post" action="${pageContext.request.contextPath}/login/validate" onsubmit="return $(this).formValidate();">
           <div class="form-group has-feedback">
-            <form:input path="account" class="form-control" placeholder="Account"/>
+            <form:input path="account" class="form-control required" placeholder="Account" title="Account"/>
             <%--<input class="form-control" placeholder="Email" type="email">--%>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <form:password path="password" class="form-control" placeholder="Password"/>
+            <form:password path="password" class="form-control required" placeholder="Password" title="Password"/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
         <div class="row">
           <div class="col-xs-8 text-center">
-            <h5 style="color: red">${errtx}</h5>
+            <h5 style="color: red">
+              <c:choose>
+                <c:when test="${errcd eq 'L102'}">
+                  帐号或密码错误！
+                </c:when>
+                <c:when test="${errcd eq 'L103'}">
+                  登录已过期，请重新登录！
+                </c:when>
+                <c:when test="${errcd eq 'L101'}">
+                  未注册用户！
+                </c:when>
+                <c:when test="${errcd eq 'L104'}">
+                  发生未知异常！
+                </c:when>
+              </c:choose>
+            </h5>
           </div>
           <div class="col-xs-4">
             <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
@@ -42,7 +57,7 @@
         <a href="#">I forgot my password</a><br>
 
         <div class="social-auth-links text-center">
-          <p>- OR -  Coming Soon</p>
+          <p>- OR -</p>
           <a onclick="toggleTo('1')" class="btn btn-block btn-facebook btn-flat text-center"> Sign in</a>
           <a href="${ctx}/login/passerby" class="btn btn-block btn-google btn-flat text-center"> PasserBy</a>
         </div>
@@ -74,28 +89,28 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input class="form-control required password" placeholder="Password" type="password" id="set_password" name="password" title="密码">
+            <input class="form-control required password" placeholder="Password" type="password" id="setPassword" name="password" title="密码">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input class="form-control required password" placeholder="Retype password" type="password" name="retype_password" title="重复密码">
+            <input class="form-control required password" placeholder="Retype password" type="password" name="retypePassword" id="retypePassword" title="重复密码">
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
-          <div id="register_error" class="form-group has-feedback text-center hidden">
+          <div id="register_error" class="form-group has-feedback text-center">
             <span style="color: red" id="error_span"></span>
           </div>
           <div class="row">
             <div class="col-xs-8">
               <div class="form-group has-feedback">
                 <label class="">
-                    <input type="checkbox" name="terms">
+                    <input type="checkbox" name="terms" id="terms" class="required" title="terms">
               I agree to the <a href="#myModal" data-toggle="modal" data-target=".bs-example-modal-sm">terms</a>
                 </label>
               </div>
             </div>
             <!-- /.col -->
             <div class="col-xs-4">
-              <button type="button" onclick="" class="btn btn-primary btn-block btn-flat">Register</button>
+              <button type="button" onclick="register_after(validate());" class="btn btn-primary btn-block btn-flat">Register</button>
             </div>
             <!-- /.col -->
           </div>
@@ -139,25 +154,62 @@
       }
   }
 
-  function register() {
-    
-  }
-  
-  $("#set_password").blur(function () {
-      if($(this).val().length < 8){
-          show_error("密码长度不够！");
-      }
-  });
+  function validate() {
 
-  $("input[name=retype_password]").blur(function () {
-      if($(this).val != $("#set_password")){
-          show_error("两次出入密码不一致！")
+      if(!$("#register").formValidate()){
+          return false;
       }
-  });
+      if ($("#terms:checked").length != 1) {
+          showMessage($("#terms"), "[{0}]不能为空!", [$("#terms").attr('title')]);
+          return false;
+      }
+
+      if(!$("#setPassword").blur()){
+          return false ;
+      }
+
+      if(!$("#retypePassword").blur()){
+          return false;
+      }
+      return true;
+  }
+
+  function register_after(flag) {
+      if(flag){
+          $.ajax({
+            data: $("#register").serialize(),
+            url: '${ctx}/login/register.json',
+            success: function (data) {
+                if(ajaxValidate(data)){
+                    alert("注册成功！");
+                    toggleTo('2');
+                }
+            }
+          })
+      }
+  }
 
   function show_error(msg) {
       $("#error_span").text(msg);
-      $("#register_error").removeClass('hidden');
+      setTimeout('$("#error_span").text("");',1000)
   }
+
+  $("#setPassword").blur(function () {
+      if($("#setPassword").val().length < 8){
+          show_error("密码长度不够！");
+          return false;
+      } else{
+          return true;
+      }
+  });
+  $("#retypePassword").blur(function () {
+      var flag = true;
+      if($("#retypePassword").val() != $("#setPassword").val()){
+          show_error("两次输入密码不一致！");
+          flag = false;
+      }
+      return flag;
+  });
+
 </script>
 </html>

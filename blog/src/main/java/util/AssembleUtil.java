@@ -2,7 +2,7 @@ package util;
 
 import dto.article.ArticleDTO;
 import dto.article.ArticleFolderDTO;
-import dto.article.ArticleSummaryDTO;
+import dto.system.UserInfoSummaryDTO;
 import dto.system.UserSummaryDTO;
 import entity.system.User;
 

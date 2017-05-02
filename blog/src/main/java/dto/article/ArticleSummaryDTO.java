@@ -37,10 +37,16 @@ public class ArticleSummaryDTO {
      */
     private String nickName;
 
+    private String title;
+
     /**
      * 评论数
      */
     private int comments;
+
+    private int photoId;
+
+    private String photoUrl;
 
     public int getId() {
         return id;
@@ -96,5 +102,29 @@ public class ArticleSummaryDTO {
 
     public void setComments(int comments) {
         this.comments = comments;
+    }
+
+    public int getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(int photoId) {
+        this.photoId = photoId;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -120,7 +120,13 @@ public class PhotoServiceImpl implements PhotoService {
         return result;
     }
 
-    protected List<Hashtable> classify(List<PhotoDTO> source,boolean isFolder){
+    @Override
+    public String getUrl(int photoId) {
+        String key = photoMapper.getQiNiuKey(photoId,0);
+        return qiNiuService.assembleUrl(Constants.QINIUDOMAIN_PHOTO,key);
+    }
+
+    protected List<Hashtable> classify(List<PhotoDTO> source, boolean isFolder){
         List<Hashtable> result = new ArrayList<>();
         if(isFolder) {
             Hashtable<String, List<PhotoDTO>> hash = new Hashtable<>();

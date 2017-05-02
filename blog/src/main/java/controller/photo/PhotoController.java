@@ -90,6 +90,7 @@ public class PhotoController extends BaseController{
         }
     }
 
+    // fixme 只是用于测试编辑器
     @RequestMapping(value = "/editor")
     public ModelAndView editor(){
         return new ModelAndView("editor");
@@ -98,5 +99,10 @@ public class PhotoController extends BaseController{
     @RequestMapping(value = "/save")
     public ModelAndView save(HttpServletRequest request){
         return null;
+    }
+
+    @RequestMapping(value = "/get", method = {RequestMethod.GET, RequestMethod.POST})
+    public String get(int photoId){
+        return "http://ooxxhoti3.bkt.clouddn.com/1_2017042813555242510.jpg";
     }
 }

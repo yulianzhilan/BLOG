@@ -48,7 +48,7 @@ public class ArticleController extends BaseController{
 
     @RequestMapping(value = "/classify", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView classify(@ModelAttribute("attribute")String attribute,HttpServletRequest request) throws Exception{
-        List<ArticleFolderDTO> result = null;
+        List<ArticleFolderDTO> result;
         if(StringUtils.isEmpty(attribute)){
             result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
         } else{

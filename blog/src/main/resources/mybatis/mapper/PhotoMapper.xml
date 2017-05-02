@@ -27,8 +27,10 @@
         PHOTO
         WHERE
         id = #{id}
-        AND
-        userId = #{userId}
+        <if test="userId != 0">
+            AND
+            userId = #{userId}
+        </if>
     </select>
 
     <select id="kindEditGet" resultType="dto.photo.PhotoDTO">

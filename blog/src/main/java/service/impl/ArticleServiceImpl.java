@@ -10,6 +10,7 @@ import dto.article.ArticleSummaryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.ArticleService;
+import service.PhotoService;
 import service.mapper.ArticleMapper;
 import util.AssembleUtil;
 import util.Constants;
@@ -23,6 +24,9 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private PhotoService photoService;
 
     @Override
     public List<ArticleFolderDTO> getDefaultArticleFolders(int userId) {
@@ -101,9 +105,9 @@ public class ArticleServiceImpl implements ArticleService {
     public PaginationResultDTO<ArticleSummaryDTO> getArticles(OrderablePaginationDTO op, boolean isHome, int userId) {
         Page<ArticleSummaryDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(()->{
             if(isHome){
-                articleMapper.getArticlesForHome(0, 0);
+                setUrls(articleMapper.getArticlesForHome(0, 0));
             } else{
-                articleMapper.getArticlesForHome(userId, 0);
+                setUrls(articleMapper.getArticlesForHome(userId, 0));
             }
         });
 
@@ -114,5 +118,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleSummaryDTO getArticle(int id) {
         return articleMapper.getArticlesForHome(0, id).get(0);
+    }
+
+    protected ArticleSummaryDTO setUrl(ArticleSummaryDTO summaryDTO){
+        summaryDTO.setPhotoUrl(photoService.getUrl(summaryDTO.getPhotoId()));
+        return summaryDTO;
+    }
+
+    protected List<ArticleSummaryDTO> setUrls(List<ArticleSummaryDTO> summaryDTOS){
+        for(ArticleSummaryDTO summaryDTO : summaryDTOS){
+            setUrl(summaryDTO);
+        }
+        return summaryDTOS;
     }
 }

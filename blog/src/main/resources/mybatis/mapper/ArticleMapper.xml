@@ -190,12 +190,17 @@
         a.description AS description,
         a.userId AS userId,
         a.modify AS modify,
-        u.nick_Name AS nickName
+        a.title as title,
+        u.nick_Name AS nickName,
+        info.photoId AS photoId
         FROM
         article a,
-        t_user u
+        t_user u,
+        u_info info
         WHERE
         a.userId = u.id
+        AND
+        u.id = info.userId
         ) ONE LEFT JOIN
         (SELECT articleId, COUNT(*) comments FROM a_comments GROUP BY articleId) c ON
         ONE.id = c.articleId where 1=1
