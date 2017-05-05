@@ -54,7 +54,7 @@
         </div>
         </form:form>
 
-        <a href="#">I forgot my password</a><br>
+        <a onclick="alert('COMING SOON...')">I forgot my password</a><br>
 
         <div class="social-auth-links text-center">
           <p>- OR -</p>
@@ -85,7 +85,7 @@
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input class="form-control required" placeholder="Email" type="email" name="email" title="邮箱">
+            <input class="form-control required" placeholder="Email" type="email" name="email" id="email" title="邮箱">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
@@ -164,14 +164,17 @@
           return false;
       }
 
-      if(!$("#setPassword").blur()){
-          return false ;
-      }
+      $("#email").blur();
 
-      if(!$("#retypePassword").blur()){
+      $("#setPassword").blur();
+
+      $("#retypePassword").blur();
+
+      if($("#error_span").text() == ""){
+          return true;
+      } else{
           return false;
       }
-      return true;
   }
 
   function register_after(flag) {
@@ -202,13 +205,23 @@
           return true;
       }
   });
+
+  $("#email").blur(function () {
+      if(!new RegExp(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/).test($("#email").val())){
+          show_error("邮箱格式不对！");
+          return false;
+      } else{
+          return true;
+      }
+  });
+
   $("#retypePassword").blur(function () {
-      var flag = true;
       if($("#retypePassword").val() != $("#setPassword").val()){
           show_error("两次输入密码不一致！");
-          flag = false;
+          return false;
+      } else{
+          return true;
       }
-      return flag;
   });
 
 </script>

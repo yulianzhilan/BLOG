@@ -29,8 +29,8 @@ public class ArticleServiceImpl implements ArticleService {
     private PhotoService photoService;
 
     @Override
-    public List<ArticleFolderDTO> getDefaultArticleFolders(int userId) {
-        List<ArticleDTO> result = articleMapper.getSimpleArticles(0, userId);
+    public List<ArticleFolderDTO> getDefaultArticleFolders(int isPrivate, int userId) {
+        List<ArticleDTO> result = articleMapper.getSimpleArticles(isPrivate, userId);
         if(result == null){
             return  null;
         }
@@ -39,8 +39,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleFolderDTO> getArticleFolders(String flag , int userId) {
-        List<ArticleDTO> result = articleMapper.getSimpleArticles(0, userId);
+    public List<ArticleFolderDTO> getArticleFolders(String flag , int isPrivate, int userId) {
+        List<ArticleDTO> result = articleMapper.getSimpleArticles(isPrivate, userId);
         if(result == null){
             return null;
         }
@@ -48,7 +48,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleFolderDTO getArticleFoldersByName(String attribute, int userId, String name) {
+    public ArticleFolderDTO getArticleFoldersByName(String attribute, int isPrivate, int userId, String name) {
         //  这里有一个问题，如果该字段的值为null，怎么获取该列表？mybatis查询
         // 现在采用非空解决
         String folder = null;
@@ -63,7 +63,7 @@ public class ArticleServiceImpl implements ArticleService {
         } else {
             return null;
         }
-        List<ArticleDTO> result = articleMapper.getSimpleArticlesByName(0,userId,folder,location,person);
+        List<ArticleDTO> result = articleMapper.getSimpleArticlesByName(isPrivate,userId,folder,location,person);
         return AssembleUtil.assembleArticleFolderDTO(result, name, attribute);
     }
 
@@ -130,5 +130,10 @@ public class ArticleServiceImpl implements ArticleService {
             setUrl(summaryDTO);
         }
         return summaryDTOS;
+    }
+
+    @Override
+    public List<ArticleDTO> searchQ(String q, int isPrivate, int userId) {
+        return articleMapper.searchQ(q,isPrivate,userId);
     }
 }

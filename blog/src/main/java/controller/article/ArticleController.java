@@ -50,9 +50,9 @@ public class ArticleController extends BaseController{
     public ModelAndView classify(@ModelAttribute("attribute")String attribute,HttpServletRequest request) throws Exception{
         List<ArticleFolderDTO> result;
         if(StringUtils.isEmpty(attribute)){
-            result = articleService.getDefaultArticleFolders(getCurrentUserId(request));
+            result = articleService.getDefaultArticleFolders(0,getCurrentUserId(request));
         } else{
-            result = articleService.getArticleFolders(attribute, getCurrentUserId(request));
+            result = articleService.getArticleFolders(attribute,0, getCurrentUserId(request));
         }
         List<?> articleDTOs = executeQuery(request, new SerializablePaginationQueryCallback() {
             @Override
@@ -80,7 +80,7 @@ public class ArticleController extends BaseController{
         if(StringUtils.isEmpty(attribute)){
             attribute = Constants.ATTRIBUTE_FOLDER;
         }
-        ArticleFolderDTO result = articleService.getArticleFoldersByName(attribute,getCurrentUserId(request),name);
+        ArticleFolderDTO result = articleService.getArticleFoldersByName(attribute,0,getCurrentUserId(request),name);
         return new ModelAndView("article/list").addObject("result", result);
     }
 
@@ -164,5 +164,11 @@ public class ArticleController extends BaseController{
             cellb.setCellValue(list.get(j).getName());
         }
         return workbook;
+    }
+
+    @RequestMapping(value = "/searchQ", method = {RequestMethod.POST})
+    public ModelAndView searchQ(String q, HttpServletRequest request){
+        List<ArticleDTO> result = articleService.searchQ(q,0,getCurrentUserId(request));
+        return ajaxModelAndView(true).addObject("result", result);
     }
 }

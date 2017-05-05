@@ -20,7 +20,7 @@
         <div class="box box-primary">
             <div class="box-header">
                 <div class="btn-group">
-                    <a href="${ctx}/article/classifyByFolder?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat">${result.attribute}</button></a>
+                    <a href="${ctx}/article/classify?attribute=${result.attribute}"><button type="button" class="btn btn-info btn-flat">${result.attribute}</button></a>
                     <c:if test="${not empty result.name}">
                         <a href="${ctx}/article/list?attribute=${result.attribute}&name=${result.name}"><button type="button" id="show" class="btn btn-info btn-flat">${result.name}</button></a>
                     </c:if>
@@ -29,9 +29,8 @@
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input name="table_search" class="form-control pull-right" placeholder="Search" type="text">
-
                         <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <button type="button" onclick="searchQ();" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                         <th class="text-center">ACTION</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <c:forEach items="${result.articleDTOs}" var="dto" varStatus="item">
                             <tr>
                                 <td class="text-center">${item.index+1}</td>
@@ -68,8 +67,8 @@
                                 <td class="text-center">
                                     <span class="fa fa-arrows-alt" style="cursor: pointer; margin-right: 5px;" title="阅读" onclick="window.location.href='${ctx}/article/read?id=${dto.id}'"></span>
                                     <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick="window.location.href='${ctx}/article/modify?id=${dto.id}'"></span>
-                                    <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="preview(${dto.id})"></span>
-                                    <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deleteArticle(${dto.id})"></span>
+                                    <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="preview('${dto.id}')"></span>
+                                    <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deleteArticle('${dto.id}')"></span>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -131,6 +130,31 @@
 
     </section>
 </div>
+
+<%@ include file="/WEB-INF/jspi/jsrender.jspi"%>
+<script id="searchQtr" type="text/x-jsrender">
+    {{for result}}
+        <tr>
+            <td class="text-center">{{: #index+1}}</td>
+            <td class="text-center">{{: #data.name}}</td>
+            <td class="text-center">{{: #data.location}}</td>
+            <td class="text-center">{{: #data.person}}</td>
+            <td class="text-center">{{: #data.folder}}</td>
+            <td class="text-center">{{: #data.description}}</td>
+            <td class="text-center">{{: #data.title}}</td>
+            <td class="text-center">{{: #data.created}}</td>
+            <td class="text-center">{{: #data.modify}}</td>
+            <td class="text-center">
+                <span class="fa fa-arrows-alt" style="cursor: pointer; margin-right: 5px;" title="阅读" onclick="window.location.href='/blog/article/read?id={{:#data.id}}'"></span>
+                <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick="window.location.href='/blog/article/modify?id={{:#data.id}}'"></span>
+                <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="preview('{{:#data.id}}')"></span>
+                <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deleteArticle('{{:#data.id}}')"></span>
+            </td>
+        </tr>
+    {{/for}}
+</script>
+
+
 <script>
     function deleteArticle(id) {
         $.ajax({
@@ -159,5 +183,19 @@
                 }
             }
         })
+    }
+    
+    function searchQ() {
+        var q = $("input[name=table_search]").val();
+        $.ajax({
+           data: {q: q},
+            url: '${ctx}/article/searchQ.json',
+            method: 'POST',
+            success: function (data) {
+               if(ajaxValidate(data)){
+                   $("#tbody").html($.templates("#searchQtr").render({'result': data.result}));
+               }
+            }
+        });
     }
 </script>

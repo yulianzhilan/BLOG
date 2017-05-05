@@ -17,7 +17,7 @@ public interface ArticleService {
      * @param usrId
      * @return
      */
-    List<ArticleFolderDTO> getDefaultArticleFolders(int usrId);
+    List<ArticleFolderDTO> getDefaultArticleFolders(int isPrivate, int usrId);
 
     /**
      * 根据分类属性 查询 所有文章（非私有）
@@ -25,7 +25,7 @@ public interface ArticleService {
      * @param userId
      * @return
      */
-    List<ArticleFolderDTO> getArticleFolders(String attribute, int userId);
+    List<ArticleFolderDTO> getArticleFolders(String attribute, int isPrivate, int userId);
 
     /**
      * 根据 分类属性 & 分类名称查询单组文章
@@ -34,7 +34,7 @@ public interface ArticleService {
      * @param name
      * @return
      */
-    ArticleFolderDTO getArticleFoldersByName(String attribute, int userId, String name);
+    ArticleFolderDTO getArticleFoldersByName(String attribute,int isPrivate, int userId, String name);
 
     /**
      * 删除
@@ -95,4 +95,13 @@ public interface ArticleService {
      * @return
      */
     ArticleSummaryDTO getArticle(int id);
+
+    /**
+     * 随机搜索
+     * @param q
+     * @param isPrivate
+     * @param userId
+     * @return
+     */
+    List<ArticleDTO> searchQ(String q, int isPrivate, int userId);
 }

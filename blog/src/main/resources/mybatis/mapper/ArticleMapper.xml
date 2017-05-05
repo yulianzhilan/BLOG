@@ -53,24 +53,26 @@
         CONTENT,
         PERSON,
         FOLDER,
-        ISPRIVATE
+        TITLE,
+        DESCRIPTION,
+        CREATED,
+        MODIFY
         FROM
         ARTICLE
         WHERE
-        ISPRIVATE = #{isPrivate, jdbcType=BIT}
+        ISPRIVATE = #{isPrivate}
         AND
-        USERID = #{userId, jdbcType=SMALLINT}
-
+        USERID = #{userId}
         <if test="q != null and q != ''">
-        AND NAME LIKE '%${q, jdbcType=VARCHAR}%'
+        AND NAME LIKE '%${q}%'
         OR
-        LOCATION LIKE '%${q, jdbcType=VARCHAR}%'
+        LOCATION LIKE '%${q}%'
         OR
-        PERSON LIKE '%${q, jdbcType=VARCHAR}%'
+        PERSON LIKE '%${q}%'
         OR
-        CONTENT LIKE '%${q, jdbcType=VARCHAR}%'
+        CONTENT LIKE '%${q}%'
         OR
-        FOLDER LIKE '%${q, jdbcType=VARCHAR}%'
+        FOLDER LIKE '%${q}%'
         </if>
         ORDER BY MODIFY DESC
     </select>

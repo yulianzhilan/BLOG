@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.ArticleService;
 import service.ValidateService;
 import util.AssembleUtil;
+import util.LoginException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -77,7 +78,7 @@ public class LoginController extends BaseController{
     @RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView home(HttpServletRequest request) throws Exception{
         if(!isLogin(request)){
-            return execute(request);
+            throw new LoginException();
         }
         List<?> articleDTOs = executeQuery(request, 5, new SerializablePaginationQueryCallback() {
             @Override

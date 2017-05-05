@@ -21,7 +21,7 @@ public class BaseController extends PaginationableController {
     protected User getCurrentUser(HttpServletRequest request){
         User user =  (User)request.getSession().getAttribute("_token");
         if(user == null){
-            throw new LoginException("登录已失效，请重新登录！");
+            throw new LoginException("expired login!");
         }
         return user;
     }
