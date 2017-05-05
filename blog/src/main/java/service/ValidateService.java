@@ -1,6 +1,7 @@
 package service;
 
 import dto.CallBackDTO;
+import dto.system.RegisterDTO;
 import dto.system.SidebarDTO;
 import dto.system.UserInfoSummaryDTO;
 import dto.system.UserSummaryDTO;
@@ -23,4 +24,6 @@ public interface ValidateService {
     User getUser(int userId);
 
     UserInfoSummaryDTO getUserInfo(int id);
+
+    void register(RegisterDTO registerDTO);
 }

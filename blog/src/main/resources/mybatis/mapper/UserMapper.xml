@@ -64,4 +64,11 @@
             AND USER.id = #{userId}
         </if>
     </select>
+
+    <insert id="register" parameterType="dto.system.RegisterDTO">
+        INSERT INTO T_USER
+        (NICK_NAME, ACCOUNT, PASSWORD, EMAIL, ROLE_ID)
+        VALUES
+        (#{rNickname}, #{rAccount}, #{rPassword}, #{rEmail}, #{roleId})
+    </insert>
 </mapper>

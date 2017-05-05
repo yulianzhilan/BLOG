@@ -1,10 +1,12 @@
 package service.impl;
 
 import dto.CallBackDTO;
+import dto.system.RegisterDTO;
 import dto.system.SidebarDTO;
 import dto.system.UserInfoSummaryDTO;
 import dto.system.UserSummaryDTO;
 import entity.system.User;
+import framework.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -87,5 +89,23 @@ public class ValidateServiceImpl implements ValidateService{
         UserInfoSummaryDTO userInfoSummaryDTO = userMapper.getUserInfo(id);
         userInfoSummaryDTO.setPhotoUrl(photoService.getUrl(userInfoSummaryDTO.getPhotoId()));
         return userInfoSummaryDTO;
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        if(registerDTO == null || StringUtils.isEmpty(registerDTO.getrAccount())
+                || StringUtils.isEmpty(registerDTO.getrNickname()) || StringUtils.isEmpty(registerDTO.getrPassword())
+                || StringUtils.isEmpty(registerDTO.getrEmail())){
+            throw new ServiceException("lack of main info!");
+        }
+
+        if(!registerDTO.getrPassword().equals(registerDTO.getrRetypePassword())){
+            throw new ServiceException("two passwords is different!");
+        }
+
+        // 设置用户角色
+        registerDTO.setRoleId("4");
+
+        userMapper.register(registerDTO);
     }
 }

@@ -1,5 +1,6 @@
 package service.mapper;
 
+import dto.system.RegisterDTO;
 import dto.system.UserInfoSummaryDTO;
 import entity.system.User;
 import org.apache.ibatis.annotations.Param;
@@ -14,4 +15,5 @@ public interface UserMapper {
     int countUser(@Param("account")String account);
     User getUserById(@Param("userId")int userId);
     UserInfoSummaryDTO getUserInfo(@Param("userId")int id);
+    void register(RegisterDTO registerDTO);
 }

@@ -4,6 +4,7 @@ import com.infoccsp.framework.core.pagination.OrderablePaginationDTO;
 import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import controller.BaseController;
 import dto.CallBackDTO;
+import dto.system.RegisterDTO;
 import dto.system.UserQueryDTO;
 import dto.system.UserSummaryDTO;
 import entity.system.User;
@@ -96,9 +97,9 @@ public class LoginController extends BaseController{
         return execute(request);
     }
 
-    //fixme 注册还没有写完，前端控制还有问题
     @RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView register(){
+    public ModelAndView register(@ModelAttribute("registerDTO")RegisterDTO registerDTO){
+        validateService.register(registerDTO);
         return ajaxModelAndView(true);
     }
 
