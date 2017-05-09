@@ -60,7 +60,7 @@ public class PhotoController extends BaseController{
         List<?> result = executeQuery(request, 5,new SerializablePaginationQueryCallback() {
             @Override
             public PaginationResultDTO<?> query(OrderablePaginationDTO op) {
-                return photoService.getPhotos(op, getCurrentUserId(request), 0);
+                return photoService.getPhotos(op, getCurrentUserId(request), 0, true);
             }
         });
 

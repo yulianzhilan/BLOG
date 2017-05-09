@@ -57,6 +57,7 @@
         USER.NICK_NAME as nickName,
         USER.ACCOUNT as account,
         <!-- USER.PASSWORD as password, -->
+        USER.EMAIL AS email,
         INFO.photoId as photoId
         from T_USER USER,U_INFO INFO WHERE
         USER.id = INFO.userId
@@ -71,4 +72,26 @@
         VALUES
         (#{rNickname}, #{rAccount}, #{rPassword}, #{rEmail}, #{roleId})
     </insert>
+
+    <update id="setting" parameterType="dto.system.UserInfoSummaryDTO">
+        UPDATE
+        T_USER
+        <trim prefix="set" suffixOverrides=",">
+            <if test="nickName != null and nickName != ''">NICK_NAME=#{nickName},</if>
+            <if test="account != null and account != ''">ACCOUNT=#{account},</if>
+            <if test="password != null and password != ''">PASSWORD=#{password},</if>
+            <if test="email != null and email != ''">EMAIL=#{email},</if>
+            <if test="roleId != null and roleId != ''">ROLE_ID=#{roleId},</if>
+        </trim>
+        WHERE ID = #{userId}
+    </update>
+
+    <update id="changePhoto">
+        UPDATE
+        U_INFO
+        SET
+        PHOTOID = #{photoId}
+        WHERE
+        USERID = #{userId}
+    </update>
 </mapper>

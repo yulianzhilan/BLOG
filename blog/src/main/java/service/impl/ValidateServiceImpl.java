@@ -104,8 +104,26 @@ public class ValidateServiceImpl implements ValidateService{
         }
 
         // 设置用户角色
+        // fixme 暂时注册用户只能使用article模块
         registerDTO.setRoleId("4");
 
         userMapper.register(registerDTO);
+    }
+
+    @Override
+    public void setting(UserInfoSummaryDTO userInfoSummaryDTO) {
+        if(userInfoSummaryDTO == null || StringUtils.isEmpty(userInfoSummaryDTO.getUserId())){
+            throw new ServiceException("lack of main info!");
+        }
+        if(!StringUtils.isEmpty(userInfoSummaryDTO.getPassword())){
+            if(!userInfoSummaryDTO.getPassword().equals(userInfoSummaryDTO.getRetypePassword())){
+                throw new ServiceException("two passwords is different!");
+            }
+        }
+
+        userMapper.setting(userInfoSummaryDTO);
+        if(!StringUtils.isEmpty(userInfoSummaryDTO.getPhotoUrl())){
+
+        }
     }
 }

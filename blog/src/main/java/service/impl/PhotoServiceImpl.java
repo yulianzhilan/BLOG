@@ -72,8 +72,16 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate) {
-        Page<PhotoDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(() -> qiNiuService.assembleUrls(Constants.QINIUDOMAIN_PHOTO, photoMapper.getPhotos(userId, isPrivate)));
+    public PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate, boolean isAssembled) {
+        Page<PhotoDTO> page = PageHelper.startPage(op.getPage(), op.getSize()).doSelectPage(
+            () -> {
+                if (isAssembled)
+                    qiNiuService.assembleUrls(Constants.QINIUDOMAIN_PHOTO, photoMapper.getPhotos(userId, isPrivate));
+                else
+                    photoMapper.getPhotos(userId, isPrivate);
+            }
+        );
+
         op.setTotalCount((int)page.getTotal());
         return new PaginationResultDTO<>(op, page.getResult());
     }

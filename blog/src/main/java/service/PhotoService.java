@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public interface PhotoService {
     String upload(MultipartHttpServletRequest request, int userId);
 
-    PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate);
+    PaginationResultDTO<PhotoDTO> getPhotos(OrderablePaginationDTO op, int userId, int isPrivate, boolean isAssembled);
 
     void delete(int id, int userId);
 

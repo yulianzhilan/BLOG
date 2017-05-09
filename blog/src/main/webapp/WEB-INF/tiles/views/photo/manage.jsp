@@ -55,6 +55,7 @@
                         <th>Folder</th>
                         <th>Description</th>
                         <th>Date</th>
+                        <th>Path</th>
                         <th>Action</th>
                     </tr>
                     <c:forEach items="${result}" var="photo" varStatus="index">
@@ -64,6 +65,7 @@
                         <td>${photo.folder}</td>
                         <td>${photo.description}</td>
                         <td><fmt:formatDate value="${photo.created}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td><i>${photo.path}</i></td>
                         <td>
                             <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick=""></span>
                             <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="showDetail('${photo.path}')"></span>
@@ -120,8 +122,8 @@
     }
 
     $('#myModal').on('hidden.bs.modal', function () {
-//        $("#updatedImg").attr("src","");
-        window.location.reload();
+        $("#updatedImg").attr("src","");
+//        window.location.reload();
     });
 
     function deletePhoto(del, id) {

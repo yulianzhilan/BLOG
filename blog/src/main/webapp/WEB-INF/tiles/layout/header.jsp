@@ -53,7 +53,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a onclick="getInfo();" class="btn btn-default btn-flat">Setting</a>
                             </div>
                             <div class="pull-right">
                                 <a onclick="if(confirm('Are You Sure?')){window.location.href='${ctx}/login/logout'}" class="btn btn-default btn-flat">Sign out</a>
@@ -66,3 +66,86 @@
         </div>
     </nav>
 </header>
+<div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-center" id="title"></h3>
+            </div>
+            <div class="modal-body">
+                <form id="setForm" method="post">
+                    <input type="hidden" name="userId">
+                    <div class="form-group has-feedback">
+                        <input class="form-control" placeholder="Nice Name" type="text" name="nickName">
+                        <span class="fa fa-user-circle-o form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" placeholder="Account" type="text" name="account" readonly>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" placeholder="Email" type="email" name="email">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control password" placeholder="Password" type="password" name="password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control password" placeholder="Retype password" type="password" name="retypePassword">
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="row">
+                            <div class="col-sm-10" style="padding-right: 0;">
+                                <input class="form-control" placeholder="Photo Path" type="text" name="photoUrl">
+                                <span class="glyphicon glyphicon-picture form-control-feedback"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group-btn">
+                                    <a target="_blank" href="${ctx}/photo/manage" class="btn btn-default"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="register_error" class="form-group has-feedback text-center">
+                        <span style="color: red" id="error_span"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="setting();">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function getInfo() {
+        $.ajax({
+            url: '${ctx}/login/getInfo.json',
+            success: function (data) {
+                if(ajaxValidate(data)){
+                    bindFormValue($("#setting"), data.infoDTO);
+                    $('#setting').modal('show');
+                }
+            }
+        })
+    }
+
+    function setting() {
+        $.ajax({
+            url: '${ctx}/login/setting.json',
+            data: $("#setting").serialize(),
+            success: function (data) {
+                if(ajaxValidate(data)){
+                    alert("setting success, please re-login!");
+                    window.location.href = "${ctx}/login/logout";
+                }
+            }
+        })
+    }
+</script>

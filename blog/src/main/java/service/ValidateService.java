@@ -26,4 +26,6 @@ public interface ValidateService {
     UserInfoSummaryDTO getUserInfo(int id);
 
     void register(RegisterDTO registerDTO);
+
+    void setting(UserInfoSummaryDTO userInfoSummaryDTO);
 }

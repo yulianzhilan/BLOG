@@ -110,6 +110,6 @@ public class LoginController extends BaseController{
 
     @RequestMapping(value = "/setting", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView setting(){
-        return null;
+        return ajaxModelAndView(true);
     }
 }
