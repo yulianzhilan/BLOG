@@ -7,7 +7,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="${sessionScope.userSummaryDTO.photoUrl}" class="img-circle" alt="User Image">
+                <img src="${sessionScope.userSummaryDTO.photoUrl}" class="img-circle" style="height: 45px;width: 45px;" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>${sessionScope.userSummaryDTO.nickName}</p>
