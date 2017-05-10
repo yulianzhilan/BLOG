@@ -58,7 +58,9 @@
         USER.ACCOUNT as account,
         <!-- USER.PASSWORD as password, -->
         USER.EMAIL AS email,
-        INFO.photoId as photoId
+        INFO.photoId as photoId,
+        USER.CREATED as created,
+        USER.MODIFY AS modify
         from T_USER USER,U_INFO INFO WHERE
         USER.id = INFO.userId
         <if test="userId != 0">
@@ -68,9 +70,9 @@
 
     <insert id="register" parameterType="dto.system.RegisterDTO">
         INSERT INTO T_USER
-        (NICK_NAME, ACCOUNT, PASSWORD, EMAIL, ROLE_ID)
+        (NICK_NAME, ACCOUNT, PASSWORD, EMAIL, ROLE_ID, modify, created)
         VALUES
-        (#{rNickname}, #{rAccount}, #{rPassword}, #{rEmail}, #{roleId})
+        (#{rNickname}, #{rAccount}, #{rPassword}, #{rEmail}, #{roleId}, now(), now())
     </insert>
 
     <update id="setting" parameterType="dto.system.UserInfoSummaryDTO">
@@ -78,10 +80,9 @@
         T_USER
         <trim prefix="set" suffixOverrides=",">
             <if test="nickName != null and nickName != ''">NICK_NAME=#{nickName},</if>
-            <if test="account != null and account != ''">ACCOUNT=#{account},</if>
             <if test="password != null and password != ''">PASSWORD=#{password},</if>
             <if test="email != null and email != ''">EMAIL=#{email},</if>
-            <if test="roleId != null and roleId != ''">ROLE_ID=#{roleId},</if>
+            modify = now()
         </trim>
         WHERE ID = #{userId}
     </update>

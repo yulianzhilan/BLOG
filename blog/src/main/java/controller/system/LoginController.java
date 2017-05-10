@@ -5,6 +5,7 @@ import com.infoccsp.framework.core.pagination.PaginationResultDTO;
 import controller.BaseController;
 import dto.CallBackDTO;
 import dto.system.RegisterDTO;
+import dto.system.UserInfoSummaryDTO;
 import dto.system.UserQueryDTO;
 import dto.system.UserSummaryDTO;
 import entity.system.User;
@@ -109,7 +110,8 @@ public class LoginController extends BaseController{
     }
 
     @RequestMapping(value = "/setting", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView setting(){
+    public ModelAndView setting(UserInfoSummaryDTO userInfoSummaryDTO){
+        validateService.setting(userInfoSummaryDTO);
         return ajaxModelAndView(true);
     }
 }

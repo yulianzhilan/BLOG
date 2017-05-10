@@ -1,4 +1,6 @@
 <header class="main-header">
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <!-- Logo -->
     <a href="${ctx}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -22,17 +24,16 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="${ctx}/adminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="${sessionScope.userSummaryDTO.photoUrl}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">Hello, ${sessionScope.userSummaryDTO.nickName}!</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="${ctx}/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                            <img src="${sessionScope.userSummaryDTO.photoUrl}" class="img-circle" alt="User Image">
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                ${sessionScope.userSummaryDTO.nickName} - ${sessionScope.userSummaryDTO.account}
+                                <small>Member since <fmt:formatDate value="${sessionScope.userSummaryDTO.created}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -71,31 +72,37 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title text-center" id="title"></h3>
+                <h3 class="modal-title text-center" id="title">All attributes are optional</h3>
             </div>
             <div class="modal-body">
                 <form id="setForm" method="post">
                     <input type="hidden" name="userId">
+                    <span style="font-weight: bold">nickName</span>
                     <div class="form-group has-feedback">
                         <input class="form-control" placeholder="Nice Name" type="text" name="nickName">
                         <span class="fa fa-user-circle-o form-control-feedback"></span>
                     </div>
+                    <span style="font-weight: bold; color: red;">account(not available)</span>
                     <div class="form-group has-feedback">
                         <input class="form-control" placeholder="Account" type="text" name="account" readonly>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
+                    <span style="font-weight: bold">email</span>
                     <div class="form-group has-feedback">
                         <input class="form-control" placeholder="Email" type="email" name="email">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
+                    <span style="font-weight: bold">password</span>
                     <div class="form-group has-feedback">
                         <input class="form-control password" placeholder="Password" type="password" name="password">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
+                    <span style="font-weight: bold">retypePassword</span>
                     <div class="form-group has-feedback">
                         <input class="form-control password" placeholder="Retype password" type="password" name="retypePassword">
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
+                    <span style="font-weight: bold">photo</span>
                     <div class="form-group has-feedback">
                         <div class="row">
                             <div class="col-sm-10" style="padding-right: 0;">
@@ -139,7 +146,7 @@
     function setting() {
         $.ajax({
             url: '${ctx}/login/setting.json',
-            data: $("#setting").serialize(),
+            data: $("#setForm").serialize(),
             success: function (data) {
                 if(ajaxValidate(data)){
                     alert("setting success, please re-login!");
@@ -148,4 +155,22 @@
             }
         })
     }
+
+    function show_error(msg) {
+        $("#error_span").text(msg);
+        setTimeout('$("#error_span").text("");',1000)
+    }
+
+    $("input[name = password]").blur(function () {
+        if($("input[name = password]").val().length < 8) {
+            show_error("密码长度不够！");
+        }
+    });
+
+    $("input[name = retypePassword]").blur(function () {
+        if($("input[name = password]").val() != $("input[name = retypePassword]").val()) {
+            show_error("两次输入密码不一致！");
+        }
+    });
+
 </script>

@@ -17,5 +17,5 @@ public interface UserMapper {
     UserInfoSummaryDTO getUserInfo(@Param("userId")int id);
     void register(RegisterDTO registerDTO);
     void setting(UserInfoSummaryDTO updateUTO);
-    void changePhoto(@Param("userId")String userId, @Param("photoId")String photoId);
+    void changePhoto(@Param("userId")int userId, @Param("photoId")int photoId);
 }

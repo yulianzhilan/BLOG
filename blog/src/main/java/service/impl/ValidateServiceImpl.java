@@ -11,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import service.PhotoService;
+import service.QiNiuService;
 import service.ValidateService;
+import service.mapper.PhotoMapper;
 import service.mapper.SidebarMapper;
 import service.mapper.UserMapper;
 import util.AssembleUtil;
+import util.Constants;
 
 import java.util.List;
 
@@ -27,10 +30,16 @@ public class ValidateServiceImpl implements ValidateService{
     private UserMapper userMapper;
 
     @Autowired
+    private PhotoMapper photoMapper;
+
+    @Autowired
     private PhotoService photoService;
 
     @Autowired
     private SidebarMapper sidebarMapper;
+
+    @Autowired
+    private QiNiuService qiNiuService;
 
     @Override
     public UserSummaryDTO getUserSummaryDTO(String _user, String _token){
@@ -120,10 +129,11 @@ public class ValidateServiceImpl implements ValidateService{
                 throw new ServiceException("two passwords is different!");
             }
         }
-
         userMapper.setting(userInfoSummaryDTO);
-        if(!StringUtils.isEmpty(userInfoSummaryDTO.getPhotoUrl())){
-
+        String path = qiNiuService.simpleUrl(Constants.QINIUDOMAIN_PHOTO, userInfoSummaryDTO.getPhotoUrl());
+        if(!StringUtils.isEmpty(userInfoSummaryDTO.getPhotoUrl()) || StringUtils.isEmpty(path)){
+            int photoId = photoMapper.getIdByPath(userInfoSummaryDTO.getUserId(), path);
+            userMapper.changePhoto(userInfoSummaryDTO.getUserId(), photoId);
         }
     }
 }

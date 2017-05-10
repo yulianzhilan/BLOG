@@ -7,6 +7,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import dto.file.FileDTO;
 import dto.photo.PhotoDTO;
+import framework.core.utils.StringUtils;
 import org.springframework.stereotype.Service;
 import service.QiNiuService;
 import util.Constants;
@@ -62,5 +63,13 @@ public class QiNiuServiceImpl implements QiNiuService{
             }
         }
         return source;
+    }
+
+    @Override
+    public String simpleUrl(String domain, String path) {
+        if(StringUtils.isEmpty(domain) || StringUtils.isEmpty(path) || !path.contains(domain)){
+            return null;
+        }
+        return path.split(domain)[1];
     }
 }

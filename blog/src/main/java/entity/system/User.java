@@ -1,5 +1,7 @@
 package entity.system;
 
+import java.util.Date;
+
 /**
  * Created by scott on 2017/3/15.
  */
@@ -19,6 +21,10 @@ public class User {
     private String idNo;
 
     private Integer roleId;
+
+    private Date created;
+
+    private Date modify;
 
     public Integer getId() {
         return id;
@@ -84,4 +90,19 @@ public class User {
         this.roleId = roleId;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getModify() {
+        return modify;
+    }
+
+    public void setModify(Date modify) {
+        this.modify = modify;
+    }
 }

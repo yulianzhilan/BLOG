@@ -44,4 +44,15 @@
           ORDER BY ${order} DESC
       </if>
     </select>
+
+    <select id="getIdByPath" resultType="int">
+        SELECT
+        ID
+        FROM
+        PHOTO
+        WHERE
+        userid = #{userId}
+        AND
+        path = #{path}
+    </select>
 </mapper>

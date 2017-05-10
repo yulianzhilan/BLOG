@@ -19,4 +19,6 @@ public interface QiNiuService<E>{
 
     List<E> assembleUrls(String domain, List<E> source);
 
+    String simpleUrl(String domain, String path);
+
 }

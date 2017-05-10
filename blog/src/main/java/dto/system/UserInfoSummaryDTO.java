@@ -1,5 +1,9 @@
 package dto.system;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 /**
  * Created by scott on 2017/5/2.
  */
@@ -20,6 +24,10 @@ public class UserInfoSummaryDTO {
     private String photoUrl;
 
     private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date created;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date modify;
 
     public String getNickName() {
         return nickName;
@@ -83,5 +91,21 @@ public class UserInfoSummaryDTO {
 
     public void setRetypePassword(String retypePassword) {
         this.retypePassword = retypePassword;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getModify() {
+        return modify;
+    }
+
+    public void setModify(Date modify) {
+        this.modify = modify;
     }
 }

@@ -68,8 +68,8 @@
                         <td><i>${photo.path}</i></td>
                         <td>
                             <span class="fa fa-pencil" style="cursor: pointer; margin-right: 5px;" title="修改" onclick=""></span>
-                            <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="showDetail('${photo.path}')"></span>
-                            <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deletePhoto(this,'${photo.id}');"></span>
+                            <span class="fa fa-eye" style="cursor: pointer; margin-right: 5px;" title="预览" onclick="showDetail('${photo.path}','2')"></span>
+                            <span class="fa fa-times" style="cursor: pointer; margin-right: 5px;" title="删除" onclick="deletePhoto('${photo.id}');"></span>
                         </td>
                     </tr>
                     </c:forEach>
@@ -90,6 +90,10 @@
     <img src="" id="updatedImg"/>
 </div>
 
+<div class="modal fade bs-example-modal-md text-center" tabindex="-1" role="dialog" id="myModal2" style="margin-top: 50px;">
+    <img src="" id="viewImg"/>
+</div>
+
 <script>
     $(function () {
         //文件上传初始化
@@ -108,7 +112,7 @@
             url: '${ctx}/photo/upload.json',
             dataType: 'json',
             success: function (data) {
-                showDetail(data.link)
+                showDetail(data.link,'1')
             },
             error: function () {
                 alert("导入失败！");
@@ -116,17 +120,27 @@
         });
     });
 
-    function showDetail(url) {
-        $("#updatedImg").attr("src",url);
-        $("#myModal").modal("show");
+    function showDetail(url, flag) {
+        if(flag == '1'){
+            $("#updatedImg").attr("src",url);
+            $("#myModal").modal("show");
+        } else if(flag == '2'){
+            $("#viewImg").attr("src",url);
+            $("#myModal2").modal("show");
+        }
     }
 
     $('#myModal').on('hidden.bs.modal', function () {
-        $("#updatedImg").attr("src","");
+//        $("#updatedImg").attr("src","");
+        window.location.reload();
+    });
+
+    $('#myModal2').on('hidden.bs.modal', function () {
+        $("#viewImg").attr("src","");
 //        window.location.reload();
     });
 
-    function deletePhoto(del, id) {
+    function deletePhoto(id) {
         $.ajax({
             data: {id: id},
             url: "${ctx}/photo/delete.json",
