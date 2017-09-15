@@ -8,7 +8,6 @@ repositories {
 
     mavenLocal()
     maven{url 'http://maven.aliyun.com/nexus/content/repositories/central/'}
-//    maven { url "http://172.21.129.59:8081/nexus/content/groups/public/" }
 }
 
 ext{
@@ -25,8 +24,6 @@ ext{
     ibatisVersion = '2.3.4.726'
     c3p0Version = '0.9.1.2'
     poiVersion = '3.15'
-//    frameworkExtVersion   = '2.0.0-SNAPSHOT'
-//    frameworkVersion      = '2.0.0'
 }
 
 dependencies {
@@ -94,10 +91,6 @@ dependencies {
 
     compile fileTree(dir:'libs',include:['*.jar'])
 
-//    // framework-core
-//    compile "com.infoccsp:framework-core:$frameworkVersion"
-//    compile "com.infoccsp:framework-ext:$frameworkExtVersion"
-    
     // 七牛
     compile 'com.qiniu:qiniu-java-sdk:7.1.3'
 }
